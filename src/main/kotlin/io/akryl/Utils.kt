@@ -2,7 +2,7 @@
 
 package io.akryl
 
-fun <T, R> For(items: Collection<T>, mapper: (T) -> R): Array<R> = items.map(mapper).toTypedArray()
+fun <T, R> For(items: Iterable<T>, mapper: (T) -> R): Array<R> = items.map(mapper).toTypedArray()
 fun <T, R> For(items: Array<T>, mapper: (T) -> R): Array<R> = items.map(mapper).toTypedArray()
 fun <T, R> ForOf(vararg items: T, mapper: (T) -> R): Array<R> = items.map(mapper).toTypedArray()
 

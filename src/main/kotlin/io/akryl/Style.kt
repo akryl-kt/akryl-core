@@ -1,6 +1,5 @@
 package io.akryl
 
-import js.HMR
 import js.css_selector_parser.AttrToken
 import js.css_selector_parser.CssSelectorParser
 import js.css_selector_parser.RuleToken
@@ -274,6 +273,9 @@ class StyleScope {
   }
 }
 
+const val GENERATED_STYLE_TAG_KEY = "data-tag"
+const val GENERATED_STYLE_TAG_VALUE = "io.akryl.generated"
+
 private class StyleImpl(
   val scoped: Boolean,
   val scope: StyleScope
@@ -300,12 +302,9 @@ private class StyleImpl(
 
       val css = document.createElement("style")
       css.setAttribute("type", "text/css")
+      css.setAttribute(GENERATED_STYLE_TAG_KEY, GENERATED_STYLE_TAG_VALUE)
       css.innerHTML = text
       document.head!!.appendChild(css)
-
-      HMR.dispose {
-        document.head!!.removeChild(css)
-      }
     }
   }
 }

@@ -43,7 +43,7 @@ private class ObserverImpl(private val callback: () -> Unit) : Observer, Reactiv
   }
 }
 
-class ChangeDetectorClass {
+object ChangeDetector {
   private var stack = ArrayList<ObserverImpl>()
 
   fun <T> evaluate(fn: () -> T, callback: () -> Unit): Pair<T, ReactiveHandle> {
@@ -61,8 +61,6 @@ class ChangeDetectorClass {
     stack.lastOrNull()?.observed(dependency)
   }
 }
-
-val ChangeDetector by HMR.singleton("ChangeDetector", ::ChangeDetectorClass)
 
 interface ComputedPropertyContainer {
   @JsName("\$isInitialized")

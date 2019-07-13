@@ -4,6 +4,7 @@ import js.css_selector_parser.AttrToken
 import js.css_selector_parser.CssSelectorParser
 import js.css_selector_parser.RuleToken
 import js.css_selector_parser.Token
+import org.w3c.dom.Element
 import kotlin.browser.document
 
 private fun camelToDashed(value: String): String {
@@ -273,39 +274,17 @@ class StyleScope {
   }
 }
 
-const val GENERATED_STYLE_TAG_KEY = "data-tag"
-const val GENERATED_STYLE_TAG_VALUE = "io.akryl.generated"
-
 private class StyleImpl(
   val scoped: Boolean,
   val scope: StyleScope
 ) : Style {
-  private var built = false
-  private var _prefix: String? = null
-
-  override val prefix by lazy {
-    build()
-    _prefix
-  }
-
-  override fun build() {
-    if (!built) {
-      built = true
-
-      _prefix = if (scoped) {
-        (scope.hashCode().toLong() and 0xFFFFFFFFL).toString(16) // todo random prefix
-      } else {
-        null
-      }
-
-      val text = scope.build(_prefix)
-
-      val css = document.createElement("style")
-      css.setAttribute("type", "text/css")
-      css.setAttribute(GENERATED_STYLE_TAG_KEY, GENERATED_STYLE_TAG_VALUE)
-      css.innerHTML = text
-      document.head!!.appendChild(css)
-    }
+  override fun build(prefix: String): Element {
+    val text = scope.build(if (scoped) prefix else null)
+    val css = document.createElement("style")
+    css.setAttribute("type", "text/css")
+    css.innerHTML = text
+    document.head!!.appendChild(css)
+    return css
   }
 }
 

@@ -35,6 +35,7 @@ class HtmlRenderElement(
   widget: HtmlWidget
 ) : RenderElement() {
   private val children = ArrayList<RenderElement>()
+  override val prefix = ""
 
   override val node: Element = if (widget.ns != null) {
     document.createElementNS(widget.ns, widget.tag)
@@ -222,6 +223,7 @@ class TextRenderElement(
   override val parent: RenderElement?,
   widget: Text
 ) : RenderElement() {
+  override val prefix = ""
   override val node: Node = document.createTextNode(widget.value)
 
   override var widget: Text = widget

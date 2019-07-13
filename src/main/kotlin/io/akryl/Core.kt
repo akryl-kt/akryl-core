@@ -6,12 +6,32 @@ import kotlin.browser.window
 import kotlin.reflect.KClass
 
 interface Style {
-  val prefix: String?
-  fun build()
+  fun build(prefix: String): Element
 }
 
 interface Styled {
+  val prefix: String
   fun style(): Style?
+}
+
+object StyleRegistry {
+  private val styles = HashMap<KClass<*>, Element?>()
+
+  fun register(styled: Styled) {
+    val clazz = styled::class
+    if (clazz in styles) return
+    styles[clazz] = styled.style()?.build(styled.prefix)
+  }
+
+  fun clear() {
+    val snapshot = ArrayList(styles.values)
+    styles.clear()
+    window.requestAnimationFrame {
+      for (style in snapshot) {
+        style?.parentElement?.removeChild(style)
+      }
+    }
+  }
 }
 
 internal const val STYLE_ATTRIBUTE_NAME = "data-id"
@@ -86,6 +106,7 @@ abstract class RenderElement : BuildContext {
 class RootRenderElement(override val node: Node) : RenderElement() {
   override val parent: RenderElement? = null
   override val widget: Widget get() = throw IllegalStateException()
+  override val prefix: String = ""
   override fun update(newWidget: Widget, force: Boolean) = throw IllegalStateException()
 }
 
@@ -134,6 +155,20 @@ class RebuildScheduler(private val block: () -> Unit) {
       scheduled = false
       block()
     }
+  }
+}
+
+private object ClassRandom {
+  private val values = HashMap<KClass<*>, String>()
+
+  fun generate(obj: Any): String {
+    val clazz = obj::class
+    var value = values[clazz]
+    if (value != null) return value
+
+    value = (obj.hashCode().toLong() and 0xFFFFFFFFL).toString(16)
+    values[clazz] = value
+    return value
   }
 }
 
@@ -187,6 +222,7 @@ abstract class State<T : StatefulWidget>(
   @JsName("\$isMounted")
   val isMounted get() = context.isMounted
 
+  override val prefix get() = widget.prefix
   override fun style() = widget.style()
 
   final override var isInitialized = false
@@ -228,15 +264,9 @@ abstract class State<T : StatefulWidget>(
 
 abstract class StatefulWidget(
   key: Key? = null
-) : Widget(key) {
-  open fun style(): Style? = null
-
-  init {
-    window.requestAnimationFrame { // todo
-      style()?.build()
-    }
-  }
-
+) : Widget(key), Styled {
+  final override val prefix by lazy { ClassRandom.generate(this) }
+  override fun style(): Style? = null
   abstract fun createState(context: BuildContext): State<*>
 
   @Suppress("UNCHECKED_CAST")
@@ -251,6 +281,7 @@ class StatefulElement(
     private set
 
   override val node get() = inner.node
+  override val prefix get() = widget.prefix
   override fun style() = widget.style()
 
   private val scheduler = RebuildScheduler { rebuild(false) }
@@ -310,6 +341,7 @@ class StatefulElement(
   }
 
   private fun build(): Widget {
+    StyleRegistry.register(widget)
     val (widget, handle) = ChangeDetector.evaluate({ state.build(this) }, scheduler::schedule)
     this.handle = handle
     return widget
@@ -319,14 +351,8 @@ class StatefulElement(
 abstract class StatelessWidget(
   key: Key? = null
 ) : Widget(key), Styled {
+  final override val prefix by lazy { ClassRandom.generate(this) }
   override fun style(): Style? = null
-
-  init {
-    window.requestAnimationFrame { // todo
-      style()?.build()
-    }
-  }
-
   final override fun createElement(parent: RenderElement?) = StatelessElement(parent, this)
   abstract fun build(context: BuildContext): Widget
 }
@@ -338,8 +364,9 @@ class StatelessElement(
   override var widget: StatelessWidget = widget
     private set
 
-  override fun style() = widget.style()
   override val node get() = inner.node
+  override val prefix get() = widget.prefix
+  override fun style() = widget.style()
 
   private val scheduler = RebuildScheduler { rebuild(false) }
   private var inner = build().createElement(this)
@@ -374,6 +401,7 @@ class StatelessElement(
   }
 
   private fun build(): Widget {
+    StyleRegistry.register(widget)
     val (widget, handle) = ChangeDetector.evaluate({ widget.build(this) }, scheduler::schedule)
     this.handle = handle
     return widget

@@ -167,7 +167,7 @@ fun Styled.A(
 ) = HtmlWidget(
   tag = "a",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     target = target,
     hidden = hidden,
@@ -235,7 +235,7 @@ fun Styled.A(
 fun Styled.A(vararg children: Widget) = HtmlWidget(
   tag = "a",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -296,7 +296,7 @@ fun Styled.Abbr(
 ) = HtmlWidget(
   tag = "abbr",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -356,7 +356,7 @@ fun Styled.Abbr(
 fun Styled.Abbr(vararg children: Widget) = HtmlWidget(
   tag = "abbr",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -417,7 +417,7 @@ fun Styled.Address(
 ) = HtmlWidget(
   tag = "address",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -477,7 +477,7 @@ fun Styled.Address(
 fun Styled.Address(vararg children: Widget) = HtmlWidget(
   tag = "address",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -548,7 +548,7 @@ fun Styled.Area(
 ) = HtmlWidget(
   tag = "area",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     alt = alt,
     hrefLang = hrefLang,
@@ -618,7 +618,7 @@ fun Styled.Area(
 fun Styled.Area(vararg children: Widget) = HtmlWidget(
   tag = "area",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -679,7 +679,7 @@ fun Styled.Article(
 ) = HtmlWidget(
   tag = "article",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -739,7 +739,7 @@ fun Styled.Article(
 fun Styled.Article(vararg children: Widget) = HtmlWidget(
   tag = "article",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -800,7 +800,7 @@ fun Styled.Aside(
 ) = HtmlWidget(
   tag = "aside",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -860,7 +860,7 @@ fun Styled.Aside(
 fun Styled.Aside(vararg children: Widget) = HtmlWidget(
   tag = "aside",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -927,7 +927,7 @@ fun Styled.Audio(
 ) = HtmlWidget(
   tag = "audio",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -993,7 +993,7 @@ fun Styled.Audio(
 fun Styled.Audio(vararg children: Widget) = HtmlWidget(
   tag = "audio",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -1054,7 +1054,7 @@ fun Styled.B(
 ) = HtmlWidget(
   tag = "b",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -1114,7 +1114,7 @@ fun Styled.B(
 fun Styled.B(vararg children: Widget) = HtmlWidget(
   tag = "b",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -1177,7 +1177,7 @@ fun Styled.Base(
 ) = HtmlWidget(
   tag = "base",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     target = target,
     hidden = hidden,
@@ -1239,7 +1239,7 @@ fun Styled.Base(
 fun Styled.Base(vararg children: Widget) = HtmlWidget(
   tag = "base",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -1300,7 +1300,7 @@ fun Styled.Bdi(
 ) = HtmlWidget(
   tag = "bdi",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -1360,7 +1360,7 @@ fun Styled.Bdi(
 fun Styled.Bdi(vararg children: Widget) = HtmlWidget(
   tag = "bdi",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -1421,7 +1421,7 @@ fun Styled.Bdo(
 ) = HtmlWidget(
   tag = "bdo",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -1481,7 +1481,7 @@ fun Styled.Bdo(
 fun Styled.Bdo(vararg children: Widget) = HtmlWidget(
   tag = "bdo",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -1543,7 +1543,7 @@ fun Styled.Blockquote(
 ) = HtmlWidget(
   tag = "blockquote",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -1604,7 +1604,7 @@ fun Styled.Blockquote(
 fun Styled.Blockquote(vararg children: Widget) = HtmlWidget(
   tag = "blockquote",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -1665,7 +1665,7 @@ fun Styled.Body(
 ) = HtmlWidget(
   tag = "body",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -1725,7 +1725,7 @@ fun Styled.Body(
 fun Styled.Body(vararg children: Widget) = HtmlWidget(
   tag = "body",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -1786,7 +1786,7 @@ fun Styled.Br(
 ) = HtmlWidget(
   tag = "br",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -1846,7 +1846,7 @@ fun Styled.Br(
 fun Styled.Br(vararg children: Widget) = HtmlWidget(
   tag = "br",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -1918,7 +1918,7 @@ fun Styled.Button(
 ) = HtmlWidget(
   tag = "button",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     formNoValidate = formNoValidate,
     form = form,
@@ -1989,7 +1989,7 @@ fun Styled.Button(
 fun Styled.Button(vararg children: Widget) = HtmlWidget(
   tag = "button",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -2052,7 +2052,7 @@ fun Styled.Canvas(
 ) = HtmlWidget(
   tag = "canvas",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2114,7 +2114,7 @@ fun Styled.Canvas(
 fun Styled.Canvas(vararg children: Widget) = HtmlWidget(
   tag = "canvas",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -2175,7 +2175,7 @@ fun Styled.Caption(
 ) = HtmlWidget(
   tag = "caption",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2235,7 +2235,7 @@ fun Styled.Caption(
 fun Styled.Caption(vararg children: Widget) = HtmlWidget(
   tag = "caption",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -2296,7 +2296,7 @@ fun Styled.Cite(
 ) = HtmlWidget(
   tag = "cite",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2356,7 +2356,7 @@ fun Styled.Cite(
 fun Styled.Cite(vararg children: Widget) = HtmlWidget(
   tag = "cite",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -2417,7 +2417,7 @@ fun Styled.Code(
 ) = HtmlWidget(
   tag = "code",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2477,7 +2477,7 @@ fun Styled.Code(
 fun Styled.Code(vararg children: Widget) = HtmlWidget(
   tag = "code",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -2539,7 +2539,7 @@ fun Styled.Col(
 ) = HtmlWidget(
   tag = "col",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2600,7 +2600,7 @@ fun Styled.Col(
 fun Styled.Col(vararg children: Widget) = HtmlWidget(
   tag = "col",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -2662,7 +2662,7 @@ fun Styled.Colgroup(
 ) = HtmlWidget(
   tag = "colgroup",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2723,7 +2723,7 @@ fun Styled.Colgroup(
 fun Styled.Colgroup(vararg children: Widget) = HtmlWidget(
   tag = "colgroup",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -2784,7 +2784,7 @@ fun Styled.Data(
 ) = HtmlWidget(
   tag = "data",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2844,7 +2844,7 @@ fun Styled.Data(
 fun Styled.Data(vararg children: Widget) = HtmlWidget(
   tag = "data",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -2905,7 +2905,7 @@ fun Styled.Datalist(
 ) = HtmlWidget(
   tag = "datalist",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2965,7 +2965,7 @@ fun Styled.Datalist(
 fun Styled.Datalist(vararg children: Widget) = HtmlWidget(
   tag = "datalist",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -3026,7 +3026,7 @@ fun Styled.Dd(
 ) = HtmlWidget(
   tag = "dd",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3086,7 +3086,7 @@ fun Styled.Dd(
 fun Styled.Dd(vararg children: Widget) = HtmlWidget(
   tag = "dd",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -3149,7 +3149,7 @@ fun Styled.Del(
 ) = HtmlWidget(
   tag = "del",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3211,7 +3211,7 @@ fun Styled.Del(
 fun Styled.Del(vararg children: Widget) = HtmlWidget(
   tag = "del",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -3273,7 +3273,7 @@ fun Styled.Details(
 ) = HtmlWidget(
   tag = "details",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3334,7 +3334,7 @@ fun Styled.Details(
 fun Styled.Details(vararg children: Widget) = HtmlWidget(
   tag = "details",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -3395,7 +3395,7 @@ fun Styled.Dfn(
 ) = HtmlWidget(
   tag = "dfn",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3455,7 +3455,7 @@ fun Styled.Dfn(
 fun Styled.Dfn(vararg children: Widget) = HtmlWidget(
   tag = "dfn",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -3517,7 +3517,7 @@ fun Styled.Dialog(
 ) = HtmlWidget(
   tag = "dialog",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3578,7 +3578,7 @@ fun Styled.Dialog(
 fun Styled.Dialog(vararg children: Widget) = HtmlWidget(
   tag = "dialog",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -3639,7 +3639,7 @@ fun Styled.Div(
 ) = HtmlWidget(
   tag = "div",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3699,7 +3699,7 @@ fun Styled.Div(
 fun Styled.Div(vararg children: Widget) = HtmlWidget(
   tag = "div",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -3760,7 +3760,7 @@ fun Styled.Dl(
 ) = HtmlWidget(
   tag = "dl",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3820,7 +3820,7 @@ fun Styled.Dl(
 fun Styled.Dl(vararg children: Widget) = HtmlWidget(
   tag = "dl",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -3881,7 +3881,7 @@ fun Styled.Dt(
 ) = HtmlWidget(
   tag = "dt",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3941,7 +3941,7 @@ fun Styled.Dt(
 fun Styled.Dt(vararg children: Widget) = HtmlWidget(
   tag = "dt",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -4002,7 +4002,7 @@ fun Styled.Em(
 ) = HtmlWidget(
   tag = "em",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4062,7 +4062,7 @@ fun Styled.Em(
 fun Styled.Em(vararg children: Widget) = HtmlWidget(
   tag = "em",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -4127,7 +4127,7 @@ fun Styled.Embed(
 ) = HtmlWidget(
   tag = "embed",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4191,7 +4191,7 @@ fun Styled.Embed(
 fun Styled.Embed(vararg children: Widget) = HtmlWidget(
   tag = "embed",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -4255,7 +4255,7 @@ fun Styled.Fieldset(
 ) = HtmlWidget(
   tag = "fieldset",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4318,7 +4318,7 @@ fun Styled.Fieldset(
 fun Styled.Fieldset(vararg children: Widget) = HtmlWidget(
   tag = "fieldset",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -4379,7 +4379,7 @@ fun Styled.Figcaption(
 ) = HtmlWidget(
   tag = "figcaption",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4439,7 +4439,7 @@ fun Styled.Figcaption(
 fun Styled.Figcaption(vararg children: Widget) = HtmlWidget(
   tag = "figcaption",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -4500,7 +4500,7 @@ fun Styled.Figure(
 ) = HtmlWidget(
   tag = "figure",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4560,7 +4560,7 @@ fun Styled.Figure(
 fun Styled.Figure(vararg children: Widget) = HtmlWidget(
   tag = "figure",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -4621,7 +4621,7 @@ fun Styled.Footer(
 ) = HtmlWidget(
   tag = "footer",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4681,7 +4681,7 @@ fun Styled.Footer(
 fun Styled.Footer(vararg children: Widget) = HtmlWidget(
   tag = "footer",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -4750,7 +4750,7 @@ fun Styled.Form(
 ) = HtmlWidget(
   tag = "form",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     target = target,
     hidden = hidden,
@@ -4818,7 +4818,7 @@ fun Styled.Form(
 fun Styled.Form(vararg children: Widget) = HtmlWidget(
   tag = "form",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -4879,7 +4879,7 @@ fun Styled.H1(
 ) = HtmlWidget(
   tag = "h1",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4939,7 +4939,7 @@ fun Styled.H1(
 fun Styled.H1(vararg children: Widget) = HtmlWidget(
   tag = "h1",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -5000,7 +5000,7 @@ fun Styled.H2(
 ) = HtmlWidget(
   tag = "h2",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5060,7 +5060,7 @@ fun Styled.H2(
 fun Styled.H2(vararg children: Widget) = HtmlWidget(
   tag = "h2",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -5121,7 +5121,7 @@ fun Styled.H3(
 ) = HtmlWidget(
   tag = "h3",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5181,7 +5181,7 @@ fun Styled.H3(
 fun Styled.H3(vararg children: Widget) = HtmlWidget(
   tag = "h3",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -5242,7 +5242,7 @@ fun Styled.H4(
 ) = HtmlWidget(
   tag = "h4",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5302,7 +5302,7 @@ fun Styled.H4(
 fun Styled.H4(vararg children: Widget) = HtmlWidget(
   tag = "h4",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -5363,7 +5363,7 @@ fun Styled.H5(
 ) = HtmlWidget(
   tag = "h5",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5423,7 +5423,7 @@ fun Styled.H5(
 fun Styled.H5(vararg children: Widget) = HtmlWidget(
   tag = "h5",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -5484,7 +5484,7 @@ fun Styled.H6(
 ) = HtmlWidget(
   tag = "h6",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5544,7 +5544,7 @@ fun Styled.H6(
 fun Styled.H6(vararg children: Widget) = HtmlWidget(
   tag = "h6",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -5605,7 +5605,7 @@ fun Styled.Head(
 ) = HtmlWidget(
   tag = "head",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5665,7 +5665,7 @@ fun Styled.Head(
 fun Styled.Head(vararg children: Widget) = HtmlWidget(
   tag = "head",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -5726,7 +5726,7 @@ fun Styled.Header(
 ) = HtmlWidget(
   tag = "header",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5786,7 +5786,7 @@ fun Styled.Header(
 fun Styled.Header(vararg children: Widget) = HtmlWidget(
   tag = "header",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -5847,7 +5847,7 @@ fun Styled.Hr(
 ) = HtmlWidget(
   tag = "hr",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5907,7 +5907,7 @@ fun Styled.Hr(
 fun Styled.Hr(vararg children: Widget) = HtmlWidget(
   tag = "hr",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -5969,7 +5969,7 @@ fun Styled.Html(
 ) = HtmlWidget(
   tag = "html",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6030,7 +6030,7 @@ fun Styled.Html(
 fun Styled.Html(vararg children: Widget) = HtmlWidget(
   tag = "html",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -6091,7 +6091,7 @@ fun Styled.I(
 ) = HtmlWidget(
   tag = "i",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6151,7 +6151,7 @@ fun Styled.I(
 fun Styled.I(vararg children: Widget) = HtmlWidget(
   tag = "i",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -6218,7 +6218,7 @@ fun Styled.Iframe(
 ) = HtmlWidget(
   tag = "iframe",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6284,7 +6284,7 @@ fun Styled.Iframe(
 fun Styled.Iframe(vararg children: Widget) = HtmlWidget(
   tag = "iframe",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -6352,7 +6352,7 @@ fun Styled.Img(
 ) = HtmlWidget(
   tag = "img",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6419,7 +6419,7 @@ fun Styled.Img(
 fun Styled.Img(vararg children: Widget) = HtmlWidget(
   tag = "img",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -6510,7 +6510,7 @@ fun Styled.Input(
 ) = HtmlWidget(
   tag = "input",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     formNoValidate = formNoValidate,
     multiple = multiple,
@@ -6600,7 +6600,7 @@ fun Styled.Input(
 fun Styled.Input(vararg children: Widget) = HtmlWidget(
   tag = "input",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -6663,7 +6663,7 @@ fun Styled.Ins(
 ) = HtmlWidget(
   tag = "ins",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6725,7 +6725,7 @@ fun Styled.Ins(
 fun Styled.Ins(vararg children: Widget) = HtmlWidget(
   tag = "ins",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -6786,7 +6786,7 @@ fun Styled.Kbd(
 ) = HtmlWidget(
   tag = "kbd",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6846,7 +6846,7 @@ fun Styled.Kbd(
 fun Styled.Kbd(vararg children: Widget) = HtmlWidget(
   tag = "kbd",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -6909,7 +6909,7 @@ fun Styled.Label(
 ) = HtmlWidget(
   tag = "label",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6971,7 +6971,7 @@ fun Styled.Label(
 fun Styled.Label(vararg children: Widget) = HtmlWidget(
   tag = "label",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -7032,7 +7032,7 @@ fun Styled.Legend(
 ) = HtmlWidget(
   tag = "legend",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7092,7 +7092,7 @@ fun Styled.Legend(
 fun Styled.Legend(vararg children: Widget) = HtmlWidget(
   tag = "legend",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -7154,7 +7154,7 @@ fun Styled.Li(
 ) = HtmlWidget(
   tag = "li",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7215,7 +7215,7 @@ fun Styled.Li(
 fun Styled.Li(vararg children: Widget) = HtmlWidget(
   tag = "li",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -7282,7 +7282,7 @@ fun Styled.Link(
 ) = HtmlWidget(
   tag = "link",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7348,7 +7348,7 @@ fun Styled.Link(
 fun Styled.Link(vararg children: Widget) = HtmlWidget(
   tag = "link",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -7409,7 +7409,7 @@ fun Styled.Main(
 ) = HtmlWidget(
   tag = "main",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7469,7 +7469,7 @@ fun Styled.Main(
 fun Styled.Main(vararg children: Widget) = HtmlWidget(
   tag = "main",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -7531,7 +7531,7 @@ fun Styled.Map(
 ) = HtmlWidget(
   tag = "map",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7592,7 +7592,7 @@ fun Styled.Map(
 fun Styled.Map(vararg children: Widget) = HtmlWidget(
   tag = "map",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -7653,7 +7653,7 @@ fun Styled.Mark(
 ) = HtmlWidget(
   tag = "mark",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7713,7 +7713,7 @@ fun Styled.Mark(
 fun Styled.Mark(vararg children: Widget) = HtmlWidget(
   tag = "mark",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -7778,7 +7778,7 @@ fun Styled.Meta(
 ) = HtmlWidget(
   tag = "meta",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7842,7 +7842,7 @@ fun Styled.Meta(
 fun Styled.Meta(vararg children: Widget) = HtmlWidget(
   tag = "meta",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -7910,7 +7910,7 @@ fun Styled.Meter(
 ) = HtmlWidget(
   tag = "meter",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7977,7 +7977,7 @@ fun Styled.Meter(
 fun Styled.Meter(vararg children: Widget) = HtmlWidget(
   tag = "meter",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -8038,7 +8038,7 @@ fun Styled.Nav(
 ) = HtmlWidget(
   tag = "nav",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8098,7 +8098,7 @@ fun Styled.Nav(
 fun Styled.Nav(vararg children: Widget) = HtmlWidget(
   tag = "nav",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -8159,7 +8159,7 @@ fun Styled.Noscript(
 ) = HtmlWidget(
   tag = "noscript",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8219,7 +8219,7 @@ fun Styled.Noscript(
 fun Styled.Noscript(vararg children: Widget) = HtmlWidget(
   tag = "noscript",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -8287,7 +8287,7 @@ fun Styled.Object(
 ) = HtmlWidget(
   tag = "object",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8354,7 +8354,7 @@ fun Styled.Object(
 fun Styled.Object(vararg children: Widget) = HtmlWidget(
   tag = "object",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -8418,7 +8418,7 @@ fun Styled.Ol(
 ) = HtmlWidget(
   tag = "ol",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8481,7 +8481,7 @@ fun Styled.Ol(
 fun Styled.Ol(vararg children: Widget) = HtmlWidget(
   tag = "ol",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -8544,7 +8544,7 @@ fun Styled.Optgroup(
 ) = HtmlWidget(
   tag = "optgroup",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8606,7 +8606,7 @@ fun Styled.Optgroup(
 fun Styled.Optgroup(vararg children: Widget) = HtmlWidget(
   tag = "optgroup",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -8671,7 +8671,7 @@ fun Styled.Option(
 ) = HtmlWidget(
   tag = "option",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8735,7 +8735,7 @@ fun Styled.Option(
 fun Styled.Option(vararg children: Widget) = HtmlWidget(
   tag = "option",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -8799,7 +8799,7 @@ fun Styled.Output(
 ) = HtmlWidget(
   tag = "output",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8862,7 +8862,7 @@ fun Styled.Output(
 fun Styled.Output(vararg children: Widget) = HtmlWidget(
   tag = "output",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -8923,7 +8923,7 @@ fun Styled.P(
 ) = HtmlWidget(
   tag = "p",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8983,7 +8983,7 @@ fun Styled.P(
 fun Styled.P(vararg children: Widget) = HtmlWidget(
   tag = "p",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -9046,7 +9046,7 @@ fun Styled.Param(
 ) = HtmlWidget(
   tag = "param",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9108,7 +9108,7 @@ fun Styled.Param(
 fun Styled.Param(vararg children: Widget) = HtmlWidget(
   tag = "param",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -9169,7 +9169,7 @@ fun Styled.Picture(
 ) = HtmlWidget(
   tag = "picture",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9229,7 +9229,7 @@ fun Styled.Picture(
 fun Styled.Picture(vararg children: Widget) = HtmlWidget(
   tag = "picture",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -9290,7 +9290,7 @@ fun Styled.Pre(
 ) = HtmlWidget(
   tag = "pre",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9350,7 +9350,7 @@ fun Styled.Pre(
 fun Styled.Pre(vararg children: Widget) = HtmlWidget(
   tag = "pre",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -9413,7 +9413,7 @@ fun Styled.Progress(
 ) = HtmlWidget(
   tag = "progress",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9475,7 +9475,7 @@ fun Styled.Progress(
 fun Styled.Progress(vararg children: Widget) = HtmlWidget(
   tag = "progress",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -9537,7 +9537,7 @@ fun Styled.Q(
 ) = HtmlWidget(
   tag = "q",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9598,7 +9598,7 @@ fun Styled.Q(
 fun Styled.Q(vararg children: Widget) = HtmlWidget(
   tag = "q",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -9659,7 +9659,7 @@ fun Styled.Rp(
 ) = HtmlWidget(
   tag = "rp",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9719,7 +9719,7 @@ fun Styled.Rp(
 fun Styled.Rp(vararg children: Widget) = HtmlWidget(
   tag = "rp",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -9780,7 +9780,7 @@ fun Styled.Rt(
 ) = HtmlWidget(
   tag = "rt",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9840,7 +9840,7 @@ fun Styled.Rt(
 fun Styled.Rt(vararg children: Widget) = HtmlWidget(
   tag = "rt",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -9901,7 +9901,7 @@ fun Styled.Ruby(
 ) = HtmlWidget(
   tag = "ruby",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9961,7 +9961,7 @@ fun Styled.Ruby(
 fun Styled.Ruby(vararg children: Widget) = HtmlWidget(
   tag = "ruby",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -10022,7 +10022,7 @@ fun Styled.S(
 ) = HtmlWidget(
   tag = "s",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10082,7 +10082,7 @@ fun Styled.S(
 fun Styled.S(vararg children: Widget) = HtmlWidget(
   tag = "s",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -10143,7 +10143,7 @@ fun Styled.Samp(
 ) = HtmlWidget(
   tag = "samp",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10203,7 +10203,7 @@ fun Styled.Samp(
 fun Styled.Samp(vararg children: Widget) = HtmlWidget(
   tag = "samp",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -10269,7 +10269,7 @@ fun Styled.Script(
 ) = HtmlWidget(
   tag = "script",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10334,7 +10334,7 @@ fun Styled.Script(
 fun Styled.Script(vararg children: Widget) = HtmlWidget(
   tag = "script",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -10395,7 +10395,7 @@ fun Styled.Section(
 ) = HtmlWidget(
   tag = "section",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10455,7 +10455,7 @@ fun Styled.Section(
 fun Styled.Section(vararg children: Widget) = HtmlWidget(
   tag = "section",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -10523,7 +10523,7 @@ fun Styled.Select(
 ) = HtmlWidget(
   tag = "select",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10590,7 +10590,7 @@ fun Styled.Select(
 fun Styled.Select(vararg children: Widget) = HtmlWidget(
   tag = "select",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -10651,7 +10651,7 @@ fun Styled.Small(
 ) = HtmlWidget(
   tag = "small",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10711,7 +10711,7 @@ fun Styled.Small(
 fun Styled.Small(vararg children: Widget) = HtmlWidget(
   tag = "small",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -10776,7 +10776,7 @@ fun Styled.Source(
 ) = HtmlWidget(
   tag = "source",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10840,7 +10840,7 @@ fun Styled.Source(
 fun Styled.Source(vararg children: Widget) = HtmlWidget(
   tag = "source",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -10901,7 +10901,7 @@ fun Styled.Span(
 ) = HtmlWidget(
   tag = "span",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10961,7 +10961,7 @@ fun Styled.Span(
 fun Styled.Span(vararg children: Widget) = HtmlWidget(
   tag = "span",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -11022,7 +11022,7 @@ fun Styled.Strong(
 ) = HtmlWidget(
   tag = "strong",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11082,7 +11082,7 @@ fun Styled.Strong(
 fun Styled.Strong(vararg children: Widget) = HtmlWidget(
   tag = "strong",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -11145,7 +11145,7 @@ fun Styled.Style(
 ) = HtmlWidget(
   tag = "style",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11207,7 +11207,7 @@ fun Styled.Style(
 fun Styled.Style(vararg children: Widget) = HtmlWidget(
   tag = "style",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -11268,7 +11268,7 @@ fun Styled.Sub(
 ) = HtmlWidget(
   tag = "sub",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11328,7 +11328,7 @@ fun Styled.Sub(
 fun Styled.Sub(vararg children: Widget) = HtmlWidget(
   tag = "sub",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -11389,7 +11389,7 @@ fun Styled.Summary(
 ) = HtmlWidget(
   tag = "summary",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11449,7 +11449,7 @@ fun Styled.Summary(
 fun Styled.Summary(vararg children: Widget) = HtmlWidget(
   tag = "summary",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -11510,7 +11510,7 @@ fun Styled.Sup(
 ) = HtmlWidget(
   tag = "sup",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11570,7 +11570,7 @@ fun Styled.Sup(
 fun Styled.Sup(vararg children: Widget) = HtmlWidget(
   tag = "sup",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -11631,7 +11631,7 @@ fun Styled.Svg(
 ) = HtmlWidget(
   tag = "svg",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11691,7 +11691,7 @@ fun Styled.Svg(
 fun Styled.Svg(vararg children: Widget) = HtmlWidget(
   tag = "svg",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -11752,7 +11752,7 @@ fun Styled.Table(
 ) = HtmlWidget(
   tag = "table",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11812,7 +11812,7 @@ fun Styled.Table(
 fun Styled.Table(vararg children: Widget) = HtmlWidget(
   tag = "table",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -11873,7 +11873,7 @@ fun Styled.Tbody(
 ) = HtmlWidget(
   tag = "tbody",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11933,7 +11933,7 @@ fun Styled.Tbody(
 fun Styled.Tbody(vararg children: Widget) = HtmlWidget(
   tag = "tbody",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -11997,7 +11997,7 @@ fun Styled.Td(
 ) = HtmlWidget(
   tag = "td",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12060,7 +12060,7 @@ fun Styled.Td(
 fun Styled.Td(vararg children: Widget) = HtmlWidget(
   tag = "td",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -12121,7 +12121,7 @@ fun Styled.Template(
 ) = HtmlWidget(
   tag = "template",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12181,7 +12181,7 @@ fun Styled.Template(
 fun Styled.Template(vararg children: Widget) = HtmlWidget(
   tag = "template",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -12254,7 +12254,7 @@ fun Styled.Textarea(
 ) = HtmlWidget(
   tag = "textarea",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     form = form,
     autoFocus = autoFocus,
@@ -12326,7 +12326,7 @@ fun Styled.Textarea(
 fun Styled.Textarea(vararg children: Widget) = HtmlWidget(
   tag = "textarea",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -12387,7 +12387,7 @@ fun Styled.Tfoot(
 ) = HtmlWidget(
   tag = "tfoot",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12447,7 +12447,7 @@ fun Styled.Tfoot(
 fun Styled.Tfoot(vararg children: Widget) = HtmlWidget(
   tag = "tfoot",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -12513,7 +12513,7 @@ fun Styled.Th(
 ) = HtmlWidget(
   tag = "th",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12578,7 +12578,7 @@ fun Styled.Th(
 fun Styled.Th(vararg children: Widget) = HtmlWidget(
   tag = "th",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -12639,7 +12639,7 @@ fun Styled.Thead(
 ) = HtmlWidget(
   tag = "thead",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12699,7 +12699,7 @@ fun Styled.Thead(
 fun Styled.Thead(vararg children: Widget) = HtmlWidget(
   tag = "thead",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -12761,7 +12761,7 @@ fun Styled.Time(
 ) = HtmlWidget(
   tag = "time",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12822,7 +12822,7 @@ fun Styled.Time(
 fun Styled.Time(vararg children: Widget) = HtmlWidget(
   tag = "time",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -12883,7 +12883,7 @@ fun Styled.Title(
 ) = HtmlWidget(
   tag = "title",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12943,7 +12943,7 @@ fun Styled.Title(
 fun Styled.Title(vararg children: Widget) = HtmlWidget(
   tag = "title",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -13004,7 +13004,7 @@ fun Styled.Tr(
 ) = HtmlWidget(
   tag = "tr",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -13064,7 +13064,7 @@ fun Styled.Tr(
 fun Styled.Tr(vararg children: Widget) = HtmlWidget(
   tag = "tr",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -13130,7 +13130,7 @@ fun Styled.Track(
 ) = HtmlWidget(
   tag = "track",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     kind = kind,
     hidden = hidden,
@@ -13195,7 +13195,7 @@ fun Styled.Track(
 fun Styled.Track(vararg children: Widget) = HtmlWidget(
   tag = "track",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -13256,7 +13256,7 @@ fun Styled.U(
 ) = HtmlWidget(
   tag = "u",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -13316,7 +13316,7 @@ fun Styled.U(
 fun Styled.U(vararg children: Widget) = HtmlWidget(
   tag = "u",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -13377,7 +13377,7 @@ fun Styled.Ul(
 ) = HtmlWidget(
   tag = "ul",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -13437,7 +13437,7 @@ fun Styled.Ul(
 fun Styled.Ul(vararg children: Widget) = HtmlWidget(
   tag = "ul",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -13498,7 +13498,7 @@ fun Styled.Var(
 ) = HtmlWidget(
   tag = "var",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -13558,7 +13558,7 @@ fun Styled.Var(
 fun Styled.Var(vararg children: Widget) = HtmlWidget(
   tag = "var",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -13628,7 +13628,7 @@ fun Styled.Video(
 ) = HtmlWidget(
   tag = "video",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     autoPlay = autoPlay,
     width = width,
@@ -13697,7 +13697,7 @@ fun Styled.Video(
 fun Styled.Video(vararg children: Widget) = HtmlWidget(
   tag = "video",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 
@@ -13758,7 +13758,7 @@ fun Styled.Wbr(
 ) = HtmlWidget(
   tag = "wbr",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -13818,7 +13818,7 @@ fun Styled.Wbr(
 fun Styled.Wbr(vararg children: Widget) = HtmlWidget(
   tag = "wbr",
   ns = null,
-  cssPrefix = this.style()?.prefix,
+  cssPrefix = prefix,
   children = children.asList()
 )
 

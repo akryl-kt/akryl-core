@@ -5,9 +5,6 @@ import js.JsSet
 import js.isPlainObject
 import js.module
 import org.w3c.dom.Element
-import org.w3c.dom.asList
-import kotlin.browser.document
-import kotlin.browser.window
 
 @Suppress("UnsafeCastFromDynamic")
 fun updatePrototypeInner(obj: dynamic, resolver: (String) -> dynamic, classes: dynamic) {
@@ -57,12 +54,7 @@ inline fun hotMount(node: Element, widget: Widget, key: String = "io.akryl.hmr.r
   hot?.accept()
 
   if (hot != null) {
-    val oldStyles = document.querySelectorAll("style[$GENERATED_STYLE_TAG_KEY='$GENERATED_STYLE_TAG_VALUE']").asList()
-    window.requestAnimationFrame {
-      for (style in oldStyles) {
-        style.parentElement?.removeChild(style)
-      }
-    }
+    StyleRegistry.clear()
   }
 
   if (ref == null) {

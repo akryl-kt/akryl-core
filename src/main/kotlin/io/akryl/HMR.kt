@@ -62,7 +62,8 @@ inline fun hotMount(node: Element, widget: Widget, key: String = "io.akryl.hmr.r
     ref = mount(node, widget)
   } else {
     println("Hot reloading '$key' mount")
-    updatePrototype(ref, { eval(it) })
+    val resolver = js("function(name) { return eval(name); }")
+    updatePrototype(ref, resolver)
     ref.rebuild(widget)
   }
 

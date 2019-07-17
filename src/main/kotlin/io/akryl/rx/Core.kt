@@ -1,6 +1,7 @@
-package io.akryl
+package io.akryl.rx
 
 import js.*
+import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 const val OBSERVABLE_MARKER = "\$observable"
@@ -133,20 +134,47 @@ fun <T : ComputedPropertyContainer?, R> T.computed(fn: T.() -> R): ComputedPrope
   return prop
 }
 
+object ObservableWrapperRegistry {
+  private val wrappers = HashMap<KClass<*>, (inner: Any) -> Any>()
+
+  @Suppress("UNCHECKED_CAST")
+  fun <T : Any> register(clazz: KClass<T>, wrapper: (inner: T) -> Any) {
+    wrappers[clazz] = wrapper as (Any) -> Any
+  }
+
+  fun tryWrap(obj: Any): Any? {
+    val wrapper = wrappers[obj::class] ?: return null
+    return wrapper(obj)
+  }
+
+  inline fun <reified T : Any> register(noinline wrapper: (inner: T) -> Any) = register(T::class, wrapper)
+
+  init {
+    register<HashMap<*, *>> { ReactiveMap(it) }
+    register<LinkedHashMap<*, *>> { ReactiveMap(it) }
+  }
+}
+
 // todo fix non reactive reference in constructor
+@Suppress("UNCHECKED_CAST")
 fun <T> observable(target: T): T {
   return if (target != null && jsTypeOf(target) == "object") {
     if (JsArray.isArray(target)) {
       observable(target, ::ArrayHandler)
     } else {
-      observable(target, ::ObjectHandler)
+      val wrapped = ObservableWrapperRegistry.tryWrap(target)
+      if (wrapped == null) {
+        observable(target, ::ObjectHandler)
+      } else {
+        wrapped as T
+      }
     }
   } else {
     target
   }
 }
 
-internal class ProxyObservable : Observable {
+class ObservableProperty : Observable {
   private val subscriptions = HashSet<Observer>()
 
   val count get() = subscriptions.size
@@ -165,8 +193,12 @@ internal class ProxyObservable : Observable {
     subs.forEach { it.changed() }
   }
 
+  fun observed() {
+    ChangeDetector.observed(this)
+  }
+
   override fun toString(): String {
-    return "ProxyObservable(${subscriptions.size})"
+    return "ObservableProperty(${subscriptions.size})"
   }
 }
 
@@ -174,11 +206,11 @@ private fun isMagicVar(name: String) = jsTypeOf(name) == "string" && name.starts
 
 @Suppress("UnsafeCastFromDynamic")
 private open class ObjectHandler : ProxyHandler {
-  private val subscriptions = HashMap<String, ProxyObservable>()
-  protected val keysSubscription = ProxyObservable()
+  private val subscriptions = HashMap<String, ObservableProperty>()
+  protected val keysSubscription = ObservableProperty()
 
   override fun ownKeys(target: Any): Array<String> {
-    ChangeDetector.observed(keysSubscription)
+    keysSubscription.observed()
 
     return JsObject.getOwnPropertyNames(target)
       .filterNot { isMagicVar(it) }
@@ -190,10 +222,10 @@ private open class ObjectHandler : ProxyHandler {
 
     var sub = subscriptions[name]
     if (sub == null) {
-      sub = ProxyObservable()
+      sub = ObservableProperty()
       subscriptions[name] = sub
     }
-    ChangeDetector.observed(sub)
+    sub.observed()
 
     val get: dynamic = JsObject
       .getOwnPropertyDescriptor<Any?>(target, name)
@@ -247,7 +279,7 @@ private open class ObjectHandler : ProxyHandler {
 private class ArrayHandler : ObjectHandler() {
   override fun get(target: dynamic, name: String, receiver: Any): Any? {
     if (name == "length") {
-      ChangeDetector.observed(keysSubscription)
+      keysSubscription.observed()
     }
     return super.get(target, name, receiver)
   }

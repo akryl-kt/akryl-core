@@ -1,5 +1,6 @@
 package io.akryl
 
+import io.akryl.rx.*
 import kotlin.test.*
 
 private data class Bar(
@@ -178,8 +179,8 @@ class ProxyReactiveTest : EmptyComputedPropertyContainer {
 
   @Test
   fun unsubscribeOnChange() {
-    val first = ProxyObservable()
-    val second = ProxyObservable()
+    val first = ObservableProperty()
+    val second = ObservableProperty()
     var callCount = 0
     var subscriptionsCount = 0
 
@@ -201,7 +202,7 @@ class ProxyReactiveTest : EmptyComputedPropertyContainer {
 
   @Test
   fun disposeHandle() {
-    val first = ProxyObservable()
+    val first = ObservableProperty()
     var called = false
 
     val handle = ChangeDetector.evaluate({

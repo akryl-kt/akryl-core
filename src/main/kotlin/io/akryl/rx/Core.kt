@@ -63,21 +63,21 @@ object ChangeDetector {
   }
 }
 
-interface ComputedPropertyContainer {
+interface ReactiveContainer {
   @JsName("\$isInitialized")
   val isInitialized: Boolean
 
-  fun registerComputedProperty(computedProperty: ComputedProperty<*, *>)
+  fun registerReactiveHandle(handle: ReactiveHandle)
 }
 
-interface EmptyComputedPropertyContainer : ComputedPropertyContainer {
+interface EmptyReactiveContainer : ReactiveContainer {
   override val isInitialized: Boolean get() = true
-  override fun registerComputedProperty(computedProperty: ComputedProperty<*, *>) {}
+  override fun registerReactiveHandle(handle: ReactiveHandle) {}
 }
 
 // todo async property evaluation by requestAnimationFrame, prevent fire() if not changed
 
-class ComputedProperty<T : ComputedPropertyContainer?, R>(private val fn: T.() -> R) : ReactiveHandle, Observable, Transient {
+class ComputedProperty<T : ReactiveContainer?, R>(private val fn: T.() -> R) : ReactiveHandle, Observable, Transient {
   private var dirty = true
   private var instance: T? = null
   private var value: R? = null
@@ -128,10 +128,43 @@ class ComputedProperty<T : ComputedPropertyContainer?, R>(private val fn: T.() -
 }
 
 @Suppress("unused", "RemoveExplicitTypeArguments")
-fun <T : ComputedPropertyContainer?, R> T.computed(fn: T.() -> R): ComputedProperty<T, R> {
+fun <T : ReactiveContainer?, R> T.computed(fn: T.() -> R): ComputedProperty<T, R> {
   val prop = ComputedProperty<T, R>(fn)
-  this?.registerComputedProperty(prop)
+  this?.registerReactiveHandle(prop)
   return prop
+}
+
+class Watcher<R>(
+  private val selector: () -> R,
+  private val callback: (oldValue: R, newValue: R) -> Unit
+) : ReactiveHandle, Transient {
+  private var first = true
+  private var oldValue = watcher()
+  private var handle: ReactiveHandle? = null
+
+  override fun dispose() {
+    handle?.dispose()
+  }
+
+  private fun watcher(): R {
+    val (newValue, handle) = ChangeDetector.evaluate({ selector() }, { watcher() })
+    this.handle = handle
+
+    if (!first) {
+      callback(oldValue, newValue)
+    }
+    first = false
+
+    return newValue
+  }
+}
+
+fun <T : ReactiveContainer?, R> T.watch(
+  selector: () -> R,
+  callback: (oldValue: R, newValue: R) -> Unit
+) {
+  val watcher = Watcher(selector, callback)
+  this?.registerReactiveHandle(watcher)
 }
 
 object ObservableWrapperRegistry {

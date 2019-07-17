@@ -19,7 +19,7 @@ private data class Baz(
   var a: Bar?
 )
 
-private class WithComputed(bar: Bar) : EmptyComputedPropertyContainer {
+private class WithComputed(bar: Bar) : EmptyReactiveContainer {
   var first = 10
   val second by computed { "first = $first, bar = $bar" }
 }
@@ -38,7 +38,7 @@ private fun init() = observable(Foo(
   d = arrayListOf(Bar("a", 1), Bar("b", 2))
 ))
 
-class ProxyReactiveTest : EmptyComputedPropertyContainer {
+class ProxyReactiveTest : EmptyReactiveContainer {
   @Test
   fun simpleObservable() {
     val bar = observable(Bar("1", 1))
@@ -268,29 +268,29 @@ class ProxyReactiveTest : EmptyComputedPropertyContainer {
   }
 
   @Test
-  fun computedPropertyContainer() {
-    var prop: ComputedProperty<*, *>? = null
+  fun reactiveHandleContainer() {
+    var h: ReactiveHandle? = null
 
-    class Container : ComputedPropertyContainer {
+    class Container : ReactiveContainer {
       override val isInitialized = true
 
       var first = 10
       val second by computed { first + 10 }
 
-      override fun registerComputedProperty(computedProperty: ComputedProperty<*, *>) {
-        assertNull(prop)
-        prop = computedProperty
+      override fun registerReactiveHandle(handle: ReactiveHandle) {
+        assertNull(h)
+        h = handle
       }
     }
 
     val container = observable(Container())
-    assertNotNull(prop)
+    assertNotNull(h)
     assertEquals(20, container.second)
 
     container.first = 20
     assertEquals(30, container.second)
 
-    prop?.dispose()
+    h?.dispose()
     container.first = 30
     assertEquals(30, container.second)
   }
@@ -300,7 +300,7 @@ class ProxyReactiveTest : EmptyComputedPropertyContainer {
     var initialized = false
     var callCount = 0
 
-    class Container : ComputedPropertyContainer {
+    class Container : ReactiveContainer {
       override val isInitialized get() = initialized
 
       var first = 10
@@ -309,7 +309,7 @@ class ProxyReactiveTest : EmptyComputedPropertyContainer {
         first + 10
       }
 
-      override fun registerComputedProperty(computedProperty: ComputedProperty<*, *>) {}
+      override fun registerReactiveHandle(handle: ReactiveHandle) {}
     }
 
     val container = observable(Container())

@@ -173,14 +173,14 @@ private object ClassRandom {
   }
 }
 
-// todo common implementation for ComputedPropertyContainer
+// todo common implementation for ReactiveContainer
 
-abstract class StateMixin<T : StatefulWidget> : ComputedPropertyContainer {
+abstract class StateMixin<T : StatefulWidget> : ReactiveContainer {
   final override var isInitialized = false
     private set
 
   @JsName("\$computedProperties")
-  private val computedProperties = ArrayList<ComputedProperty<*, *>>()
+  private val computedProperties = ArrayList<ReactiveHandle>()
 
   open fun created() {
     check(!isInitialized) { "State already initialized" }
@@ -198,17 +198,17 @@ abstract class StateMixin<T : StatefulWidget> : ComputedPropertyContainer {
     computedProperties.forEach { it.dispose() }
   }
 
-  final override fun registerComputedProperty(computedProperty: ComputedProperty<*, *>) {
-    computedProperties.add(computedProperty)
+  final override fun registerReactiveHandle(handle: ReactiveHandle) {
+    computedProperties.add(handle)
   }
 }
 
 abstract class State<T : StatefulWidget>(
   @JsName("\$context")
   val context: BuildContext
-) : ComputedPropertyContainer, Styled {
+) : ReactiveContainer, Styled {
   @JsName("\$computedProperties")
-  private val computedProperties = ArrayList<ComputedProperty<*, *>>()
+  private val computedProperties = ArrayList<ReactiveHandle>()
 
   @JsName("\$mixins")
   private val mixins = ArrayList<StateMixin<in T>>()
@@ -252,8 +252,8 @@ abstract class State<T : StatefulWidget>(
     computedProperties.forEach { it.dispose() }
   }
 
-  final override fun registerComputedProperty(computedProperty: ComputedProperty<*, *>) {
-    computedProperties.add(computedProperty)
+  final override fun registerReactiveHandle(handle: ReactiveHandle) {
+    computedProperties.add(handle)
   }
 
   fun <M : StateMixin<in T>> use(mixin: M): M {

@@ -210,6 +210,7 @@ class HtmlRenderElement(
     } else {
       node.removeAttribute(k)
     }
+    updateSpecialAttribute(node, k, v)
   }
 }
 
@@ -242,3 +243,9 @@ class TextRenderElement(
 fun classMap(vararg items: Pair<String, Boolean>) = items
   .filter { it.second }
   .map { it.first }
+
+private fun updateSpecialAttribute(node: dynamic, k: String, v: String?) {
+  when (k) {
+    "checked" -> node.checked = v != null
+  }
+}

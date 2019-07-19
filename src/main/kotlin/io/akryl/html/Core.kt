@@ -167,12 +167,16 @@ class HtmlRenderElement(
       if (oldValue != newValue) {
         updateProp(k, newValue)
       }
+      updateSpecialAttribute(node, k, newValue)
     }
 
     for ((k, newValue) in newAttributes) {
       val oldValue = widget.attributes[k]
       if (oldValue == null && newValue != null) {
         updateProp(k, newValue)
+      }
+      if (newValue != null) {
+        updateSpecialAttribute(node, k, newValue)
       }
     }
   }
@@ -210,7 +214,6 @@ class HtmlRenderElement(
     } else {
       node.removeAttribute(k)
     }
-    updateSpecialAttribute(node, k, v)
   }
 }
 

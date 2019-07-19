@@ -57,7 +57,7 @@ class NativeKey<out N : Node> : Key() {
 
 data class ValueKey(val value: Any) : Key()
 
-abstract class Widget(val key: Key? = null) {
+abstract class Widget(val key: Key? = null) : Transient {
   abstract fun createElement(parent: RenderElement?): RenderElement
 }
 
@@ -213,7 +213,6 @@ abstract class State<T : StatefulWidget>(
   @JsName("\$mixins")
   private val mixins = ArrayList<StateMixin<in T>>()
 
-  @JsName("\$widget")
   @Suppress("UNCHECKED_CAST")
   val widget: T get() = context.widget as T
 
@@ -278,8 +277,17 @@ class StatefulElement(
   override val parent: RenderElement?,
   widget: StatefulWidget
 ) : RenderElement() {
+  // todo ReactiveProperty
+  private val widgetProp = ObservableProperty()
   override var widget: StatefulWidget = widget
-    private set
+    get() {
+      widgetProp.observed()
+      return field
+    }
+    private set(value) {
+      field = value
+      widgetProp.fire()
+    }
 
   override val node get() = inner.node
   override val prefix get() = widget.prefix

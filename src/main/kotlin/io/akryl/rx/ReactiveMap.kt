@@ -52,8 +52,9 @@ class ReactiveMap<K, V>(private val inner: MutableMap<K, V>) : MutableMap<K, V>,
     override fun retainAll(elements: Collection<MutableMap.MutableEntry<K, V>>) = throw NotImplementedError()
     override fun contains(element: MutableMap.MutableEntry<K, V>) = throw NotImplementedError()
     override fun containsAll(elements: Collection<MutableMap.MutableEntry<K, V>>) = throw NotImplementedError()
-    override fun isEmpty() = throw NotImplementedError()
-    override val size get() = throw NotImplementedError()
+
+    override fun isEmpty() = this@ReactiveMap.isEmpty()
+    override val size get() = this@ReactiveMap.size
 
     override fun iterator(): MutableIterator<MutableMap.MutableEntry<K, V>> {
       sizeProp.observed()

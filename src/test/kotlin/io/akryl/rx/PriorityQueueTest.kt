@@ -39,9 +39,9 @@ class PriorityQueueTest {
   @Test
   fun drain() {
     val queue = PriorityQueue<Int>()
-    queue.push(0, 1)
-    queue.push(0, 2)
-    queue.push(0, 3)
+    queue.push(1, 1)
+    queue.push(1, 2)
+    queue.push(1, 3)
 
     val result = ArrayList<Int>()
     queue.drain {
@@ -51,6 +51,6 @@ class PriorityQueueTest {
       result.add(it)
     }
 
-    assertEquals(listOf(1, 2, 3, 4, 5, 6), result)
+    assertEquals(listOf(1, 4, 2, 5, 3, 6), result)
   }
 }

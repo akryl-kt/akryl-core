@@ -73,7 +73,7 @@ private fun defineProperty(obj: dynamic, key: String, initialValue: Any?) {
       value
     },
     set = { newValue ->
-      value = newValue
+      value = observable(newValue)
       prop.fire()
     }
   ))

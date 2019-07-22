@@ -99,6 +99,12 @@ class SimpleClassTest : EmptyReactiveContainer {
 
     first.second.value = 20
     assertEquals(20, value)
+
+    first.second = Second()
+    assertEquals(10, value)
+
+    first.second.value = 30
+    assertEquals(30, value)
   }
 
   @Test

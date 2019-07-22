@@ -176,25 +176,21 @@ private object ClassRandom {
 // todo common implementation for ReactiveContainer
 
 abstract class StateMixin<T : StatefulWidget> : ReactiveContainer {
-  final override var isInitialized = false
-    private set
-
   @JsName("\$computedProperties")
   private val computedProperties = ArrayList<ReactiveHandle>()
 
   open fun created() {
-    check(!isInitialized) { "State already initialized" }
-    isInitialized = true
+    check(observable) { "State is not initialized" }
   }
 
   open fun mounted() {
-    check(isInitialized) { "State is not initialized" }
+    check(observable) { "State is not initialized" }
   }
 
   open fun updated(oldWidget: T, newWidget: T) {}
 
   open fun unmounted() {
-    check(isInitialized) { "State is not initialized" }
+    check(observable) { "State is not initialized" }
     computedProperties.forEach { it.dispose() }
   }
 
@@ -225,17 +221,13 @@ abstract class State<T : StatefulWidget>(
   override val prefix get() = widget.prefix
   override fun style() = widget.style()
 
-  final override var isInitialized = false
-    private set
-
   open fun created() {
-    check(!isInitialized) { "State already initialized" }
-    isInitialized = true
+    check(observable) { "State is not initialized" }
     mixins.forEach { it.created() }
   }
 
   open fun mounted() {
-    check(isInitialized) { "State is not initialized" }
+    check(observable) { "State is not initialized" }
     mixins.forEach { it.mounted() }
   }
 
@@ -277,17 +269,8 @@ class StatefulElement(
   override val parent: RenderElement?,
   widget: StatefulWidget
 ) : RenderElement() {
-  // todo ReactiveProperty
-  private val widgetProp = ObservableProperty()
-  override var widget: StatefulWidget = widget
-    get() {
-      widgetProp.observed()
-      return field
-    }
-    private set(value) {
-      field = value
-      widgetProp.fire()
-    }
+  override var widget by reactive(widget)
+    private set
 
   override val node get() = inner.node
   override val prefix get() = widget.prefix

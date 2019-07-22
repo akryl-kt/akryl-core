@@ -27,6 +27,13 @@ fun <T> proxy(target: T, handler: ProxyHandler): T {
 
 interface PropertyDescriptor<T>
 
+val <T> PropertyDescriptor<T>.accessor get(): AccessorPropertyDescriptor<T>? {
+  val pd = this.unsafeCast<AccessorPropertyDescriptor<T>>()
+  return if (pd.get != null || pd.set != null) pd else null
+}
+
+val <T> PropertyDescriptor<T>.data get() = if (accessor == null) this.unsafeCast<DataPropertyDescriptor<T>>() else null
+
 class AccessorPropertyDescriptor<T>(
   var configurable: Boolean = false,
   val enumerable: Boolean = false,

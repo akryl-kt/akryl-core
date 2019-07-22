@@ -11,7 +11,7 @@ object EventLoop {
   }
 
   private fun requestAnimationFrame() {
-    val request = js("window && window.requestAnimationFrame")
+    val request = js("typeof(window) !== 'undefined' && window.requestAnimationFrame || null")
     if (request != null) {
       request(this::drain)
     }

@@ -146,13 +146,17 @@ internal fun update(parent: RenderElement, oldElement: RenderElement, newWidget:
 }
 
 class RebuildScheduler(private val block: () -> Unit) {
+  companion object {
+    const val QUEUE_PRIORITY = 300
+  }
+
   private var scheduled = false
 
   fun schedule() {
     if (scheduled) return
     scheduled = true
 
-    window.requestAnimationFrame {
+    EventLoop.submit(QUEUE_PRIORITY) {
       scheduled = false
       block()
     }

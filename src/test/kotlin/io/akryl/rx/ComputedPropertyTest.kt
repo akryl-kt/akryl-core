@@ -80,6 +80,7 @@ class ComputedPropertyTest : EmptyReactiveContainer {
 
     a = 20
     aProp.fire()
+    EventLoop.drain()
     assertEquals(30, c)
   }
 
@@ -103,7 +104,27 @@ class ComputedPropertyTest : EmptyReactiveContainer {
     assertEquals(4, prop)
   }
 
-  // todo sequential
-  // todo fire only if changed
-  // todo event loop test
+  @Test
+  fun fireOnlyIfChanged() {
+    var counter = 0
+    var a by reactive(0)
+    val b by computed { a % 2 }
+    val c by computed { counter += 1; b }
+
+    EventLoop.drain()
+    assertEquals(0, c)
+    assertEquals(1, counter)
+
+    a = 1
+    EventLoop.drain()
+    assertEquals(2, counter)
+
+    a = 3
+    EventLoop.drain()
+    assertEquals(2, counter)
+
+    a = 6
+    EventLoop.drain()
+    assertEquals(3, counter)
+  }
 }

@@ -6,6 +6,10 @@ class ComputedProperty<R>(
   private val container: ReactiveContainer,
   private val fn: () -> R
 ) : ReactiveHandle, Transient, Observable {
+  companion object {
+    const val QUEUE_PRIORITY = 100
+  }
+
   private val inner = ObservableProperty()
   private var dirty = true
   private var value: R? = null
@@ -21,12 +25,7 @@ class ComputedProperty<R>(
 
   @Suppress("UNCHECKED_CAST")
   fun get(): R {
-    if (dirty) {
-      val (value, handle) = ChangeDetector.evaluate(fn, this::fire)
-      this.value = value
-      this.handle = handle
-      dirty = !container.observable
-    }
+    compute()
     inner.observed()
     return value as R
   }
@@ -35,7 +34,18 @@ class ComputedProperty<R>(
 
   private fun fire() {
     dirty = true
-    inner.fire()
+    EventLoop.submit(QUEUE_PRIORITY, this::compute)
+  }
+
+  private fun compute() {
+    if (dirty) {
+      val (value, handle) = ChangeDetector.evaluate(fn, this::fire)
+      val changed = value != this.value
+      this.value = value
+      this.handle = handle
+      dirty = !container.observable
+      if (changed) inner.fire()
+    }
   }
 }
 

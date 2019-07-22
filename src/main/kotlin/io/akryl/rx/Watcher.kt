@@ -4,8 +4,11 @@ class Watcher<R>(
   private val selector: () -> R,
   private val callback: (oldValue: R, newValue: R) -> Unit
 ) : ReactiveHandle, Transient {
-  private var first = true
-  private var oldValue = watcher()
+  companion object {
+    const val QUEUE_PRIORITY = 200
+  }
+
+  private var oldValue = compute()
   private var handle: ReactiveHandle? = null
 
   override fun dispose() {
@@ -13,17 +16,20 @@ class Watcher<R>(
     handle = null
   }
 
-  private fun watcher(): R {
-    val (newValue, handle) = ChangeDetector.evaluate(selector) { watcher() }
-    this.handle = handle
-
-    if (!first) {
-      callback(oldValue, newValue)
-    }
-    first = false
+  private fun watcher() {
+    val newValue = compute()
+    callback(oldValue, newValue)
     oldValue = newValue
+  }
 
+  private fun compute(): R {
+    val (newValue, handle) = ChangeDetector.evaluate(selector, this::fire)
+    this.handle = handle
     return newValue
+  }
+
+  private fun fire() {
+    EventLoop.submit(QUEUE_PRIORITY, this::watcher)
   }
 }
 

@@ -257,7 +257,7 @@ abstract class State<T : StatefulWidget>(
 abstract class StatefulWidget(
   key: Key? = null
 ) : Widget(key), Styled {
-  final override val prefix by lazy { ClassRandom.generate(this) }
+  final override val prefix get() = ClassRandom.generate(this)
   override fun style(): Style? = null
   abstract fun createState(context: BuildContext): State<*>
 
@@ -343,7 +343,7 @@ class StatefulElement(
 abstract class StatelessWidget(
   key: Key? = null
 ) : Widget(key), Styled {
-  final override val prefix by lazy { ClassRandom.generate(this) }
+  final override val prefix get() = ClassRandom.generate(this)
   override fun style(): Style? = null
   final override fun createElement(parent: RenderElement?) = StatelessElement(parent, this)
   abstract fun build(context: BuildContext): Widget

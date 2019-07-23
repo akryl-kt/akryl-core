@@ -10479,6 +10479,7 @@ fun Styled.Select(
   autoFocus: Boolean? = null,
   translate: String? = null,
   dropZone: String? = null,
+  value: String? = null,
   onBlur: ((event: Event) -> Unit)? = null,
   onChange: ((event: Event) -> Unit)? = null,
   onContextMenu: ((event: Event) -> Unit)? = null,
@@ -10544,6 +10545,7 @@ fun Styled.Select(
     autoFocus = autoFocus,
     translate = translate,
     dropZone = dropZone,
+    value = value,
     clazz = classes(clazz, classes)
   ),
   listeners = listeners(

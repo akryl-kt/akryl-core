@@ -250,5 +250,6 @@ fun classMap(vararg items: Pair<String, Boolean>) = items
 private fun updateSpecialAttribute(node: dynamic, k: String, v: String?) {
   when (k) {
     "checked" -> node.checked = v != null
+    "value" -> node.value = v
   }
 }

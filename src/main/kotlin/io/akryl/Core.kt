@@ -52,18 +52,18 @@ abstract class Key : Transient {
 
 @Suppress("UNCHECKED_CAST")
 class NativeKey<out N : Node> : Key() {
-  val node get() = element.node as N
+  val node get() = (element.node as RealDomNode).inner as N
 }
 
 data class ValueKey(val value: Any) : Key()
 
 abstract class Widget(val key: Key? = null) : Transient {
-  abstract fun createElement(parent: RenderElement?): RenderElement
+  abstract fun createElement(parent: RenderElement): RenderElement
 }
 
 interface BuildContext : Styled {
   val widget: Widget
-  val node: Node
+  val node: DomNode
   val isMounted: Boolean
 
   fun <T : Any> ancestorStateOf(clazz: KClass<T>): T?
@@ -74,8 +74,9 @@ inline fun <reified T : Any> BuildContext.ancestorStateOf() = ancestorStateOf(T:
 
 abstract class RenderElement : BuildContext {
   abstract override val widget: Widget
-  abstract val parent: RenderElement?
-  abstract override val node: Node
+  abstract val parent: RenderElement
+  abstract val factory: DomFactory
+  abstract override val node: DomNode
   override fun style(): Style? = null
 
   final override var isMounted: Boolean = false
@@ -96,25 +97,28 @@ abstract class RenderElement : BuildContext {
   }
 
   override fun <T : Any> ancestorStateOf(clazz: KClass<T>): T? {
-    return parent?.ancestorStateOf(clazz)
+    return parent.ancestorStateOf(clazz)
   }
 
   override fun ancestorStateOf(predicate: (state: State<*>) -> Boolean): State<*>? {
-    return parent?.ancestorStateOf(predicate)
+    return parent.ancestorStateOf(predicate)
   }
 }
 
-class RootRenderElement(override val node: Node) : RenderElement() {
-  override val parent: RenderElement? = null
+class RootRenderElement(override val node: RealDomNode) : RenderElement() {
+  override val parent: RenderElement = this
+  override val factory = ReadDomFactory
   override val widget: Widget get() = throw IllegalStateException()
   override val prefix: String = ""
   override fun update(newWidget: Widget, force: Boolean) = throw IllegalStateException()
+  override fun <T : Any> ancestorStateOf(clazz: KClass<T>): T? = null
+  override fun ancestorStateOf(predicate: (state: State<*>) -> Boolean): State<*>? = null
 }
 
 class MountRef(val parent: RenderElement, var element: RenderElement) {
   fun unmount() {
     if (element.isMounted) {
-      element.node.parentElement!!.removeChild(element.node)
+      element.node.remove()
       element.unmounted()
     }
   }
@@ -125,7 +129,7 @@ class MountRef(val parent: RenderElement, var element: RenderElement) {
 }
 
 fun mount(element: Element, widget: Widget): MountRef {
-  val parent = RootRenderElement(element)
+  val parent = RootRenderElement(RealDomNode(element))
   val root = widget.createElement(parent)
   parent.node.appendChild(root.node)
   root.mounted()
@@ -136,8 +140,7 @@ internal fun update(parent: RenderElement, oldElement: RenderElement, newWidget:
   if (oldElement.widget.key == newWidget.key && oldElement.update(newWidget, force)) return oldElement
 
   val newElement = newWidget.createElement(parent)
-  val parentNode = oldElement.node.parentElement!!
-  parentNode.replaceChild(newElement.node, oldElement.node)
+  oldElement.node.replace(newElement.node)
 
   oldElement.unmounted()
   newElement.mounted()
@@ -217,7 +220,7 @@ abstract class State<T : StatefulWidget>(
   val widget: T get() = context.widget as T
 
   @JsName("\$nativeElement")
-  val nativeElement get() = context.node as Element
+  val nativeElement get() = (context.node as RealDomNode).inner as Element
 
   @JsName("\$isMounted")
   val isMounted get() = context.isMounted
@@ -266,16 +269,17 @@ abstract class StatefulWidget(
   abstract fun createState(context: BuildContext): State<*>
 
   @Suppress("UNCHECKED_CAST")
-  final override fun createElement(parent: RenderElement?) = StatefulElement(parent, this)
+  final override fun createElement(parent: RenderElement) = StatefulElement(parent, this)
 }
 
 class StatefulElement(
-  override val parent: RenderElement?,
+  override val parent: RenderElement,
   widget: StatefulWidget
 ) : RenderElement() {
   override var widget by reactive(widget)
     private set
 
+  override val factory = parent.factory
   override val node get() = inner.node
   override val prefix get() = widget.prefix
   override fun style() = widget.style()
@@ -349,17 +353,18 @@ abstract class StatelessWidget(
 ) : Widget(key), Styled {
   final override val prefix get() = ClassRandom.generate(this)
   override fun style(): Style? = null
-  final override fun createElement(parent: RenderElement?) = StatelessElement(parent, this)
+  final override fun createElement(parent: RenderElement) = StatelessElement(parent, this)
   abstract fun build(context: BuildContext): Widget
 }
 
 class StatelessElement(
-  override val parent: RenderElement?,
+  override val parent: RenderElement,
   widget: StatelessWidget
 ) : RenderElement(), Styled {
   override var widget: StatelessWidget = widget
     private set
 
+  override val factory = parent.factory
   override val node get() = inner.node
   override val prefix get() = widget.prefix
   override fun style() = widget.style()

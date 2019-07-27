@@ -3,13 +3,9 @@
 package io.akryl.html
 
 import io.akryl.*
-import org.w3c.dom.Element
 import org.w3c.dom.HTMLElement
-import org.w3c.dom.Node
 import org.w3c.dom.css.CSSStyleDeclaration
 import org.w3c.dom.events.Event
-import kotlin.browser.document
-import kotlin.dom.clear
 import kotlin.math.min
 
 class HtmlWidget(
@@ -27,21 +23,18 @@ class HtmlWidget(
     check(children.isEmpty() || innerHtml == null) { "Only one property of [children, innerHtml] can be set" }
   }
 
-  override fun createElement(parent: RenderElement?) = HtmlRenderElement(parent, this)
+  override fun createElement(parent: RenderElement) = HtmlRenderElement(parent, this)
 }
 
 class HtmlRenderElement(
-  override val parent: RenderElement?,
+  override val parent: RenderElement,
   widget: HtmlWidget
 ) : RenderElement() {
   private val children = ArrayList<RenderElement>()
   override val prefix = ""
 
-  override val node: Element = if (widget.ns != null) {
-    document.createElementNS(widget.ns, widget.tag)
-  } else {
-    document.createElement(widget.tag)
-  }
+  override val factory = parent.factory
+  override val node = factory.createNode(widget.tag, widget.ns)
 
   init {
     widget.cssPrefix?.let { node.setAttribute(STYLE_ATTRIBUTE_NAME, it) }
@@ -130,7 +123,7 @@ class HtmlRenderElement(
     }
 
     for (i in (children.size - 1) downTo commonSize) {
-      node.removeChild(children[i].node)
+      children[i].node.remove()
       val oldChild = children.removeAt(i)
       oldChild.unmounted()
     }
@@ -220,15 +213,16 @@ class HtmlRenderElement(
 class Text(
   val value: String
 ) : Widget() {
-  override fun createElement(parent: RenderElement?) = TextRenderElement(parent, this)
+  override fun createElement(parent: RenderElement) = TextRenderElement(parent, this)
 }
 
 class TextRenderElement(
-  override val parent: RenderElement?,
+  override val parent: RenderElement,
   widget: Text
 ) : RenderElement() {
   override val prefix = ""
-  override val node: Node = document.createTextNode(widget.value)
+  override val factory = parent.factory
+  override val node = factory.createText(widget.value)
 
   override var widget: Text = widget
     private set

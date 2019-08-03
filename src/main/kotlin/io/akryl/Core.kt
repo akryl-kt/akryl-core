@@ -11,7 +11,7 @@ interface Style {
 }
 
 interface Styled {
-  val prefix: String
+  val prefix: String?
   fun style(): Style?
 }
 
@@ -19,9 +19,10 @@ object StyleRegistry {
   private val styles = HashMap<KClass<*>, Element?>()
 
   fun register(styled: Styled) {
+    val prefix = styled.prefix ?: return
     val clazz = styled::class
     if (clazz in styles) return
-    styles[clazz] = styled.style()?.build(styled.prefix)
+    styles[clazz] = styled.style()?.build(prefix)
   }
 
   fun clear() {
@@ -129,7 +130,10 @@ class MountRef(val parent: RenderElement, var element: RenderElement) {
 }
 
 fun mount(element: Element, widget: Widget): MountRef {
-  val parent = RootRenderElement(RealDomNode(element))
+  return mount(RootRenderElement(RealDomNode(element)), widget)
+}
+
+fun mount(parent: RenderElement, widget: Widget): MountRef {
   val root = widget.createElement(parent)
   parent.node.appendChild(root.node)
   root.mounted()

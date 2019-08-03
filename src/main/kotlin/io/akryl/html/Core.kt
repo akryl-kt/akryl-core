@@ -3,8 +3,6 @@
 package io.akryl.html
 
 import io.akryl.*
-import org.w3c.dom.HTMLElement
-import org.w3c.dom.css.CSSStyleDeclaration
 import org.w3c.dom.events.Event
 import kotlin.math.min
 
@@ -45,12 +43,9 @@ class HtmlRenderElement(
       }
     }
 
-    val style = (node as? HTMLElement)?.style
-    if (style != null) {
-      for ((k, v) in widget.style) {
-        if (v != null) {
-          style.setProperty(k, v)
-        }
+    for ((k, v) in widget.style) {
+      if (v != null) {
+        node.setStyle(k, v)
       }
     }
 
@@ -137,19 +132,17 @@ class HtmlRenderElement(
   }
 
   private fun updateStyle(newStyle: Map<String, String?>) {
-    val style = (node as? HTMLElement)?.style ?: return
-
     for ((k, oldValue) in widget.style) {
       val newValue = newStyle[k]
       if (oldValue != newValue) {
-        updateProp(style, k, newValue)
+        updateStyle(k, newValue)
       }
     }
 
     for ((k, newValue) in newStyle) {
       val oldValue = widget.style[k]
       if (oldValue == null && newValue != null) {
-        updateProp(style, k, newValue)
+        updateStyle(k, newValue)
       }
     }
   }
@@ -158,7 +151,7 @@ class HtmlRenderElement(
     for ((k, oldValue) in widget.attributes) {
       val newValue = newAttributes[k]
       if (oldValue != newValue) {
-        updateProp(k, newValue)
+        updateAttribute(k, newValue)
       }
       updateSpecialAttribute(node, k, newValue)
     }
@@ -166,7 +159,7 @@ class HtmlRenderElement(
     for ((k, newValue) in newAttributes) {
       val oldValue = widget.attributes[k]
       if (oldValue == null && newValue != null) {
-        updateProp(k, newValue)
+        updateAttribute(k, newValue)
       }
       if (newValue != null) {
         updateSpecialAttribute(node, k, newValue)
@@ -193,15 +186,15 @@ class HtmlRenderElement(
     }
   }
 
-  private fun updateProp(style: CSSStyleDeclaration, k: String, v: String?) {
+  private fun updateStyle(k: String, v: String?) {
     if (v != null) {
-      style.setProperty(k, v)
+      node.setStyle(k, v)
     } else {
-      style.removeProperty(k)
+      node.removeStyle(k)
     }
   }
 
-  private fun updateProp(k: String, v: String?) {
+  private fun updateAttribute(k: String, v: String?) {
     if (v != null) {
       node.setAttribute(k, v)
     } else {

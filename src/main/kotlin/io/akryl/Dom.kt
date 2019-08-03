@@ -1,6 +1,7 @@
 package io.akryl
 
 import org.w3c.dom.Element
+import org.w3c.dom.HTMLElement
 import org.w3c.dom.Node
 import org.w3c.dom.Text
 import org.w3c.dom.events.Event
@@ -25,6 +26,9 @@ interface DomNode {
 
   fun setAttribute(qualifiedName: String, value: String)
   fun removeAttribute(qualifiedName: String)
+
+  fun setStyle(property: String, value: String)
+  fun removeStyle(property: String)
 
   fun addEventListener(type: String, callback: (event: Event) -> Unit)
   fun removeEventListener(type: String, callback: (event: Event) -> Unit)
@@ -53,6 +57,9 @@ class RealDomNode(
     get() = (inner as Element).innerHTML
     set(value) { (inner as Element).innerHTML = value }
 
+  private val element by lazy { inner as Element }
+  private val htmlElement by lazy { inner as HTMLElement }
+
   override fun appendChild(node: DomNode) {
     node as RealDomNode
     inner.appendChild(node.inner)
@@ -72,18 +79,26 @@ class RealDomNode(
   }
 
   override fun setAttribute(qualifiedName: String, value: String) {
-    (inner as Element).setAttribute(qualifiedName, value)
+    element.setAttribute(qualifiedName, value)
   }
 
   override fun removeAttribute(qualifiedName: String) {
-    (inner as Element).removeAttribute(qualifiedName)
+    element.removeAttribute(qualifiedName)
+  }
+
+  override fun setStyle(property: String, value: String) {
+    htmlElement.style.setProperty(property, value)
+  }
+
+  override fun removeStyle(property: String) {
+    htmlElement.style.removeProperty(property)
   }
 
   override fun addEventListener(type: String, callback: (event: Event) -> Unit) {
-    (inner as Element).addEventListener(type, callback)
+    element.addEventListener(type, callback)
   }
 
   override fun removeEventListener(type: String, callback: (event: Event) -> Unit) {
-    (inner as Element).removeEventListener(type, callback)
+    element.removeEventListener(type, callback)
   }
 }

@@ -1,25 +1,26 @@
 package io.akryl
 
+import io.akryl.html.HtmlWidget
+import io.akryl.html.Text
 import org.w3c.dom.events.Event
 import kotlin.test.assertEquals
 
 object TestDomFactory : DomFactory {
   override fun createNode(tag: String, namespace: String?): DomNode = TestDomNode(tag, namespace)
-  override fun createText(text: String): DomNode = TestDomNode(text, null)
+  override fun createText(text: String): DomNode = TestDomNode("text", null, textContent = text)
 }
 
-class TestDomNode(
+data class TestDomNode(
   val tag: String,
   val namespace: String?,
   val children: ArrayList<TestDomNode> = ArrayList(),
-  val attributes: HashMap<String, String> = HashMap(),
-  val style: HashMap<String, String> = HashMap(),
-  val listeners: HashMap<String, ArrayList<(event: Event) -> Unit>> = HashMap()
+  val attributes: HashMap<String, String?> = HashMap(),
+  val style: HashMap<String, String?> = HashMap(),
+  val listeners: HashMap<String, ArrayList<(event: Event) -> Unit>> = HashMap(),
+  override var textContent: String? = null
 ) : DomNode {
   var parent: TestDomNode? = null
     private set
-
-  override var textContent: String? = null
 
   override var innerHTML: String
     get() = children.joinToString("")
@@ -32,9 +33,20 @@ class TestDomNode(
     node.parent = this
   }
 
+  override fun insertBefore(index: Int, node: DomNode) {
+    node as TestDomNode
+    val nodeParent = node.parent
+    if (nodeParent != null) {
+      nodeParent.children.removeAll { it === node }
+      node.parent = null
+    }
+    children.add(index, node)
+    node.parent = this
+  }
+
   override fun remove() {
     val parent = checkNotNull(parent) { "Node $this has no parent" }
-    parent.children.remove(this)
+    parent.children.removeAll { it === this }
     this.parent = null
   }
 
@@ -42,7 +54,7 @@ class TestDomNode(
     newNode as TestDomNode
     val parent = checkNotNull(parent) { "Node $this has no parent" }
     check(newNode.parent == null) { "Node $newNode already has parent" }
-    val index = parent.children.indexOf(this)
+    val index = parent.children.indexOfFirst { it === this }
     parent.children[index] = newNode
     newNode.parent = parent
     this.parent = null
@@ -86,7 +98,11 @@ class TestDomNode(
   }
 
   override fun toString(): String {
-    var attrs: Map<String, String> = attributes
+    if (tag == "text" && namespace == null) {
+      return textContent ?: ""
+    }
+
+    var attrs: Map<String, String?> = attributes
     if (style.isNotEmpty()) {
       val styleStr = style.entries
         .joinToString("; ") { "${it.key}: ${it.value}" }
@@ -120,4 +136,33 @@ fun fakeMount(widget: Widget): MountRef {
 
 fun assertHtml(expected: String, actual: MountRef) {
   assertEquals(expected, actual.parent.node.innerHTML)
+}
+
+fun assertHtml(expected: Widget, actual: MountRef) {
+  val node = expected.toTestNode()
+  assertEquals(node, actual.element.node)
+}
+
+fun Widget.toTestNode(): TestDomNode = when (this) {
+  is HtmlWidget -> TestDomNode(
+    tag,
+    ns,
+    children.mapTo(ArrayList()) { it.toTestNode() },
+    HashMap(attributes),
+    HashMap(style),
+    listeners.mapValuesTo(HashMap()) { arrayListOf(it.value) }
+  )
+  is Text -> TestDomNode(tag = "text", namespace = null, textContent = value)
+  else -> throw IllegalStateException("Unexpected widget in test tree '$this'")
+}
+
+fun mountTest(widget: Widget): MountRef {
+  val ref = fakeMount(widget)
+  assertHtml(widget, ref)
+  return ref
+}
+
+fun MountRef.rebuildTest(widget: Widget) {
+  this.rebuild(widget)
+  assertHtml(widget, this)
 }

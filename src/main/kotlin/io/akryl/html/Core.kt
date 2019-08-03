@@ -4,7 +4,6 @@ package io.akryl.html
 
 import io.akryl.*
 import org.w3c.dom.events.Event
-import kotlin.math.min
 
 class HtmlWidget(
   val tag: String,
@@ -108,26 +107,50 @@ class HtmlRenderElement(
       }
     }
 
-    // todo key-based algorithm
+    val currentKeys = HashMap<IndexedKey, RenderElement>()
+    var indexCounter = 0
 
-    val commonSize = min(children.size, newChildren.size)
-
-    for (i in 0 until commonSize) {
-      val newChild = newChildren[i]
-      children[i] = update(this, children[i], newChild, force)
+    for (child in children) {
+      val key = child.widget.key
+      if (key != null) {
+        currentKeys[IndexedKey(key, 0)] = child
+      } else {
+        indexCounter += 1
+        currentKeys[IndexedKey(null, indexCounter)] = child
+      }
     }
 
-    for (i in (children.size - 1) downTo commonSize) {
-      children[i].node.remove()
+    indexCounter = 0
+
+    for ((index, newWidget) in newChildren.withIndex()) {
+      val key = newWidget.key
+      val indexedKey = if (key != null) {
+        IndexedKey(key, 0)
+      } else {
+        indexCounter += 1
+        IndexedKey(null, indexCounter)
+      }
+      var element = currentKeys[indexedKey]
+      if (element != null) {
+        val oldIndex = children.indexOf(element)
+        if (oldIndex != index) {
+          node.insertBefore(index, element.node)
+          children.removeAt(oldIndex)
+          children.add(index, element)
+        }
+        children[index] = update(this, element, newWidget, force)
+      } else {
+        element = newWidget.createElement(this)
+        node.insertBefore(index, element.node)
+        children.add(index, element)
+        element.mounted()
+      }
+    }
+
+    for (i in (children.size - 1) downTo newChildren.size) {
       val oldChild = children.removeAt(i)
+      oldChild.node.remove()
       oldChild.unmounted()
-    }
-
-    for (i in commonSize until newChildren.size) {
-      val newChild = newChildren[i].createElement(this)
-      children.add(newChild)
-      node.appendChild(newChild.node)
-      newChild.mounted()
     }
   }
 
@@ -240,3 +263,5 @@ private fun updateSpecialAttribute(node: dynamic, k: String, v: String?) {
     "value" -> node.value = v
   }
 }
+
+private data class IndexedKey(val key: Key?, val index: Int)

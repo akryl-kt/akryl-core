@@ -33,14 +33,18 @@ data class TestDomNode(
     node.parent = this
   }
 
-  override fun insertBefore(index: Int, node: DomNode) {
+  override fun insertBefore(node: DomNode, ref: DomNode) {
     node as TestDomNode
+    ref as TestDomNode
+
     val nodeParent = node.parent
     if (nodeParent != null) {
       nodeParent.children.removeAll { it === node }
       node.parent = null
     }
-    children.add(index, node)
+
+    val refIndex = children.indexOfFirst { it === ref }
+    children.add(refIndex, node)
     node.parent = this
   }
 

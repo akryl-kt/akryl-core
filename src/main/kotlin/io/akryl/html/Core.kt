@@ -134,14 +134,20 @@ class HtmlRenderElement(
       if (element != null) {
         val oldIndex = children.indexOf(element)
         if (oldIndex != index) {
-          node.insertBefore(index, element.node)
+          val insertRef = children[index].node
+          node.insertBefore(element.node, insertRef)
           children.removeAt(oldIndex)
           children.add(index, element)
         }
         children[index] = update(this, element, newWidget, force)
       } else {
         element = newWidget.createElement(this)
-        node.insertBefore(index, element.node)
+        if (index < children.size) {
+          val insertRef = children[index].node
+          node.insertBefore(element.node, insertRef)
+        } else {
+          node.appendChild(element.node)
+        }
         children.add(index, element)
         element.mounted()
       }

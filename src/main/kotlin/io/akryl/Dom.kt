@@ -1,6 +1,9 @@
 package io.akryl
 
-import org.w3c.dom.*
+import org.w3c.dom.Element
+import org.w3c.dom.HTMLElement
+import org.w3c.dom.Node
+import org.w3c.dom.Text
 import org.w3c.dom.events.Event
 import kotlin.browser.document
 import kotlin.dom.clear
@@ -17,7 +20,7 @@ interface DomNode {
   var innerHTML: String
 
   fun appendChild(node: DomNode)
-  fun insertBefore(index: Int, node: DomNode)
+  fun insertBefore(node: DomNode, ref: DomNode)
   fun remove()
   fun replace(newNode: DomNode)
   fun clear()
@@ -55,17 +58,18 @@ class RealDomNode(
     get() = (inner as Element).innerHTML
     set(value) { (inner as Element).innerHTML = value }
 
-  private val element by lazy { inner as Element }
-  private val htmlElement by lazy { inner as HTMLElement }
+  private val element by lazy { inner.unsafeCast<Element>() }
+  private val htmlElement by lazy { inner.unsafeCast<HTMLElement>() }
 
   override fun appendChild(node: DomNode) {
     node as RealDomNode
     inner.appendChild(node.inner)
   }
 
-  override fun insertBefore(index: Int, node: DomNode) {
+  override fun insertBefore(node: DomNode, ref: DomNode) {
     node as RealDomNode
-    inner.insertBefore(node.inner, inner.childNodes[index])
+    ref as RealDomNode
+    inner.insertBefore(node.inner, ref.inner)
   }
 
   override fun remove() {

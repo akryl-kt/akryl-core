@@ -86,7 +86,7 @@ private inline fun listeners(
 }
 
 private inline fun classes(clazz: String?, classes: List<String?>?): String? {
-  return (classes ?: emptyList<String?>() + clazz)
+  return ((classes ?: emptyList()) + clazz)
     .filterNotNull()
     .joinToString(" ")
     .ifEmpty { null }

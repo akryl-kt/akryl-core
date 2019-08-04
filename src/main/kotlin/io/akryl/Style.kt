@@ -24,6 +24,7 @@ class SelectorScope(private val selectors: List<String>) {
   private val data = HashMap<String, String>()
   private val inner = ArrayList<SelectorScope>()
 
+  // common
   var alignContent by data
   var alignItems by data
   var alignSelf by data
@@ -221,11 +222,18 @@ class SelectorScope(private val selectors: List<String>) {
   var visibility by data
   var whiteSpace by data
   var width by data
+  var willChange by data
   var wordBreak by data
   var wordSpacing by data
   var wordWrap by data
   var writingMode by data
   var zIndex by data
+
+  // todo all svg props
+  // svg
+  var fill by data
+  var stroke by data
+  var strokeWidth by data
 
   operator fun String.invoke(block: SelectorScope.() -> Unit) {
     inner.add(SelectorScope(selectors + this).apply(block))

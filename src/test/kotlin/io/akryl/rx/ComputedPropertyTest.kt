@@ -127,4 +127,23 @@ class ComputedPropertyTest : EmptyReactiveContainer {
     EventLoop.drain()
     assertEquals(3, counter)
   }
+
+  @Test
+  fun changeInComputed() {
+    var value by reactive<String?>(null)
+
+    val result by computed {
+      var inner = value
+      if (value == null) {
+        inner = "foo"
+        value = inner
+      }
+      inner
+    }
+
+    assertEquals("foo", result)
+
+    value = "bar"
+    assertEquals("bar", result)
+  }
 }

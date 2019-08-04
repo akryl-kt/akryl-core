@@ -9112,6 +9112,122 @@ fun Styled.Param(vararg children: Widget) = HtmlWidget(
   children = children.asList()
 )
 
+fun Styled.Path(
+  hidden: Boolean? = null,
+  id: String? = null,
+  contentEditable: String? = null,
+  dir: String? = null,
+  tabIndex: String? = null,
+  draggable: Boolean? = null,
+  lang: String? = null,
+  spellCheck: Boolean? = null,
+  accessKey: String? = null,
+  title: String? = null,
+  translate: String? = null,
+  dropZone: String? = null,
+  d: String? = null,
+  onBlur: ((event: Event) -> Unit)? = null,
+  onChange: ((event: Event) -> Unit)? = null,
+  onContextMenu: ((event: Event) -> Unit)? = null,
+  onFocus: ((event: Event) -> Unit)? = null,
+  onInput: ((event: Event) -> Unit)? = null,
+  onInvalid: ((event: Event) -> Unit)? = null,
+  onReset: ((event: Event) -> Unit)? = null,
+  onSearch: ((event: Event) -> Unit)? = null,
+  onSelect: ((event: Event) -> Unit)? = null,
+  onSubmit: ((event: Event) -> Unit)? = null,
+  onScroll: ((event: Event) -> Unit)? = null,
+  onToggle: ((event: Event) -> Unit)? = null,
+  onKeyDown: ((event: KeyboardEvent) -> Unit)? = null,
+  onKeyPress: ((event: KeyboardEvent) -> Unit)? = null,
+  onKeyUp: ((event: KeyboardEvent) -> Unit)? = null,
+  onMouseDown: ((event: MouseEvent) -> Unit)? = null,
+  onMouseMove: ((event: MouseEvent) -> Unit)? = null,
+  onMouseOut: ((event: MouseEvent) -> Unit)? = null,
+  onMouseOver: ((event: MouseEvent) -> Unit)? = null,
+  onMouseUp: ((event: MouseEvent) -> Unit)? = null,
+  onClick: ((event: MouseEvent) -> Unit)? = null,
+  onDoubleClick: ((event: MouseEvent) -> Unit)? = null,
+  onWheel: ((event: WheelEvent) -> Unit)? = null,
+  onDrag: ((event: DragEvent) -> Unit)? = null,
+  onDragEnd: ((event: DragEvent) -> Unit)? = null,
+  onDragEnter: ((event: DragEvent) -> Unit)? = null,
+  onDragLeave: ((event: DragEvent) -> Unit)? = null,
+  onDragOver: ((event: DragEvent) -> Unit)? = null,
+  onDragStart: ((event: DragEvent) -> Unit)? = null,
+  onDrop: ((event: DragEvent) -> Unit)? = null,
+  onCopy: ((event: ClipboardEvent) -> Unit)? = null,
+  onCut: ((event: ClipboardEvent) -> Unit)? = null,
+  onPaste: ((event: ClipboardEvent) -> Unit)? = null,
+  clazz: String? = null,
+  classes: List<String?>? = null,
+  style: Map<String, String?> = emptyMap(),
+  text: String? = null,
+  child: Widget? = null,
+  children: Iterable<Widget>? = null,
+  innerHtml: String? = null,
+  key: Key? = null
+) = HtmlWidget(
+  tag = "path",
+  ns = "http://www.w3.org/2000/svg",
+  cssPrefix = prefix,
+  attributes = attributes(
+    hidden = hidden,
+    id = id,
+    contentEditable = contentEditable,
+    dir = dir,
+    tabIndex = tabIndex,
+    draggable = draggable,
+    lang = lang,
+    spellCheck = spellCheck,
+    accessKey = accessKey,
+    title = title,
+    translate = translate,
+    dropZone = dropZone,
+    d = d,
+    clazz = classes(clazz, classes)
+  ),
+  listeners = listeners(
+    onBlur,
+    onChange,
+    onContextMenu,
+    onFocus,
+    onInput,
+    onInvalid,
+    onReset,
+    onSearch,
+    onSelect,
+    onSubmit,
+    onScroll,
+    onToggle,
+    onKeyDown,
+    onKeyPress,
+    onKeyUp,
+    onMouseDown,
+    onMouseMove,
+    onMouseOut,
+    onMouseOver,
+    onMouseUp,
+    onClick,
+    onDoubleClick,
+    onWheel,
+    onDrag,
+    onDragEnd,
+    onDragEnter,
+    onDragLeave,
+    onDragOver,
+    onDragStart,
+    onDrop,
+    onCopy,
+    onCut,
+    onPaste
+  ),
+  style = style,
+  children = children(text, child, children),
+  innerHtml = innerHtml,
+  key = key
+)
+
 fun Styled.Picture(
   hidden: Boolean? = null,
   id: String? = null,
@@ -13928,6 +14044,7 @@ private inline fun attributes(
   controls: String? = null,
   httpEquiv: String? = null,
   action: String? = null,
+  d: String? = null,
   clazz: String? = null
 ): HashMap<String, String> {
   val result = HashMap<String, String>()
@@ -14030,7 +14147,9 @@ private inline fun attributes(
   if (controls != null) result["controls"] = controls
   if (httpEquiv != null) result["http-equiv"] = httpEquiv
   if (action != null) result["action"] = action
+  if (d != null) result["d"] = d
   if (clazz != null) result["class"] = clazz
   return result
 }
 
+// todo svg elements

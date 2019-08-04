@@ -11589,6 +11589,8 @@ fun Styled.Svg(
   title: String? = null,
   translate: String? = null,
   dropZone: String? = null,
+  width: Int? = null,
+  height: Int? = null,
   onBlur: ((event: Event) -> Unit)? = null,
   onChange: ((event: Event) -> Unit)? = null,
   onContextMenu: ((event: Event) -> Unit)? = null,
@@ -11632,7 +11634,7 @@ fun Styled.Svg(
   key: Key? = null
 ) = HtmlWidget(
   tag = "svg",
-  ns = null,
+  ns = "http://www.w3.org/2000/svg",
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -11647,6 +11649,8 @@ fun Styled.Svg(
     title = title,
     translate = translate,
     dropZone = dropZone,
+    width = width,
+    height = height,
     clazz = classes(clazz, classes)
   ),
   listeners = listeners(
@@ -11692,7 +11696,7 @@ fun Styled.Svg(
 
 fun Styled.Svg(vararg children: Widget) = HtmlWidget(
   tag = "svg",
-  ns = null,
+  ns = "http://www.w3.org/2000/svg",
   cssPrefix = prefix,
   children = children.asList()
 )

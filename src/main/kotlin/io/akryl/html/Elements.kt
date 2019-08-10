@@ -2,9 +2,8 @@
 
 package io.akryl.html
 
-import io.akryl.Key
 import io.akryl.Styled
-import io.akryl.Widget
+import io.akryl.react.ReactNode
 import org.w3c.dom.DragEvent
 import org.w3c.dom.clipboard.ClipboardEvent
 import org.w3c.dom.events.Event
@@ -49,39 +48,39 @@ private inline fun listeners(
   noinline onPaste: ((event: ClipboardEvent) -> Unit)? = null
 ): HashMap<String, (Event) -> Unit> {
   val result = HashMap<String, (Event) -> Unit>()
-  if (onBlur != null) result["blur"] = onBlur
-  if (onChange != null) result["change"] = onChange
-  if (onContextMenu != null) result["contextmenu"] = onContextMenu
-  if (onFocus != null) result["focus"] = onFocus
-  if (onInput != null) result["input"] = onInput
-  if (onInvalid != null) result["invalid"] = onInvalid
-  if (onReset != null) result["reset"] = onReset
-  if (onSearch != null) result["search"] = onSearch
-  if (onSelect != null) result["select"] = onSelect
-  if (onSubmit != null) result["submit"] = onSubmit
-  if (onScroll != null) result["scroll"] = onScroll
-  if (onToggle != null) result["toggle"] = onToggle
-  if (onKeyDown != null) result["keydown"] = onKeyDown as (Event) -> Unit
-  if (onKeyPress != null) result["keypress"] = onKeyPress as (Event) -> Unit
-  if (onKeyUp != null) result["keyup"] = onKeyUp as (Event) -> Unit
-  if (onMouseDown != null) result["mousedown"] = onMouseDown as (Event) -> Unit
-  if (onMouseMove != null) result["mousemove"] = onMouseMove as (Event) -> Unit
-  if (onMouseOut != null) result["mouseout"] = onMouseOut as (Event) -> Unit
-  if (onMouseOver != null) result["mouseover"] = onMouseOver as (Event) -> Unit
-  if (onMouseUp != null) result["mouseup"] = onMouseUp as (Event) -> Unit
-  if (onClick != null) result["click"] = onClick as (Event) -> Unit
-  if (onDoubleClick != null) result["dblclick"] = onDoubleClick as (Event) -> Unit
-  if (onWheel != null) result["wheel"] = onWheel as (Event) -> Unit
-  if (onDrag != null) result["drag"] = onDrag as (Event) -> Unit
-  if (onDragEnd != null) result["dragend"] = onDragEnd as (Event) -> Unit
-  if (onDragEnter != null) result["dragenter"] = onDragEnter as (Event) -> Unit
-  if (onDragLeave != null) result["dragleave"] = onDragLeave as (Event) -> Unit
-  if (onDragOver != null) result["dragover"] = onDragOver as (Event) -> Unit
-  if (onDragStart != null) result["dragstart"] = onDragStart as (Event) -> Unit
-  if (onDrop != null) result["drop"] = onDrop as (Event) -> Unit
-  if (onCopy != null) result["copy"] = onCopy as (Event) -> Unit
-  if (onCut != null) result["cut"] = onCut as (Event) -> Unit
-  if (onPaste != null) result["paste"] = onPaste as (Event) -> Unit
+  if (onBlur != null) result["onBlur"] = onBlur
+  if (onChange != null) result["onChange"] = onChange
+  if (onContextMenu != null) result["onContextMenu"] = onContextMenu
+  if (onFocus != null) result["onFocus"] = onFocus
+  if (onInput != null) result["onInput"] = onInput
+  if (onInvalid != null) result["onInvalid"] = onInvalid
+  if (onReset != null) result["onReset"] = onReset
+  if (onSearch != null) result["onSearch"] = onSearch
+  if (onSelect != null) result["onSelect"] = onSelect
+  if (onSubmit != null) result["onSubmit"] = onSubmit
+  if (onScroll != null) result["onScroll"] = onScroll
+  if (onToggle != null) result["onToggle"] = onToggle
+  if (onKeyDown != null) result["onKeyDown"] = onKeyDown as (Event) -> Unit
+  if (onKeyPress != null) result["onKeyPress"] = onKeyPress as (Event) -> Unit
+  if (onKeyUp != null) result["onKeyUp"] = onKeyUp as (Event) -> Unit
+  if (onMouseDown != null) result["onMouseDown"] = onMouseDown as (Event) -> Unit
+  if (onMouseMove != null) result["onMouseMove"] = onMouseMove as (Event) -> Unit
+  if (onMouseOut != null) result["onMouseOut"] = onMouseOut as (Event) -> Unit
+  if (onMouseOver != null) result["onMouseOver"] = onMouseOver as (Event) -> Unit
+  if (onMouseUp != null) result["onMouseUp"] = onMouseUp as (Event) -> Unit
+  if (onClick != null) result["onClick"] = onClick as (Event) -> Unit
+  if (onDoubleClick != null) result["onDblClick"] = onDoubleClick as (Event) -> Unit
+  if (onWheel != null) result["onWheel"] = onWheel as (Event) -> Unit
+  if (onDrag != null) result["onDrag"] = onDrag as (Event) -> Unit
+  if (onDragEnd != null) result["onDragEnd"] = onDragEnd as (Event) -> Unit
+  if (onDragEnter != null) result["onDragEnter"] = onDragEnter as (Event) -> Unit
+  if (onDragLeave != null) result["onDragLeave"] = onDragLeave as (Event) -> Unit
+  if (onDragOver != null) result["onDragOver"] = onDragOver as (Event) -> Unit
+  if (onDragStart != null) result["onDragStart"] = onDragStart as (Event) -> Unit
+  if (onDrop != null) result["onDrop"] = onDrop as (Event) -> Unit
+  if (onCopy != null) result["onCopy"] = onCopy as (Event) -> Unit
+  if (onCut != null) result["onCut"] = onCut as (Event) -> Unit
+  if (onPaste != null) result["onPaste"] = onPaste as (Event) -> Unit
   return result
 }
 
@@ -92,10 +91,10 @@ private inline fun classes(clazz: String?, classes: List<String?>?): String? {
     .ifEmpty { null }
 }
 
-private inline fun children(text: String?, child: Widget?, children: Iterable<Widget>?): List<Widget> {
+private inline fun children(text: String?, child: ReactNode?, children: Iterable<ReactNode>?): List<ReactNode> {
   if (text == null && child == null && children == null) return emptyList()
 
-  val result = ArrayList<Widget>()
+  val result = ArrayList<ReactNode>()
   if (text != null) result.add(Text(text))
   if (child != null) result.add(child)
   if (children != null) result.addAll(children)
@@ -160,13 +159,12 @@ fun Styled.A(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "a",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     target = target,
@@ -232,9 +230,8 @@ fun Styled.A(
   key = key
 )
 
-fun Styled.A(vararg children: Widget) = HtmlWidget(
+fun Styled.A(vararg children: ReactNode) = html(
   tag = "a",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -289,13 +286,12 @@ fun Styled.Abbr(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "abbr",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -353,9 +349,8 @@ fun Styled.Abbr(
   key = key
 )
 
-fun Styled.Abbr(vararg children: Widget) = HtmlWidget(
+fun Styled.Abbr(vararg children: ReactNode) = html(
   tag = "abbr",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -410,13 +405,12 @@ fun Styled.Address(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "address",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -474,9 +468,8 @@ fun Styled.Address(
   key = key
 )
 
-fun Styled.Address(vararg children: Widget) = HtmlWidget(
+fun Styled.Address(vararg children: ReactNode) = html(
   tag = "address",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -541,13 +534,12 @@ fun Styled.Area(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "area",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     alt = alt,
@@ -615,9 +607,8 @@ fun Styled.Area(
   key = key
 )
 
-fun Styled.Area(vararg children: Widget) = HtmlWidget(
+fun Styled.Area(vararg children: ReactNode) = html(
   tag = "area",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -672,13 +663,12 @@ fun Styled.Article(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "article",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -736,9 +726,8 @@ fun Styled.Article(
   key = key
 )
 
-fun Styled.Article(vararg children: Widget) = HtmlWidget(
+fun Styled.Article(vararg children: ReactNode) = html(
   tag = "article",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -793,13 +782,12 @@ fun Styled.Aside(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "aside",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -857,9 +845,8 @@ fun Styled.Aside(
   key = key
 )
 
-fun Styled.Aside(vararg children: Widget) = HtmlWidget(
+fun Styled.Aside(vararg children: ReactNode) = html(
   tag = "aside",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -920,13 +907,12 @@ fun Styled.Audio(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "audio",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -990,9 +976,8 @@ fun Styled.Audio(
   key = key
 )
 
-fun Styled.Audio(vararg children: Widget) = HtmlWidget(
+fun Styled.Audio(vararg children: ReactNode) = html(
   tag = "audio",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -1047,13 +1032,12 @@ fun Styled.B(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "b",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -1111,9 +1095,8 @@ fun Styled.B(
   key = key
 )
 
-fun Styled.B(vararg children: Widget) = HtmlWidget(
+fun Styled.B(vararg children: ReactNode) = html(
   tag = "b",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -1170,13 +1153,12 @@ fun Styled.Base(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "base",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     target = target,
@@ -1236,9 +1218,8 @@ fun Styled.Base(
   key = key
 )
 
-fun Styled.Base(vararg children: Widget) = HtmlWidget(
+fun Styled.Base(vararg children: ReactNode) = html(
   tag = "base",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -1293,13 +1274,12 @@ fun Styled.Bdi(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "bdi",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -1357,9 +1337,8 @@ fun Styled.Bdi(
   key = key
 )
 
-fun Styled.Bdi(vararg children: Widget) = HtmlWidget(
+fun Styled.Bdi(vararg children: ReactNode) = html(
   tag = "bdi",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -1414,13 +1393,12 @@ fun Styled.Bdo(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "bdo",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -1478,9 +1456,8 @@ fun Styled.Bdo(
   key = key
 )
 
-fun Styled.Bdo(vararg children: Widget) = HtmlWidget(
+fun Styled.Bdo(vararg children: ReactNode) = html(
   tag = "bdo",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -1536,13 +1513,12 @@ fun Styled.Blockquote(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "blockquote",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -1601,9 +1577,8 @@ fun Styled.Blockquote(
   key = key
 )
 
-fun Styled.Blockquote(vararg children: Widget) = HtmlWidget(
+fun Styled.Blockquote(vararg children: ReactNode) = html(
   tag = "blockquote",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -1658,13 +1633,12 @@ fun Styled.Body(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "body",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -1722,9 +1696,8 @@ fun Styled.Body(
   key = key
 )
 
-fun Styled.Body(vararg children: Widget) = HtmlWidget(
+fun Styled.Body(vararg children: ReactNode) = html(
   tag = "body",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -1779,13 +1752,12 @@ fun Styled.Br(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "br",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -1843,9 +1815,8 @@ fun Styled.Br(
   key = key
 )
 
-fun Styled.Br(vararg children: Widget) = HtmlWidget(
+fun Styled.Br(vararg children: ReactNode) = html(
   tag = "br",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -1911,13 +1882,12 @@ fun Styled.Button(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "button",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     formNoValidate = formNoValidate,
@@ -1986,9 +1956,8 @@ fun Styled.Button(
   key = key
 )
 
-fun Styled.Button(vararg children: Widget) = HtmlWidget(
+fun Styled.Button(vararg children: ReactNode) = html(
   tag = "button",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -2045,13 +2014,12 @@ fun Styled.Canvas(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "canvas",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -2111,9 +2079,8 @@ fun Styled.Canvas(
   key = key
 )
 
-fun Styled.Canvas(vararg children: Widget) = HtmlWidget(
+fun Styled.Canvas(vararg children: ReactNode) = html(
   tag = "canvas",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -2168,13 +2135,12 @@ fun Styled.Caption(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "caption",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -2232,9 +2198,8 @@ fun Styled.Caption(
   key = key
 )
 
-fun Styled.Caption(vararg children: Widget) = HtmlWidget(
+fun Styled.Caption(vararg children: ReactNode) = html(
   tag = "caption",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -2289,13 +2254,12 @@ fun Styled.Cite(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "cite",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -2353,9 +2317,8 @@ fun Styled.Cite(
   key = key
 )
 
-fun Styled.Cite(vararg children: Widget) = HtmlWidget(
+fun Styled.Cite(vararg children: ReactNode) = html(
   tag = "cite",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -2410,13 +2373,12 @@ fun Styled.Code(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "code",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -2474,9 +2436,8 @@ fun Styled.Code(
   key = key
 )
 
-fun Styled.Code(vararg children: Widget) = HtmlWidget(
+fun Styled.Code(vararg children: ReactNode) = html(
   tag = "code",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -2532,13 +2493,12 @@ fun Styled.Col(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "col",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -2597,9 +2557,8 @@ fun Styled.Col(
   key = key
 )
 
-fun Styled.Col(vararg children: Widget) = HtmlWidget(
+fun Styled.Col(vararg children: ReactNode) = html(
   tag = "col",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -2655,13 +2614,12 @@ fun Styled.Colgroup(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "colgroup",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -2720,9 +2678,8 @@ fun Styled.Colgroup(
   key = key
 )
 
-fun Styled.Colgroup(vararg children: Widget) = HtmlWidget(
+fun Styled.Colgroup(vararg children: ReactNode) = html(
   tag = "colgroup",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -2777,13 +2734,12 @@ fun Styled.Data(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "data",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -2841,9 +2797,8 @@ fun Styled.Data(
   key = key
 )
 
-fun Styled.Data(vararg children: Widget) = HtmlWidget(
+fun Styled.Data(vararg children: ReactNode) = html(
   tag = "data",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -2898,13 +2853,12 @@ fun Styled.Datalist(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "datalist",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -2962,9 +2916,8 @@ fun Styled.Datalist(
   key = key
 )
 
-fun Styled.Datalist(vararg children: Widget) = HtmlWidget(
+fun Styled.Datalist(vararg children: ReactNode) = html(
   tag = "datalist",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -3019,13 +2972,12 @@ fun Styled.Dd(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "dd",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -3083,9 +3035,8 @@ fun Styled.Dd(
   key = key
 )
 
-fun Styled.Dd(vararg children: Widget) = HtmlWidget(
+fun Styled.Dd(vararg children: ReactNode) = html(
   tag = "dd",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -3142,13 +3093,12 @@ fun Styled.Del(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "del",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -3208,9 +3158,8 @@ fun Styled.Del(
   key = key
 )
 
-fun Styled.Del(vararg children: Widget) = HtmlWidget(
+fun Styled.Del(vararg children: ReactNode) = html(
   tag = "del",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -3266,13 +3215,12 @@ fun Styled.Details(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "details",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -3331,9 +3279,8 @@ fun Styled.Details(
   key = key
 )
 
-fun Styled.Details(vararg children: Widget) = HtmlWidget(
+fun Styled.Details(vararg children: ReactNode) = html(
   tag = "details",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -3388,13 +3335,12 @@ fun Styled.Dfn(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "dfn",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -3452,9 +3398,8 @@ fun Styled.Dfn(
   key = key
 )
 
-fun Styled.Dfn(vararg children: Widget) = HtmlWidget(
+fun Styled.Dfn(vararg children: ReactNode) = html(
   tag = "dfn",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -3510,13 +3455,12 @@ fun Styled.Dialog(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "dialog",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -3575,9 +3519,8 @@ fun Styled.Dialog(
   key = key
 )
 
-fun Styled.Dialog(vararg children: Widget) = HtmlWidget(
+fun Styled.Dialog(vararg children: ReactNode) = html(
   tag = "dialog",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -3632,13 +3575,12 @@ fun Styled.Div(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "div",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -3696,9 +3638,8 @@ fun Styled.Div(
   key = key
 )
 
-fun Styled.Div(vararg children: Widget) = HtmlWidget(
+fun Styled.Div(vararg children: ReactNode) = html(
   tag = "div",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -3753,13 +3694,12 @@ fun Styled.Dl(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "dl",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -3817,9 +3757,8 @@ fun Styled.Dl(
   key = key
 )
 
-fun Styled.Dl(vararg children: Widget) = HtmlWidget(
+fun Styled.Dl(vararg children: ReactNode) = html(
   tag = "dl",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -3874,13 +3813,12 @@ fun Styled.Dt(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "dt",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -3938,9 +3876,8 @@ fun Styled.Dt(
   key = key
 )
 
-fun Styled.Dt(vararg children: Widget) = HtmlWidget(
+fun Styled.Dt(vararg children: ReactNode) = html(
   tag = "dt",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -3995,13 +3932,12 @@ fun Styled.Em(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "em",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -4059,9 +3995,8 @@ fun Styled.Em(
   key = key
 )
 
-fun Styled.Em(vararg children: Widget) = HtmlWidget(
+fun Styled.Em(vararg children: ReactNode) = html(
   tag = "em",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -4120,13 +4055,12 @@ fun Styled.Embed(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "embed",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -4188,9 +4122,8 @@ fun Styled.Embed(
   key = key
 )
 
-fun Styled.Embed(vararg children: Widget) = HtmlWidget(
+fun Styled.Embed(vararg children: ReactNode) = html(
   tag = "embed",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -4248,13 +4181,12 @@ fun Styled.Fieldset(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "fieldset",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -4315,9 +4247,8 @@ fun Styled.Fieldset(
   key = key
 )
 
-fun Styled.Fieldset(vararg children: Widget) = HtmlWidget(
+fun Styled.Fieldset(vararg children: ReactNode) = html(
   tag = "fieldset",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -4372,13 +4303,12 @@ fun Styled.Figcaption(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "figcaption",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -4436,9 +4366,8 @@ fun Styled.Figcaption(
   key = key
 )
 
-fun Styled.Figcaption(vararg children: Widget) = HtmlWidget(
+fun Styled.Figcaption(vararg children: ReactNode) = html(
   tag = "figcaption",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -4493,13 +4422,12 @@ fun Styled.Figure(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "figure",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -4557,9 +4485,8 @@ fun Styled.Figure(
   key = key
 )
 
-fun Styled.Figure(vararg children: Widget) = HtmlWidget(
+fun Styled.Figure(vararg children: ReactNode) = html(
   tag = "figure",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -4614,13 +4541,12 @@ fun Styled.Footer(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "footer",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -4678,9 +4604,8 @@ fun Styled.Footer(
   key = key
 )
 
-fun Styled.Footer(vararg children: Widget) = HtmlWidget(
+fun Styled.Footer(vararg children: ReactNode) = html(
   tag = "footer",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -4743,13 +4668,12 @@ fun Styled.Form(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "form",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     target = target,
@@ -4815,9 +4739,8 @@ fun Styled.Form(
   key = key
 )
 
-fun Styled.Form(vararg children: Widget) = HtmlWidget(
+fun Styled.Form(vararg children: ReactNode) = html(
   tag = "form",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -4872,13 +4795,12 @@ fun Styled.H1(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "h1",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -4936,9 +4858,8 @@ fun Styled.H1(
   key = key
 )
 
-fun Styled.H1(vararg children: Widget) = HtmlWidget(
+fun Styled.H1(vararg children: ReactNode) = html(
   tag = "h1",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -4993,13 +4914,12 @@ fun Styled.H2(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "h2",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -5057,9 +4977,8 @@ fun Styled.H2(
   key = key
 )
 
-fun Styled.H2(vararg children: Widget) = HtmlWidget(
+fun Styled.H2(vararg children: ReactNode) = html(
   tag = "h2",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -5114,13 +5033,12 @@ fun Styled.H3(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "h3",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -5178,9 +5096,8 @@ fun Styled.H3(
   key = key
 )
 
-fun Styled.H3(vararg children: Widget) = HtmlWidget(
+fun Styled.H3(vararg children: ReactNode) = html(
   tag = "h3",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -5235,13 +5152,12 @@ fun Styled.H4(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "h4",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -5299,9 +5215,8 @@ fun Styled.H4(
   key = key
 )
 
-fun Styled.H4(vararg children: Widget) = HtmlWidget(
+fun Styled.H4(vararg children: ReactNode) = html(
   tag = "h4",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -5356,13 +5271,12 @@ fun Styled.H5(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "h5",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -5420,9 +5334,8 @@ fun Styled.H5(
   key = key
 )
 
-fun Styled.H5(vararg children: Widget) = HtmlWidget(
+fun Styled.H5(vararg children: ReactNode) = html(
   tag = "h5",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -5477,13 +5390,12 @@ fun Styled.H6(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "h6",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -5541,9 +5453,8 @@ fun Styled.H6(
   key = key
 )
 
-fun Styled.H6(vararg children: Widget) = HtmlWidget(
+fun Styled.H6(vararg children: ReactNode) = html(
   tag = "h6",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -5598,13 +5509,12 @@ fun Styled.Head(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "head",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -5662,9 +5572,8 @@ fun Styled.Head(
   key = key
 )
 
-fun Styled.Head(vararg children: Widget) = HtmlWidget(
+fun Styled.Head(vararg children: ReactNode) = html(
   tag = "head",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -5719,13 +5628,12 @@ fun Styled.Header(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "header",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -5783,9 +5691,8 @@ fun Styled.Header(
   key = key
 )
 
-fun Styled.Header(vararg children: Widget) = HtmlWidget(
+fun Styled.Header(vararg children: ReactNode) = html(
   tag = "header",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -5840,13 +5747,12 @@ fun Styled.Hr(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "hr",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -5904,9 +5810,8 @@ fun Styled.Hr(
   key = key
 )
 
-fun Styled.Hr(vararg children: Widget) = HtmlWidget(
+fun Styled.Hr(vararg children: ReactNode) = html(
   tag = "hr",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -5962,13 +5867,12 @@ fun Styled.Html(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "html",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -6027,9 +5931,8 @@ fun Styled.Html(
   key = key
 )
 
-fun Styled.Html(vararg children: Widget) = HtmlWidget(
+fun Styled.Html(vararg children: ReactNode) = html(
   tag = "html",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -6084,13 +5987,12 @@ fun Styled.I(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "i",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -6148,9 +6050,8 @@ fun Styled.I(
   key = key
 )
 
-fun Styled.I(vararg children: Widget) = HtmlWidget(
+fun Styled.I(vararg children: ReactNode) = html(
   tag = "i",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -6211,13 +6112,12 @@ fun Styled.Iframe(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "iframe",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -6281,9 +6181,8 @@ fun Styled.Iframe(
   key = key
 )
 
-fun Styled.Iframe(vararg children: Widget) = HtmlWidget(
+fun Styled.Iframe(vararg children: ReactNode) = html(
   tag = "iframe",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -6345,13 +6244,12 @@ fun Styled.Img(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "img",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -6416,9 +6314,8 @@ fun Styled.Img(
   key = key
 )
 
-fun Styled.Img(vararg children: Widget) = HtmlWidget(
+fun Styled.Img(vararg children: ReactNode) = html(
   tag = "img",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -6503,13 +6400,12 @@ fun Styled.Input(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "input",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     formNoValidate = formNoValidate,
@@ -6597,9 +6493,8 @@ fun Styled.Input(
   key = key
 )
 
-fun Styled.Input(vararg children: Widget) = HtmlWidget(
+fun Styled.Input(vararg children: ReactNode) = html(
   tag = "input",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -6656,13 +6551,12 @@ fun Styled.Ins(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "ins",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -6722,9 +6616,8 @@ fun Styled.Ins(
   key = key
 )
 
-fun Styled.Ins(vararg children: Widget) = HtmlWidget(
+fun Styled.Ins(vararg children: ReactNode) = html(
   tag = "ins",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -6779,13 +6672,12 @@ fun Styled.Kbd(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "kbd",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -6843,9 +6735,8 @@ fun Styled.Kbd(
   key = key
 )
 
-fun Styled.Kbd(vararg children: Widget) = HtmlWidget(
+fun Styled.Kbd(vararg children: ReactNode) = html(
   tag = "kbd",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -6902,13 +6793,12 @@ fun Styled.Label(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "label",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -6968,9 +6858,8 @@ fun Styled.Label(
   key = key
 )
 
-fun Styled.Label(vararg children: Widget) = HtmlWidget(
+fun Styled.Label(vararg children: ReactNode) = html(
   tag = "label",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -7025,13 +6914,12 @@ fun Styled.Legend(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "legend",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -7089,9 +6977,8 @@ fun Styled.Legend(
   key = key
 )
 
-fun Styled.Legend(vararg children: Widget) = HtmlWidget(
+fun Styled.Legend(vararg children: ReactNode) = html(
   tag = "legend",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -7147,13 +7034,12 @@ fun Styled.Li(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "li",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -7212,9 +7098,8 @@ fun Styled.Li(
   key = key
 )
 
-fun Styled.Li(vararg children: Widget) = HtmlWidget(
+fun Styled.Li(vararg children: ReactNode) = html(
   tag = "li",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -7275,13 +7160,12 @@ fun Styled.Link(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "link",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -7345,9 +7229,8 @@ fun Styled.Link(
   key = key
 )
 
-fun Styled.Link(vararg children: Widget) = HtmlWidget(
+fun Styled.Link(vararg children: ReactNode) = html(
   tag = "link",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -7402,13 +7285,12 @@ fun Styled.Main(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "main",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -7466,9 +7348,8 @@ fun Styled.Main(
   key = key
 )
 
-fun Styled.Main(vararg children: Widget) = HtmlWidget(
+fun Styled.Main(vararg children: ReactNode) = html(
   tag = "main",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -7524,13 +7405,12 @@ fun Styled.Map(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "map",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -7589,9 +7469,8 @@ fun Styled.Map(
   key = key
 )
 
-fun Styled.Map(vararg children: Widget) = HtmlWidget(
+fun Styled.Map(vararg children: ReactNode) = html(
   tag = "map",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -7646,13 +7525,12 @@ fun Styled.Mark(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "mark",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -7710,9 +7588,8 @@ fun Styled.Mark(
   key = key
 )
 
-fun Styled.Mark(vararg children: Widget) = HtmlWidget(
+fun Styled.Mark(vararg children: ReactNode) = html(
   tag = "mark",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -7771,13 +7648,12 @@ fun Styled.Meta(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "meta",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -7839,9 +7715,8 @@ fun Styled.Meta(
   key = key
 )
 
-fun Styled.Meta(vararg children: Widget) = HtmlWidget(
+fun Styled.Meta(vararg children: ReactNode) = html(
   tag = "meta",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -7903,13 +7778,12 @@ fun Styled.Meter(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "meter",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -7974,9 +7848,8 @@ fun Styled.Meter(
   key = key
 )
 
-fun Styled.Meter(vararg children: Widget) = HtmlWidget(
+fun Styled.Meter(vararg children: ReactNode) = html(
   tag = "meter",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -8031,13 +7904,12 @@ fun Styled.Nav(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "nav",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -8095,9 +7967,8 @@ fun Styled.Nav(
   key = key
 )
 
-fun Styled.Nav(vararg children: Widget) = HtmlWidget(
+fun Styled.Nav(vararg children: ReactNode) = html(
   tag = "nav",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -8152,13 +8023,12 @@ fun Styled.Noscript(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "noscript",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -8216,9 +8086,8 @@ fun Styled.Noscript(
   key = key
 )
 
-fun Styled.Noscript(vararg children: Widget) = HtmlWidget(
+fun Styled.Noscript(vararg children: ReactNode) = html(
   tag = "noscript",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -8280,13 +8149,12 @@ fun Styled.Object(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "object",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -8351,9 +8219,8 @@ fun Styled.Object(
   key = key
 )
 
-fun Styled.Object(vararg children: Widget) = HtmlWidget(
+fun Styled.Object(vararg children: ReactNode) = html(
   tag = "object",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -8411,13 +8278,12 @@ fun Styled.Ol(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "ol",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -8478,9 +8344,8 @@ fun Styled.Ol(
   key = key
 )
 
-fun Styled.Ol(vararg children: Widget) = HtmlWidget(
+fun Styled.Ol(vararg children: ReactNode) = html(
   tag = "ol",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -8537,13 +8402,12 @@ fun Styled.Optgroup(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "optgroup",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -8603,9 +8467,8 @@ fun Styled.Optgroup(
   key = key
 )
 
-fun Styled.Optgroup(vararg children: Widget) = HtmlWidget(
+fun Styled.Optgroup(vararg children: ReactNode) = html(
   tag = "optgroup",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -8664,13 +8527,12 @@ fun Styled.Option(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "option",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -8732,9 +8594,8 @@ fun Styled.Option(
   key = key
 )
 
-fun Styled.Option(vararg children: Widget) = HtmlWidget(
+fun Styled.Option(vararg children: ReactNode) = html(
   tag = "option",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -8792,13 +8653,12 @@ fun Styled.Output(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "output",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -8859,9 +8719,8 @@ fun Styled.Output(
   key = key
 )
 
-fun Styled.Output(vararg children: Widget) = HtmlWidget(
+fun Styled.Output(vararg children: ReactNode) = html(
   tag = "output",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -8916,13 +8775,12 @@ fun Styled.P(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "p",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -8980,9 +8838,8 @@ fun Styled.P(
   key = key
 )
 
-fun Styled.P(vararg children: Widget) = HtmlWidget(
+fun Styled.P(vararg children: ReactNode) = html(
   tag = "p",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -9039,13 +8896,12 @@ fun Styled.Param(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "param",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -9105,9 +8961,8 @@ fun Styled.Param(
   key = key
 )
 
-fun Styled.Param(vararg children: Widget) = HtmlWidget(
+fun Styled.Param(vararg children: ReactNode) = html(
   tag = "param",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -9163,13 +9018,12 @@ fun Styled.Path(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "path",
-  ns = "http://www.w3.org/2000/svg",
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -9278,13 +9132,12 @@ fun Styled.Picture(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "picture",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -9342,9 +9195,8 @@ fun Styled.Picture(
   key = key
 )
 
-fun Styled.Picture(vararg children: Widget) = HtmlWidget(
+fun Styled.Picture(vararg children: ReactNode) = html(
   tag = "picture",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -9399,13 +9251,12 @@ fun Styled.Pre(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "pre",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -9463,9 +9314,8 @@ fun Styled.Pre(
   key = key
 )
 
-fun Styled.Pre(vararg children: Widget) = HtmlWidget(
+fun Styled.Pre(vararg children: ReactNode) = html(
   tag = "pre",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -9522,13 +9372,12 @@ fun Styled.Progress(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "progress",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -9588,9 +9437,8 @@ fun Styled.Progress(
   key = key
 )
 
-fun Styled.Progress(vararg children: Widget) = HtmlWidget(
+fun Styled.Progress(vararg children: ReactNode) = html(
   tag = "progress",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -9646,13 +9494,12 @@ fun Styled.Q(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "q",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -9711,9 +9558,8 @@ fun Styled.Q(
   key = key
 )
 
-fun Styled.Q(vararg children: Widget) = HtmlWidget(
+fun Styled.Q(vararg children: ReactNode) = html(
   tag = "q",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -9768,13 +9614,12 @@ fun Styled.Rp(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "rp",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -9832,9 +9677,8 @@ fun Styled.Rp(
   key = key
 )
 
-fun Styled.Rp(vararg children: Widget) = HtmlWidget(
+fun Styled.Rp(vararg children: ReactNode) = html(
   tag = "rp",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -9889,13 +9733,12 @@ fun Styled.Rt(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "rt",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -9953,9 +9796,8 @@ fun Styled.Rt(
   key = key
 )
 
-fun Styled.Rt(vararg children: Widget) = HtmlWidget(
+fun Styled.Rt(vararg children: ReactNode) = html(
   tag = "rt",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -10010,13 +9852,12 @@ fun Styled.Ruby(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "ruby",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -10074,9 +9915,8 @@ fun Styled.Ruby(
   key = key
 )
 
-fun Styled.Ruby(vararg children: Widget) = HtmlWidget(
+fun Styled.Ruby(vararg children: ReactNode) = html(
   tag = "ruby",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -10131,13 +9971,12 @@ fun Styled.S(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "s",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -10195,9 +10034,8 @@ fun Styled.S(
   key = key
 )
 
-fun Styled.S(vararg children: Widget) = HtmlWidget(
+fun Styled.S(vararg children: ReactNode) = html(
   tag = "s",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -10252,13 +10090,12 @@ fun Styled.Samp(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "samp",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -10316,9 +10153,8 @@ fun Styled.Samp(
   key = key
 )
 
-fun Styled.Samp(vararg children: Widget) = HtmlWidget(
+fun Styled.Samp(vararg children: ReactNode) = html(
   tag = "samp",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -10378,13 +10214,12 @@ fun Styled.Script(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "script",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -10447,9 +10282,8 @@ fun Styled.Script(
   key = key
 )
 
-fun Styled.Script(vararg children: Widget) = HtmlWidget(
+fun Styled.Script(vararg children: ReactNode) = html(
   tag = "script",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -10504,13 +10338,12 @@ fun Styled.Section(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "section",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -10568,9 +10401,8 @@ fun Styled.Section(
   key = key
 )
 
-fun Styled.Section(vararg children: Widget) = HtmlWidget(
+fun Styled.Section(vararg children: ReactNode) = html(
   tag = "section",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -10633,13 +10465,12 @@ fun Styled.Select(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "select",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -10705,9 +10536,8 @@ fun Styled.Select(
   key = key
 )
 
-fun Styled.Select(vararg children: Widget) = HtmlWidget(
+fun Styled.Select(vararg children: ReactNode) = html(
   tag = "select",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -10762,13 +10592,12 @@ fun Styled.Small(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "small",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -10826,9 +10655,8 @@ fun Styled.Small(
   key = key
 )
 
-fun Styled.Small(vararg children: Widget) = HtmlWidget(
+fun Styled.Small(vararg children: ReactNode) = html(
   tag = "small",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -10887,13 +10715,12 @@ fun Styled.Source(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "source",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -10955,9 +10782,8 @@ fun Styled.Source(
   key = key
 )
 
-fun Styled.Source(vararg children: Widget) = HtmlWidget(
+fun Styled.Source(vararg children: ReactNode) = html(
   tag = "source",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -11012,13 +10838,12 @@ fun Styled.Span(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "span",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -11076,9 +10901,8 @@ fun Styled.Span(
   key = key
 )
 
-fun Styled.Span(vararg children: Widget) = HtmlWidget(
+fun Styled.Span(vararg children: ReactNode) = html(
   tag = "span",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -11133,13 +10957,12 @@ fun Styled.Strong(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "strong",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -11197,9 +11020,8 @@ fun Styled.Strong(
   key = key
 )
 
-fun Styled.Strong(vararg children: Widget) = HtmlWidget(
+fun Styled.Strong(vararg children: ReactNode) = html(
   tag = "strong",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -11256,13 +11078,12 @@ fun Styled.Style(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "style",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -11322,9 +11143,8 @@ fun Styled.Style(
   key = key
 )
 
-fun Styled.Style(vararg children: Widget) = HtmlWidget(
+fun Styled.Style(vararg children: ReactNode) = html(
   tag = "style",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -11379,13 +11199,12 @@ fun Styled.Sub(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "sub",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -11443,9 +11262,8 @@ fun Styled.Sub(
   key = key
 )
 
-fun Styled.Sub(vararg children: Widget) = HtmlWidget(
+fun Styled.Sub(vararg children: ReactNode) = html(
   tag = "sub",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -11500,13 +11318,12 @@ fun Styled.Summary(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "summary",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -11564,9 +11381,8 @@ fun Styled.Summary(
   key = key
 )
 
-fun Styled.Summary(vararg children: Widget) = HtmlWidget(
+fun Styled.Summary(vararg children: ReactNode) = html(
   tag = "summary",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -11621,13 +11437,12 @@ fun Styled.Sup(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "sup",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -11685,9 +11500,8 @@ fun Styled.Sup(
   key = key
 )
 
-fun Styled.Sup(vararg children: Widget) = HtmlWidget(
+fun Styled.Sup(vararg children: ReactNode) = html(
   tag = "sup",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -11744,13 +11558,12 @@ fun Styled.Svg(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "svg",
-  ns = "http://www.w3.org/2000/svg",
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -11810,9 +11623,8 @@ fun Styled.Svg(
   key = key
 )
 
-fun Styled.Svg(vararg children: Widget) = HtmlWidget(
+fun Styled.Svg(vararg children: ReactNode) = html(
   tag = "svg",
-  ns = "http://www.w3.org/2000/svg",
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -11867,13 +11679,12 @@ fun Styled.Table(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "table",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -11931,9 +11742,8 @@ fun Styled.Table(
   key = key
 )
 
-fun Styled.Table(vararg children: Widget) = HtmlWidget(
+fun Styled.Table(vararg children: ReactNode) = html(
   tag = "table",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -11988,13 +11798,12 @@ fun Styled.Tbody(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "tbody",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -12052,9 +11861,8 @@ fun Styled.Tbody(
   key = key
 )
 
-fun Styled.Tbody(vararg children: Widget) = HtmlWidget(
+fun Styled.Tbody(vararg children: ReactNode) = html(
   tag = "tbody",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -12112,13 +11920,12 @@ fun Styled.Td(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "td",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -12179,9 +11986,8 @@ fun Styled.Td(
   key = key
 )
 
-fun Styled.Td(vararg children: Widget) = HtmlWidget(
+fun Styled.Td(vararg children: ReactNode) = html(
   tag = "td",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -12236,13 +12042,12 @@ fun Styled.Template(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "template",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -12300,9 +12105,8 @@ fun Styled.Template(
   key = key
 )
 
-fun Styled.Template(vararg children: Widget) = HtmlWidget(
+fun Styled.Template(vararg children: ReactNode) = html(
   tag = "template",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -12369,13 +12173,12 @@ fun Styled.Textarea(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "textarea",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     form = form,
@@ -12445,9 +12248,8 @@ fun Styled.Textarea(
   key = key
 )
 
-fun Styled.Textarea(vararg children: Widget) = HtmlWidget(
+fun Styled.Textarea(vararg children: ReactNode) = html(
   tag = "textarea",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -12502,13 +12304,12 @@ fun Styled.Tfoot(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "tfoot",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -12566,9 +12367,8 @@ fun Styled.Tfoot(
   key = key
 )
 
-fun Styled.Tfoot(vararg children: Widget) = HtmlWidget(
+fun Styled.Tfoot(vararg children: ReactNode) = html(
   tag = "tfoot",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -12628,13 +12428,12 @@ fun Styled.Th(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "th",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -12697,9 +12496,8 @@ fun Styled.Th(
   key = key
 )
 
-fun Styled.Th(vararg children: Widget) = HtmlWidget(
+fun Styled.Th(vararg children: ReactNode) = html(
   tag = "th",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -12754,13 +12552,12 @@ fun Styled.Thead(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "thead",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -12818,9 +12615,8 @@ fun Styled.Thead(
   key = key
 )
 
-fun Styled.Thead(vararg children: Widget) = HtmlWidget(
+fun Styled.Thead(vararg children: ReactNode) = html(
   tag = "thead",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -12876,13 +12672,12 @@ fun Styled.Time(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "time",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -12941,9 +12736,8 @@ fun Styled.Time(
   key = key
 )
 
-fun Styled.Time(vararg children: Widget) = HtmlWidget(
+fun Styled.Time(vararg children: ReactNode) = html(
   tag = "time",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -12998,13 +12792,12 @@ fun Styled.Title(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "title",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -13062,9 +12855,8 @@ fun Styled.Title(
   key = key
 )
 
-fun Styled.Title(vararg children: Widget) = HtmlWidget(
+fun Styled.Title(vararg children: ReactNode) = html(
   tag = "title",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -13119,13 +12911,12 @@ fun Styled.Tr(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "tr",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -13183,9 +12974,8 @@ fun Styled.Tr(
   key = key
 )
 
-fun Styled.Tr(vararg children: Widget) = HtmlWidget(
+fun Styled.Tr(vararg children: ReactNode) = html(
   tag = "tr",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -13245,13 +13035,12 @@ fun Styled.Track(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "track",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     kind = kind,
@@ -13314,9 +13103,8 @@ fun Styled.Track(
   key = key
 )
 
-fun Styled.Track(vararg children: Widget) = HtmlWidget(
+fun Styled.Track(vararg children: ReactNode) = html(
   tag = "track",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -13371,13 +13159,12 @@ fun Styled.U(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "u",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -13435,9 +13222,8 @@ fun Styled.U(
   key = key
 )
 
-fun Styled.U(vararg children: Widget) = HtmlWidget(
+fun Styled.U(vararg children: ReactNode) = html(
   tag = "u",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -13492,13 +13278,12 @@ fun Styled.Ul(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "ul",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -13556,9 +13341,8 @@ fun Styled.Ul(
   key = key
 )
 
-fun Styled.Ul(vararg children: Widget) = HtmlWidget(
+fun Styled.Ul(vararg children: ReactNode) = html(
   tag = "ul",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -13613,13 +13397,12 @@ fun Styled.Var(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "var",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -13677,9 +13460,8 @@ fun Styled.Var(
   key = key
 )
 
-fun Styled.Var(vararg children: Widget) = HtmlWidget(
+fun Styled.Var(vararg children: ReactNode) = html(
   tag = "var",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -13743,13 +13525,12 @@ fun Styled.Video(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "video",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     autoPlay = autoPlay,
@@ -13816,9 +13597,8 @@ fun Styled.Video(
   key = key
 )
 
-fun Styled.Video(vararg children: Widget) = HtmlWidget(
+fun Styled.Video(vararg children: ReactNode) = html(
   tag = "video",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )
@@ -13873,13 +13653,12 @@ fun Styled.Wbr(
   classes: List<String?>? = null,
   style: Map<String, String?> = emptyMap(),
   text: String? = null,
-  child: Widget? = null,
-  children: Iterable<Widget>? = null,
+  child: ReactNode? = null,
+  children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Key? = null
-) = HtmlWidget(
+  key: Any? = null
+) = html(
   tag = "wbr",
-  ns = null,
   cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
@@ -13937,9 +13716,8 @@ fun Styled.Wbr(
   key = key
 )
 
-fun Styled.Wbr(vararg children: Widget) = HtmlWidget(
+fun Styled.Wbr(vararg children: ReactNode) = html(
   tag = "wbr",
-  ns = null,
   cssPrefix = prefix,
   children = children.asList()
 )

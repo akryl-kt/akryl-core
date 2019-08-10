@@ -39,6 +39,8 @@ class ComputedProperty<R>(
 
   private fun compute() {
     if (dirty) {
+      dispose()
+
       dirty = !container.observable
       val (value, handle) = ChangeDetector.evaluate(fn, this::fire)
       val changed = value != this.value

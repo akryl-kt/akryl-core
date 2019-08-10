@@ -3,6 +3,8 @@ package io.akryl.rx
 class ObservableProperty : Observable {
   private val subscriptions = HashSet<Observer>()
 
+  val subscriptionsCount get() = subscriptions.size
+
   override fun subscribe(observer: Observer) {
     subscriptions.add(observer)
   }

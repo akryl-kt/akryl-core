@@ -105,6 +105,33 @@ class ComputedPropertyTest : EmptyReactiveContainer {
   }
 
   @Test
+  fun initializationDispose() {
+    class Container : ReactiveContainer {
+      override fun registerReactiveHandle(handle: ReactiveHandle) {}
+    }
+
+    val observable = ObservableProperty()
+
+    val container = Container()
+    var counter = 0
+    val prop by container.computed {
+      observable.observed()
+      counter += 1
+      counter
+    }
+
+    assertEquals(1, prop)
+    assertEquals(2, prop)
+    assertEquals(3, prop)
+    assertEquals(1, observable.subscriptionsCount)
+
+    observable(container)
+    assertEquals(4, prop)
+    assertEquals(4, prop)
+    assertEquals(4, prop)
+  }
+
+  @Test
   fun fireOnlyIfChanged() {
     var counter = 0
     var a by reactive(0)

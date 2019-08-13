@@ -1,6 +1,6 @@
 @file:Suppress("FunctionName")
 
-package io.akryl
+package io.akryl.utils
 
 fun <T, R> For(items: Iterable<T>, mapper: (T) -> R): Array<R> = items.map(mapper).toTypedArray()
 fun <T, R> For(items: Array<T>, mapper: (T) -> R): Array<R> = items.map(mapper).toTypedArray()

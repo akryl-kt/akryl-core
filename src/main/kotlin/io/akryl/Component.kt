@@ -1,5 +1,8 @@
+@file:Suppress("unused")
+
 package io.akryl
 
+import io.akryl.css.Styled
 import io.akryl.react.FunctionalComponent
 import io.akryl.react.ReactNode
 import io.akryl.react.createElement
@@ -14,7 +17,9 @@ import io.akryl.react.dom.render as reactRender
 import io.akryl.react.useRef as reactUseRef
 import io.akryl.react.useState as reactUseState
 
-abstract class Component : ReactNode, Styled {
+abstract class Component(
+  val key: Any? = undefined
+) : ReactNode, Styled {
   final override val prefix: String? get() = null // todo
 
   abstract fun render(): ReactNode

@@ -38,6 +38,10 @@ compileKotlin2Js {
         sourceMap = true
         moduleKind = "commonjs"
         main = "nocall"
+        freeCompilerArgs = [
+                "-XXLanguage:+InlineClasses",
+                "-Xuse-experimental=kotlin.ExperimentalUnsignedTypes"
+        ]
     }
 }
 
@@ -47,6 +51,10 @@ compileTestKotlin2Js {
         sourceMap = true
         moduleKind = "commonjs"
         main = "nocall"
+        freeCompilerArgs = [
+                "-XXLanguage:+InlineClasses",
+                "-Xuse-experimental=kotlin.ExperimentalUnsignedTypes"
+        ]
     }
 }
 

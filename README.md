@@ -14,7 +14,7 @@ Add jcenter repository:
 
 ```gradle
 repositories {
-    maven { url "https://dl.bintray.com/ashlanderr/akryl/" }
+    jcenter()
 }
 ```
 

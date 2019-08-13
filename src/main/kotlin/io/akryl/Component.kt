@@ -29,6 +29,10 @@ fun render(component: Component, container: Element) {
   reactRender(build(component), container)
 }
 
+fun render(node: ReactNode, container: Element) {
+  reactRender(build(node), container)
+}
+
 internal class Wrapper(var inner: dynamic, clazz: KClass<*>) {
   val render: FunctionalComponent
 

@@ -411,3 +411,22 @@ class FontWeightScope(properties: CssProps, name: String) : StringScope(properti
   fun w200() = this("200")
   fun w100() = this("100")
 }
+
+class FlexDirectionScope(properties: CssProps, name: String) : StringScope(properties, name) {
+  fun initial() = this("initial")
+  fun inherit() = this("inherit")
+
+  fun row() = this("row")
+  fun rowReverse() = this("row-reverse")
+  fun column() = this("column")
+  fun columnReverse() = this("column-reverse")
+}
+
+class FlexWrapScope(properties: CssProps, name: String) : StringScope(properties, name) {
+  fun initial() = this("initial")
+  fun inherit() = this("inherit")
+
+  fun nowrap() = this("nowrap")
+  fun wrap() = this("wrap")
+  fun wrapReverse() = this("wrap-reverse")
+}

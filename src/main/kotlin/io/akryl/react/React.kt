@@ -28,3 +28,11 @@ external fun memo(
   component: FunctionalComponent,
   arePropsEquals: (dynamic, dynamic) -> Boolean = definedExternally
 ): FunctionalComponent
+
+external interface Context<T> {
+  val Provider: (props: ProviderProps<T>) -> ReactNode
+  val Consumer: () -> ReactNode
+}
+
+external fun <T> createContext(initialValue: T): Context<T>
+external fun <T> useContext(context: Context<T>): T?

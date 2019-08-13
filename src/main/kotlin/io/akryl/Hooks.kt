@@ -1,9 +1,11 @@
 package io.akryl
 
+import io.akryl.react.Context
 import io.akryl.react.EffectDisposer
 import io.akryl.react.Ref
 import io.akryl.rx.*
 import kotlin.reflect.KProperty
+import io.akryl.react.useContext as reactUseContext
 import io.akryl.react.useEffect as reactUseEffect
 import io.akryl.react.useRef as reactUseRef
 import io.akryl.react.useState as reactUseState
@@ -83,6 +85,10 @@ fun <R> useComputed(fn: () -> R): ComputedProperty<R> {
   }
 
   return ref
+}
+
+fun <T> useContext(context: Context<T>): T? {
+  return reactUseContext(context)
 }
 
 private object EmptyReactiveContainer : ReactiveContainer, Transient {

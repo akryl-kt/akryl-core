@@ -11,6 +11,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:0.0.45"
         classpath 'com.moowork.gradle:gradle-node-plugin:1.2.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+'
     }
 }
 
@@ -18,9 +19,23 @@ apply plugin: "kotlin2js"
 apply plugin: "org.jetbrains.kotlin.frontend"
 apply plugin: "maven"
 apply plugin: 'com.moowork.node'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+def getVersionName() {
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'describe', '--abbrev=0', '--tags'
+        standardOutput = stdout
+    }
+    def output = stdout.toString().trim()
+    output = output.replaceFirst(/v([\d.]+)/, '$1')
+    output = output.replaceFirst(/v([\d.]+)-(\d+)-.*/, '$1')
+    return output
+}
 
 group = "io.akryl"
-version = "0.5.0"
+version = getVersionName()
 
 repositories {
     jcenter()
@@ -78,4 +93,54 @@ task populateNodeModules(type: Copy) {
 task runMocha(type: NodeTask, dependsOn: [compileTestKotlin2Js, populateNodeModules]) {
     script = file("${buildDir}/node_modules/mocha/bin/mocha")
     args = [compileTestKotlin2Js.outputFile]
+}
+
+jar {
+    baseName = project.getProperty('name')
+    manifest {
+        attributes 'Implementation-Title': 'Akryl Core'
+        attributes 'Implementation-Version': version
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['mavenJava']
+    configurations = ['archives']
+    pkg {
+        repo = 'akryl'
+        name = 'akryl-core'
+        vcsUrl = 'https://github.com/akryl-kt/akryl-core.git'
+        licenses = ['MIT']
+        version {
+            name = project.version
+            desc = 'Akryl Core'
+            released  = new Date()
+            vcsTag = "v$project.version"
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
 }

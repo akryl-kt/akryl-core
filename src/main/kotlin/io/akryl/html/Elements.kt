@@ -70,7 +70,7 @@ private inline fun listeners(
   if (onMouseOver != null) result["onMouseOver"] = onMouseOver as (Event) -> Unit
   if (onMouseUp != null) result["onMouseUp"] = onMouseUp as (Event) -> Unit
   if (onClick != null) result["onClick"] = onClick as (Event) -> Unit
-  if (onDoubleClick != null) result["onDblClick"] = onDoubleClick as (Event) -> Unit
+  if (onDoubleClick != null) result["onDoubleClick"] = onDoubleClick as (Event) -> Unit
   if (onWheel != null) result["onWheel"] = onWheel as (Event) -> Unit
   if (onDrag != null) result["onDrag"] = onDrag as (Event) -> Unit
   if (onDragEnd != null) result["onDragEnd"] = onDragEnd as (Event) -> Unit
@@ -13825,106 +13825,106 @@ private inline fun attributes(
   action: String? = null,
   d: String? = null,
   clazz: String? = null
-): HashMap<String, String> {
-  val result = HashMap<String, String>()
+): HashMap<String, Any> {
+  val result = HashMap<String, Any>()
   if (data != null) result["data"] = data
-  if (useMap != null) result["usemap"] = useMap
+  if (useMap != null) result["useMap"] = useMap
   if (multiple != null) result["multiple"] = multiple
   if (content != null) result["content"] = content
-  if (rowSpan != null) result["rowspan"] = rowSpan.toString()
+  if (rowSpan != null) result["rowSpan"] = rowSpan
   if (form != null) result["form"] = form
   if (accept != null) result["accept"] = accept
-  if (formTarget != null) result["formtarget"] = formTarget
-  if (autoFocus == true) result["autofocus"] = ""
+  if (formTarget != null) result["formTarget"] = formTarget
+  if (autoFocus != null) result["autoFocus"] = autoFocus
   if (shape != null) result["shape"] = shape
   if (size != null) result["size"] = size
   if (value != null) result["value"] = value
   if (list != null) result["list"] = list
-  if (formEncType != null) result["formenctype"] = formEncType
+  if (formEncType != null) result["formEncType"] = formEncType
   if (title != null) result["title"] = title
   if (headers != null) result["headers"] = headers
-  if (acceptCharset != null) result["accept-charset"] = acceptCharset
+  if (acceptCharset != null) result["acceptCharset"] = acceptCharset
   if (method != null) result["method"] = method
-  if (srcDoc != null) result["srcdoc"] = srcDoc
-  if (hidden == true) result["hidden"] = ""
+  if (srcDoc != null) result["srcDoc"] = srcDoc
+  if (hidden != null) result["hidden"] = hidden
   if (`for` != null) result["htmlFor"] = `for`
   if (defer != null) result["defer"] = defer
-  if (srcLang != null) result["srclang"] = srcLang
+  if (srcLang != null) result["srcLang"] = srcLang
   if (type != null) result["type"] = type
   if (target != null) result["target"] = target
   if (kind != null) result["kind"] = kind
   if (charset != null) result["charset"] = charset
-  if (required == true) result["required"] = ""
+  if (required != null) result["required"] = required
   if (sandbox != null) result["sandbox"] = sandbox
   if (poster != null) result["poster"] = poster
-  if (formNoValidate == true) result["formnovalidate"] = ""
-  if (noValidate == true) result["novalidate"] = ""
-  if (autoPlay != null) result["autoplay"] = autoPlay
-  if (colSpan != null) result["colspan"] = colSpan.toString()
+  if (formNoValidate != null) result["formNoValidate"] = formNoValidate
+  if (noValidate != null) result["novalidate"] = noValidate
+  if (autoPlay != null) result["autoPlay"] = autoPlay
+  if (colSpan != null) result["colSpan"] = colSpan
   if (default != null) result["default"] = default
   if (min != null) result["min"] = min
   if (alt != null) result["alt"] = alt
-  if (step != null) result["step"] = step.toString()
+  if (step != null) result["step"] = step
   if (coords != null) result["coords"] = coords
   if (label != null) result["label"] = label
   if (id != null) result["id"] = id
   if (async != null) result["async"] = async
   if (reversed != null) result["reversed"] = reversed
-  if (height != null) result["height"] = height.toString()
-  if (muted == true) result["muted"] = ""
-  if (rows != null) result["rows"] = rows.toString()
+  if (height != null) result["height"] = height
+  if (muted != null) result["muted"] = muted
+  if (rows != null) result["rows"] = rows
   if (dirname != null) result["dirname"] = dirname
-  if (selected == true) result["selected"] = ""
+  if (selected != null) result["selected"] = selected
   if (placeholder != null) result["placeholder"] = placeholder
   if (sizes != null) result["sizes"] = sizes
   if (low != null) result["low"] = low
-  if (autocomplete == true) result["autocomplete"] = ""
-  if (dropZone != null) result["dropzone"] = dropZone
+  if (autocomplete != null) result["autocomplete"] = autocomplete
+  if (dropZone != null) result["dropZone"] = dropZone
   if (open != null) result["open"] = open
-  if (isMap != null) result["ismap"] = isMap
+  if (isMap != null) result["isMap"] = isMap
   if (datetime != null) result["datetime"] = datetime
   if (abbr != null) result["abbr"] = abbr
   if (cite != null) result["cite"] = cite
   if (download != null) result["download"] = download
-  if (width != null) result["width"] = width.toString()
+  if (width != null) result["width"] = width
   if (xmlns != null) result["xmlns"] = xmlns
-  if (span != null) result["span"] = span.toString()
+  if (span != null) result["span"] = span
   if (name != null) result["name"] = name
-  if (readonly == true) result["readonly"] = ""
+  if (readonly != null) result["readonly"] = readonly
   if (scope != null) result["scope"] = scope
   if (translate != null) result["translate"] = translate
-  if (contentEditable != null) result["contenteditable"] = contentEditable
+  if (contentEditable != null) result["contentEditable"] = contentEditable
   if (pattern != null) result["pattern"] = pattern
   if (href != null) result["href"] = href
   if (rel != null) result["rel"] = rel
-  if (tabIndex != null) result["tabindex"] = tabIndex.toString()
-  if (accessKey != null) result["accesskey"] = accessKey
-  if (formMethod != null) result["formmethod"] = formMethod
-  if (cols != null) result["cols"] = cols.toString()
+  if (tabIndex != null) result["tabIndex"] = tabIndex
+  if (accessKey != null) result["accessKey"] = accessKey
+  if (formMethod != null) result["formMethod"] = formMethod
+  if (cols != null) result["cols"] = cols
   if (start != null) result["start"] = start
   if (loop != null) result["loop"] = loop
   if (optimum != null) result["optimum"] = optimum
-  if (srcSet != null) result["srcset"] = srcSet
+  if (srcSet != null) result["srcSet"] = srcSet
   if (src != null) result["src"] = src
   if (high != null) result["high"] = high
   if (media != null) result["media"] = media
-  if (disabled == true) result["disabled"] = ""
-  if (spellCheck == true) result["spellcheck"] = ""
-  if (checked == true) result["checked"] = ""
-  if (hrefLang != null) result["hreflang"] = hrefLang
-  if (draggable == true) result["draggable"] = ""
-  if (encType != null) result["enctype"] = encType
+  if (disabled != null) result["disabled"] = disabled
+  if (spellCheck != null) result["spellCheck"] = spellCheck
+  if (checked != null) result["checked"] = checked
+  if (hrefLang != null) result["hrefLang"] = hrefLang
+  if (draggable != null) result["draggable"] = draggable
+  if (encType != null) result["encType"] = encType
   if (preload != null) result["preload"] = preload
   if (ping != null) result["ping"] = ping
-  if (formAction != null) result["formaction"] = formAction
-  if (longDesc != null) result["longdesc"] = longDesc
+  if (formAction != null) result["formAction"] = formAction
+  if (longDesc != null) result["longDesc"] = longDesc
   if (wrap != null) result["wrap"] = wrap
   if (lang != null) result["lang"] = lang
   if (dir != null) result["dir"] = dir
-  if (maxLength != null) result["maxlength"] = maxLength.toString()
+  if (maxLength != null) result["maxLength"] = maxLength
   if (max != null) result["max"] = max
   if (controls != null) result["controls"] = controls
-  if (httpEquiv != null) result["http-equiv"] = httpEquiv
+  if (httpEquiv != null) result["httpEquiv"] = httpEquiv
   if (action != null) result["action"] = action
   if (d != null) result["d"] = d
   if (clazz != null) result["className"] = clazz

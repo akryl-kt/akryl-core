@@ -12,7 +12,7 @@ class ComputedProperty<R>(
 
   private val inner = ObservableProperty()
   private var dirty = true
-  private var value: R? = null
+  private var _value: R? = null
   private var handle: ReactiveHandle? = null
 
   override fun subscribe(observer: Observer) = inner.subscribe(observer)
@@ -24,15 +24,15 @@ class ComputedProperty<R>(
   }
 
   @Suppress("UNCHECKED_CAST")
-  fun get(): R {
+  val value: R get() {
     compute()
     inner.observed()
-    return value as R
+    return _value as R
   }
 
-  operator fun getValue(target: Any?, property: KProperty<*>) = get()
+  operator fun getValue(target: Any?, property: KProperty<*>) = value
 
-  private fun fire() {
+  fun changed() {
     dirty = true
     EventLoop.submit(QUEUE_PRIORITY, this::compute)
   }
@@ -42,9 +42,9 @@ class ComputedProperty<R>(
       dispose()
 
       dirty = !container.observable
-      val (value, handle) = ChangeDetector.evaluate(fn, this::fire)
-      val changed = value != this.value
-      this.value = value
+      val (value, handle) = ChangeDetector.evaluate(fn, this::changed)
+      val changed = value != this._value
+      this._value = value
       this.handle = handle
       if (changed) inner.fire()
     }

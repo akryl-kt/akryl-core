@@ -10,10 +10,14 @@ import io.akryl.react.useEffect as reactUseEffect
 import io.akryl.react.useRef as reactUseRef
 import io.akryl.react.useState as reactUseState
 
-class StateProperty<R>(
-  private val state: R,
-  private val setState: (R) -> Unit
+data class StateProperty<R>(
+  val state: R,
+  val setState: (R) -> Unit
 ) {
+  var value: R
+    get() = state
+    set(value) { setState(value) }
+
   operator fun getValue(self: Any?, property: KProperty<*>): R {
     return state
   }
@@ -23,10 +27,14 @@ class StateProperty<R>(
   }
 }
 
+@Suppress("UNCHECKED_CAST")
 class RefProperty<R>(
   private val ref: Ref<R?>
 ) {
-  @Suppress("UNCHECKED_CAST")
+  var value: R
+    get() = ref.current as R
+    set(value) { ref.current = value }
+
   operator fun getValue(self: Any?, property: KProperty<*>): R {
     return ref.current as R
   }
@@ -77,14 +85,38 @@ fun <R> useReactive(initialValue: () -> R): ReactiveProperty<R> {
   return ref
 }
 
-fun <R> useComputed(fn: () -> R): ComputedProperty<R> {
-  val ref by useRef { ComputedProperty(EmptyReactiveContainer, fn) }
+fun <C : Component, R> C.useComputed(fn: C.() -> R): ComputedProperty<R> {
+  var thisRef by useRef { this }
+  thisRef = this
+
+  val propRef by useRef { ComputedProperty(EmptyReactiveContainer) { thisRef.fn() } }
 
   useEffect(Unit) {
-    dispose { ref.dispose() }
+    dispose { propRef.dispose() }
   }
 
-  return ref
+  useEffect(this) {
+    propRef.changed()
+  }
+
+  return propRef
+}
+
+fun <C : Component, R> C.useComputed(vararg dependencies: Any?, fn: C.() -> R): ComputedProperty<R> {
+  var thisRef by useRef { this }
+  thisRef = this
+
+  val propRef by useRef { ComputedProperty(EmptyReactiveContainer) { thisRef.fn() } }
+
+  useEffect(Unit) {
+    dispose { propRef.dispose() }
+  }
+
+  useEffect(*dependencies) {
+    propRef.changed()
+  }
+
+  return propRef
 }
 
 fun <T> useContext(context: Context<T>): T? {

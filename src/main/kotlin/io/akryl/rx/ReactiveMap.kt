@@ -42,11 +42,11 @@ internal class ReactiveMap<K, V>(source: MutableMap<K, V>, factory: () -> Mutabl
 
   private class Entry<K, V>(val entry: MutableMap.MutableEntry<K, ReactiveProperty<V>>) : MutableMap.MutableEntry<K, V> {
     override val key = entry.key
-    override val value get() = entry.value.get()
+    override val value get() = entry.value.value
 
     override fun setValue(newValue: V): V {
       val oldValue = value
-      entry.value.set(observable(newValue))
+      entry.value.value = observable(newValue)
       return oldValue
     }
 
@@ -60,7 +60,7 @@ internal class ReactiveMap<K, V>(source: MutableMap<K, V>, factory: () -> Mutabl
     private lateinit var current: Entry<K, V>
 
     init {
-        sizeProp.get()
+        sizeProp.value
     }
 
     override fun hasNext() = inner.hasNext()
@@ -74,7 +74,7 @@ internal class ReactiveMap<K, V>(source: MutableMap<K, V>, factory: () -> Mutabl
     override fun remove() {
       inner.remove()
       current.entry.value.fire()
-      sizeProp.set(this@ReactiveMap.inner.size)
+      sizeProp.value = this@ReactiveMap.inner.size
     }
   }
 
@@ -88,23 +88,23 @@ internal class ReactiveMap<K, V>(source: MutableMap<K, V>, factory: () -> Mutabl
     val values = ArrayList(inner.values)
     inner.clear()
     values.forEach { it.fire() }
-    sizeProp.set(inner.size)
+    sizeProp.value = inner.size
   }
 
   override fun containsKey(key: K): Boolean {
     val value = inner[key]
     return if (value != null) {
-      value.get()
+      value.value
       true
     } else {
-      sizeProp.get()
+      sizeProp.value
       false
     }
   }
 
   override fun containsValue(value: V): Boolean {
-    val result = inner.any { it.value.get() == value }
-    if (!result) sizeProp.get()
+    val result = inner.any { it.value.value == value }
+    if (!result) sizeProp.value
     return result
   }
 
@@ -120,9 +120,9 @@ internal class ReactiveMap<K, V>(source: MutableMap<K, V>, factory: () -> Mutabl
   override operator fun get(key: K): V? {
     val value = inner[key]
     return if (value != null) {
-      value.get()
+      value.value
     } else {
-      sizeProp.get()
+      sizeProp.value
       return null
     }
   }
@@ -130,23 +130,23 @@ internal class ReactiveMap<K, V>(source: MutableMap<K, V>, factory: () -> Mutabl
   override fun put(key: K, value: V): V? {
     val prop = inner[key]
     val oldValue = if (prop != null) {
-      val oldValue = prop.get()
-      prop.set(value)
+      val oldValue = prop.value
+      prop.value = value
       oldValue
     } else {
       inner[key] = ReactiveProperty(observable(value))
       null
     }
-    sizeProp.set(inner.size)
+    sizeProp.value = inner.size
     return oldValue
   }
 
   override fun remove(key: K): V? {
     val prop = inner.remove(key)
-    sizeProp.set(inner.size)
+    sizeProp.value = inner.size
     prop?.fire()
-    return prop?.get()
+    return prop?.value
   }
 
-  override val size get() = sizeProp.get()
+  override val size get() = sizeProp.value
 }

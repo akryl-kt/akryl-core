@@ -3,7 +3,6 @@
 package io.akryl.html
 
 import io.akryl.css.ClassName
-import io.akryl.css.Styled
 import io.akryl.react.ReactNode
 import org.w3c.dom.DragEvent
 import org.w3c.dom.clipboard.ClipboardEvent
@@ -102,7 +101,7 @@ private inline fun children(text: String?, child: ReactNode?, children: Iterable
   return result
 }
 
-fun Styled.A(
+fun A(
   target: String? = null,
   hidden: Boolean? = null,
   id: String? = null,
@@ -166,7 +165,6 @@ fun Styled.A(
   key: Any? = null
 ) = html(
   tag = "a",
-  cssPrefix = prefix,
   attributes = attributes(
     target = target,
     hidden = hidden,
@@ -231,13 +229,12 @@ fun Styled.A(
   key = key
 )
 
-fun Styled.A(vararg children: ReactNode) = html(
+fun A(vararg children: ReactNode) = html(
   tag = "a",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Abbr(
+fun Abbr(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -293,7 +290,6 @@ fun Styled.Abbr(
   key: Any? = null
 ) = html(
   tag = "abbr",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -350,13 +346,12 @@ fun Styled.Abbr(
   key = key
 )
 
-fun Styled.Abbr(vararg children: ReactNode) = html(
+fun Abbr(vararg children: ReactNode) = html(
   tag = "abbr",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Address(
+fun Address(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -412,7 +407,6 @@ fun Styled.Address(
   key: Any? = null
 ) = html(
   tag = "address",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -469,13 +463,12 @@ fun Styled.Address(
   key = key
 )
 
-fun Styled.Address(vararg children: ReactNode) = html(
+fun Address(vararg children: ReactNode) = html(
   tag = "address",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Area(
+fun Area(
   alt: String? = null,
   hrefLang: String? = null,
   download: String? = null,
@@ -541,7 +534,6 @@ fun Styled.Area(
   key: Any? = null
 ) = html(
   tag = "area",
-  cssPrefix = prefix,
   attributes = attributes(
     alt = alt,
     hrefLang = hrefLang,
@@ -608,13 +600,12 @@ fun Styled.Area(
   key = key
 )
 
-fun Styled.Area(vararg children: ReactNode) = html(
+fun Area(vararg children: ReactNode) = html(
   tag = "area",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Article(
+fun Article(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -670,7 +661,6 @@ fun Styled.Article(
   key: Any? = null
 ) = html(
   tag = "article",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -727,13 +717,12 @@ fun Styled.Article(
   key = key
 )
 
-fun Styled.Article(vararg children: ReactNode) = html(
+fun Article(vararg children: ReactNode) = html(
   tag = "article",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Aside(
+fun Aside(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -789,7 +778,6 @@ fun Styled.Aside(
   key: Any? = null
 ) = html(
   tag = "aside",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -846,13 +834,12 @@ fun Styled.Aside(
   key = key
 )
 
-fun Styled.Aside(vararg children: ReactNode) = html(
+fun Aside(vararg children: ReactNode) = html(
   tag = "aside",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Audio(
+fun Audio(
   hidden: Boolean? = null,
   id: String? = null,
   muted: Boolean? = null,
@@ -914,7 +901,6 @@ fun Styled.Audio(
   key: Any? = null
 ) = html(
   tag = "audio",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -977,13 +963,12 @@ fun Styled.Audio(
   key = key
 )
 
-fun Styled.Audio(vararg children: ReactNode) = html(
+fun Audio(vararg children: ReactNode) = html(
   tag = "audio",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.B(
+fun B(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -1039,7 +1024,6 @@ fun Styled.B(
   key: Any? = null
 ) = html(
   tag = "b",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -1096,13 +1080,12 @@ fun Styled.B(
   key = key
 )
 
-fun Styled.B(vararg children: ReactNode) = html(
+fun B(vararg children: ReactNode) = html(
   tag = "b",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Base(
+fun Base(
   target: String? = null,
   hidden: Boolean? = null,
   id: String? = null,
@@ -1160,7 +1143,6 @@ fun Styled.Base(
   key: Any? = null
 ) = html(
   tag = "base",
-  cssPrefix = prefix,
   attributes = attributes(
     target = target,
     hidden = hidden,
@@ -1219,13 +1201,12 @@ fun Styled.Base(
   key = key
 )
 
-fun Styled.Base(vararg children: ReactNode) = html(
+fun Base(vararg children: ReactNode) = html(
   tag = "base",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Bdi(
+fun Bdi(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -1281,7 +1262,6 @@ fun Styled.Bdi(
   key: Any? = null
 ) = html(
   tag = "bdi",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -1338,13 +1318,12 @@ fun Styled.Bdi(
   key = key
 )
 
-fun Styled.Bdi(vararg children: ReactNode) = html(
+fun Bdi(vararg children: ReactNode) = html(
   tag = "bdi",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Bdo(
+fun Bdo(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -1400,7 +1379,6 @@ fun Styled.Bdo(
   key: Any? = null
 ) = html(
   tag = "bdo",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -1457,13 +1435,12 @@ fun Styled.Bdo(
   key = key
 )
 
-fun Styled.Bdo(vararg children: ReactNode) = html(
+fun Bdo(vararg children: ReactNode) = html(
   tag = "bdo",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Blockquote(
+fun Blockquote(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -1520,7 +1497,6 @@ fun Styled.Blockquote(
   key: Any? = null
 ) = html(
   tag = "blockquote",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -1578,13 +1554,12 @@ fun Styled.Blockquote(
   key = key
 )
 
-fun Styled.Blockquote(vararg children: ReactNode) = html(
+fun Blockquote(vararg children: ReactNode) = html(
   tag = "blockquote",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Body(
+fun Body(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -1640,7 +1615,6 @@ fun Styled.Body(
   key: Any? = null
 ) = html(
   tag = "body",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -1697,13 +1671,12 @@ fun Styled.Body(
   key = key
 )
 
-fun Styled.Body(vararg children: ReactNode) = html(
+fun Body(vararg children: ReactNode) = html(
   tag = "body",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Br(
+fun Br(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -1759,7 +1732,6 @@ fun Styled.Br(
   key: Any? = null
 ) = html(
   tag = "br",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -1816,13 +1788,12 @@ fun Styled.Br(
   key = key
 )
 
-fun Styled.Br(vararg children: ReactNode) = html(
+fun Br(vararg children: ReactNode) = html(
   tag = "br",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Button(
+fun Button(
   formNoValidate: Boolean? = null,
   form: String? = null,
   formTarget: String? = null,
@@ -1889,7 +1860,6 @@ fun Styled.Button(
   key: Any? = null
 ) = html(
   tag = "button",
-  cssPrefix = prefix,
   attributes = attributes(
     formNoValidate = formNoValidate,
     form = form,
@@ -1957,13 +1927,12 @@ fun Styled.Button(
   key = key
 )
 
-fun Styled.Button(vararg children: ReactNode) = html(
+fun Button(vararg children: ReactNode) = html(
   tag = "button",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Canvas(
+fun Canvas(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -2021,7 +1990,6 @@ fun Styled.Canvas(
   key: Any? = null
 ) = html(
   tag = "canvas",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2080,13 +2048,12 @@ fun Styled.Canvas(
   key = key
 )
 
-fun Styled.Canvas(vararg children: ReactNode) = html(
+fun Canvas(vararg children: ReactNode) = html(
   tag = "canvas",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Caption(
+fun Caption(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -2142,7 +2109,6 @@ fun Styled.Caption(
   key: Any? = null
 ) = html(
   tag = "caption",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2199,13 +2165,12 @@ fun Styled.Caption(
   key = key
 )
 
-fun Styled.Caption(vararg children: ReactNode) = html(
+fun Caption(vararg children: ReactNode) = html(
   tag = "caption",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Cite(
+fun Cite(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -2261,7 +2226,6 @@ fun Styled.Cite(
   key: Any? = null
 ) = html(
   tag = "cite",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2318,13 +2282,12 @@ fun Styled.Cite(
   key = key
 )
 
-fun Styled.Cite(vararg children: ReactNode) = html(
+fun Cite(vararg children: ReactNode) = html(
   tag = "cite",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Code(
+fun Code(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -2380,7 +2343,6 @@ fun Styled.Code(
   key: Any? = null
 ) = html(
   tag = "code",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2437,13 +2399,12 @@ fun Styled.Code(
   key = key
 )
 
-fun Styled.Code(vararg children: ReactNode) = html(
+fun Code(vararg children: ReactNode) = html(
   tag = "code",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Col(
+fun Col(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -2500,7 +2461,6 @@ fun Styled.Col(
   key: Any? = null
 ) = html(
   tag = "col",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2558,13 +2518,12 @@ fun Styled.Col(
   key = key
 )
 
-fun Styled.Col(vararg children: ReactNode) = html(
+fun Col(vararg children: ReactNode) = html(
   tag = "col",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Colgroup(
+fun Colgroup(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -2621,7 +2580,6 @@ fun Styled.Colgroup(
   key: Any? = null
 ) = html(
   tag = "colgroup",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2679,13 +2637,12 @@ fun Styled.Colgroup(
   key = key
 )
 
-fun Styled.Colgroup(vararg children: ReactNode) = html(
+fun Colgroup(vararg children: ReactNode) = html(
   tag = "colgroup",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Data(
+fun Data(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -2741,7 +2698,6 @@ fun Styled.Data(
   key: Any? = null
 ) = html(
   tag = "data",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2798,13 +2754,12 @@ fun Styled.Data(
   key = key
 )
 
-fun Styled.Data(vararg children: ReactNode) = html(
+fun Data(vararg children: ReactNode) = html(
   tag = "data",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Datalist(
+fun Datalist(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -2860,7 +2815,6 @@ fun Styled.Datalist(
   key: Any? = null
 ) = html(
   tag = "datalist",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -2917,13 +2871,12 @@ fun Styled.Datalist(
   key = key
 )
 
-fun Styled.Datalist(vararg children: ReactNode) = html(
+fun Datalist(vararg children: ReactNode) = html(
   tag = "datalist",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Dd(
+fun Dd(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -2979,7 +2932,6 @@ fun Styled.Dd(
   key: Any? = null
 ) = html(
   tag = "dd",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3036,13 +2988,12 @@ fun Styled.Dd(
   key = key
 )
 
-fun Styled.Dd(vararg children: ReactNode) = html(
+fun Dd(vararg children: ReactNode) = html(
   tag = "dd",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Del(
+fun Del(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -3100,7 +3051,6 @@ fun Styled.Del(
   key: Any? = null
 ) = html(
   tag = "del",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3159,13 +3109,12 @@ fun Styled.Del(
   key = key
 )
 
-fun Styled.Del(vararg children: ReactNode) = html(
+fun Del(vararg children: ReactNode) = html(
   tag = "del",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Details(
+fun Details(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -3222,7 +3171,6 @@ fun Styled.Details(
   key: Any? = null
 ) = html(
   tag = "details",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3280,13 +3228,12 @@ fun Styled.Details(
   key = key
 )
 
-fun Styled.Details(vararg children: ReactNode) = html(
+fun Details(vararg children: ReactNode) = html(
   tag = "details",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Dfn(
+fun Dfn(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -3342,7 +3289,6 @@ fun Styled.Dfn(
   key: Any? = null
 ) = html(
   tag = "dfn",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3399,13 +3345,12 @@ fun Styled.Dfn(
   key = key
 )
 
-fun Styled.Dfn(vararg children: ReactNode) = html(
+fun Dfn(vararg children: ReactNode) = html(
   tag = "dfn",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Dialog(
+fun Dialog(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -3462,7 +3407,6 @@ fun Styled.Dialog(
   key: Any? = null
 ) = html(
   tag = "dialog",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3520,13 +3464,12 @@ fun Styled.Dialog(
   key = key
 )
 
-fun Styled.Dialog(vararg children: ReactNode) = html(
+fun Dialog(vararg children: ReactNode) = html(
   tag = "dialog",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Div(
+fun Div(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -3582,7 +3525,6 @@ fun Styled.Div(
   key: Any? = null
 ) = html(
   tag = "div",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3639,13 +3581,12 @@ fun Styled.Div(
   key = key
 )
 
-fun Styled.Div(vararg children: ReactNode) = html(
+fun Div(vararg children: ReactNode) = html(
   tag = "div",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Dl(
+fun Dl(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -3701,7 +3642,6 @@ fun Styled.Dl(
   key: Any? = null
 ) = html(
   tag = "dl",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3758,13 +3698,12 @@ fun Styled.Dl(
   key = key
 )
 
-fun Styled.Dl(vararg children: ReactNode) = html(
+fun Dl(vararg children: ReactNode) = html(
   tag = "dl",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Dt(
+fun Dt(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -3820,7 +3759,6 @@ fun Styled.Dt(
   key: Any? = null
 ) = html(
   tag = "dt",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3877,13 +3815,12 @@ fun Styled.Dt(
   key = key
 )
 
-fun Styled.Dt(vararg children: ReactNode) = html(
+fun Dt(vararg children: ReactNode) = html(
   tag = "dt",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Em(
+fun Em(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -3939,7 +3876,6 @@ fun Styled.Em(
   key: Any? = null
 ) = html(
   tag = "em",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -3996,13 +3932,12 @@ fun Styled.Em(
   key = key
 )
 
-fun Styled.Em(vararg children: ReactNode) = html(
+fun Em(vararg children: ReactNode) = html(
   tag = "em",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Embed(
+fun Embed(
   hidden: Boolean? = null,
   id: String? = null,
   src: String? = null,
@@ -4062,7 +3997,6 @@ fun Styled.Embed(
   key: Any? = null
 ) = html(
   tag = "embed",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4123,13 +4057,12 @@ fun Styled.Embed(
   key = key
 )
 
-fun Styled.Embed(vararg children: ReactNode) = html(
+fun Embed(vararg children: ReactNode) = html(
   tag = "embed",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Fieldset(
+fun Fieldset(
   hidden: Boolean? = null,
   id: String? = null,
   name: String? = null,
@@ -4188,7 +4121,6 @@ fun Styled.Fieldset(
   key: Any? = null
 ) = html(
   tag = "fieldset",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4248,13 +4180,12 @@ fun Styled.Fieldset(
   key = key
 )
 
-fun Styled.Fieldset(vararg children: ReactNode) = html(
+fun Fieldset(vararg children: ReactNode) = html(
   tag = "fieldset",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Figcaption(
+fun Figcaption(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -4310,7 +4241,6 @@ fun Styled.Figcaption(
   key: Any? = null
 ) = html(
   tag = "figcaption",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4367,13 +4297,12 @@ fun Styled.Figcaption(
   key = key
 )
 
-fun Styled.Figcaption(vararg children: ReactNode) = html(
+fun Figcaption(vararg children: ReactNode) = html(
   tag = "figcaption",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Figure(
+fun Figure(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -4429,7 +4358,6 @@ fun Styled.Figure(
   key: Any? = null
 ) = html(
   tag = "figure",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4486,13 +4414,12 @@ fun Styled.Figure(
   key = key
 )
 
-fun Styled.Figure(vararg children: ReactNode) = html(
+fun Figure(vararg children: ReactNode) = html(
   tag = "figure",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Footer(
+fun Footer(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -4548,7 +4475,6 @@ fun Styled.Footer(
   key: Any? = null
 ) = html(
   tag = "footer",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4605,13 +4531,12 @@ fun Styled.Footer(
   key = key
 )
 
-fun Styled.Footer(vararg children: ReactNode) = html(
+fun Footer(vararg children: ReactNode) = html(
   tag = "footer",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Form(
+fun Form(
   target: String? = null,
   hidden: Boolean? = null,
   id: String? = null,
@@ -4675,7 +4600,6 @@ fun Styled.Form(
   key: Any? = null
 ) = html(
   tag = "form",
-  cssPrefix = prefix,
   attributes = attributes(
     target = target,
     hidden = hidden,
@@ -4740,13 +4664,12 @@ fun Styled.Form(
   key = key
 )
 
-fun Styled.Form(vararg children: ReactNode) = html(
+fun Form(vararg children: ReactNode) = html(
   tag = "form",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.H1(
+fun H1(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -4802,7 +4725,6 @@ fun Styled.H1(
   key: Any? = null
 ) = html(
   tag = "h1",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4859,13 +4781,12 @@ fun Styled.H1(
   key = key
 )
 
-fun Styled.H1(vararg children: ReactNode) = html(
+fun H1(vararg children: ReactNode) = html(
   tag = "h1",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.H2(
+fun H2(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -4921,7 +4842,6 @@ fun Styled.H2(
   key: Any? = null
 ) = html(
   tag = "h2",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -4978,13 +4898,12 @@ fun Styled.H2(
   key = key
 )
 
-fun Styled.H2(vararg children: ReactNode) = html(
+fun H2(vararg children: ReactNode) = html(
   tag = "h2",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.H3(
+fun H3(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -5040,7 +4959,6 @@ fun Styled.H3(
   key: Any? = null
 ) = html(
   tag = "h3",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5097,13 +5015,12 @@ fun Styled.H3(
   key = key
 )
 
-fun Styled.H3(vararg children: ReactNode) = html(
+fun H3(vararg children: ReactNode) = html(
   tag = "h3",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.H4(
+fun H4(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -5159,7 +5076,6 @@ fun Styled.H4(
   key: Any? = null
 ) = html(
   tag = "h4",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5216,13 +5132,12 @@ fun Styled.H4(
   key = key
 )
 
-fun Styled.H4(vararg children: ReactNode) = html(
+fun H4(vararg children: ReactNode) = html(
   tag = "h4",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.H5(
+fun H5(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -5278,7 +5193,6 @@ fun Styled.H5(
   key: Any? = null
 ) = html(
   tag = "h5",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5335,13 +5249,12 @@ fun Styled.H5(
   key = key
 )
 
-fun Styled.H5(vararg children: ReactNode) = html(
+fun H5(vararg children: ReactNode) = html(
   tag = "h5",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.H6(
+fun H6(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -5397,7 +5310,6 @@ fun Styled.H6(
   key: Any? = null
 ) = html(
   tag = "h6",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5454,13 +5366,12 @@ fun Styled.H6(
   key = key
 )
 
-fun Styled.H6(vararg children: ReactNode) = html(
+fun H6(vararg children: ReactNode) = html(
   tag = "h6",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Head(
+fun Head(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -5516,7 +5427,6 @@ fun Styled.Head(
   key: Any? = null
 ) = html(
   tag = "head",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5573,13 +5483,12 @@ fun Styled.Head(
   key = key
 )
 
-fun Styled.Head(vararg children: ReactNode) = html(
+fun Head(vararg children: ReactNode) = html(
   tag = "head",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Header(
+fun Header(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -5635,7 +5544,6 @@ fun Styled.Header(
   key: Any? = null
 ) = html(
   tag = "header",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5692,13 +5600,12 @@ fun Styled.Header(
   key = key
 )
 
-fun Styled.Header(vararg children: ReactNode) = html(
+fun Header(vararg children: ReactNode) = html(
   tag = "header",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Hr(
+fun Hr(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -5754,7 +5661,6 @@ fun Styled.Hr(
   key: Any? = null
 ) = html(
   tag = "hr",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5811,13 +5717,12 @@ fun Styled.Hr(
   key = key
 )
 
-fun Styled.Hr(vararg children: ReactNode) = html(
+fun Hr(vararg children: ReactNode) = html(
   tag = "hr",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Html(
+fun Html(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -5874,7 +5779,6 @@ fun Styled.Html(
   key: Any? = null
 ) = html(
   tag = "html",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -5932,13 +5836,12 @@ fun Styled.Html(
   key = key
 )
 
-fun Styled.Html(vararg children: ReactNode) = html(
+fun Html(vararg children: ReactNode) = html(
   tag = "html",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.I(
+fun I(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -5994,7 +5897,6 @@ fun Styled.I(
   key: Any? = null
 ) = html(
   tag = "i",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6051,13 +5953,12 @@ fun Styled.I(
   key = key
 )
 
-fun Styled.I(vararg children: ReactNode) = html(
+fun I(vararg children: ReactNode) = html(
   tag = "i",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Iframe(
+fun Iframe(
   hidden: Boolean? = null,
   id: String? = null,
   name: String? = null,
@@ -6119,7 +6020,6 @@ fun Styled.Iframe(
   key: Any? = null
 ) = html(
   tag = "iframe",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6182,13 +6082,12 @@ fun Styled.Iframe(
   key = key
 )
 
-fun Styled.Iframe(vararg children: ReactNode) = html(
+fun Iframe(vararg children: ReactNode) = html(
   tag = "iframe",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Img(
+fun Img(
   hidden: Boolean? = null,
   id: String? = null,
   src: String? = null,
@@ -6251,7 +6150,6 @@ fun Styled.Img(
   key: Any? = null
 ) = html(
   tag = "img",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6315,13 +6213,12 @@ fun Styled.Img(
   key = key
 )
 
-fun Styled.Img(vararg children: ReactNode) = html(
+fun Img(vararg children: ReactNode) = html(
   tag = "img",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Input(
+fun Input(
   formNoValidate: Boolean? = null,
   multiple: String? = null,
   min: String? = null,
@@ -6407,7 +6304,6 @@ fun Styled.Input(
   key: Any? = null
 ) = html(
   tag = "input",
-  cssPrefix = prefix,
   attributes = attributes(
     formNoValidate = formNoValidate,
     multiple = multiple,
@@ -6494,13 +6390,12 @@ fun Styled.Input(
   key = key
 )
 
-fun Styled.Input(vararg children: ReactNode) = html(
+fun Input(vararg children: ReactNode) = html(
   tag = "input",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Ins(
+fun Ins(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -6558,7 +6453,6 @@ fun Styled.Ins(
   key: Any? = null
 ) = html(
   tag = "ins",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6617,13 +6511,12 @@ fun Styled.Ins(
   key = key
 )
 
-fun Styled.Ins(vararg children: ReactNode) = html(
+fun Ins(vararg children: ReactNode) = html(
   tag = "ins",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Kbd(
+fun Kbd(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -6679,7 +6572,6 @@ fun Styled.Kbd(
   key: Any? = null
 ) = html(
   tag = "kbd",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6736,13 +6628,12 @@ fun Styled.Kbd(
   key = key
 )
 
-fun Styled.Kbd(vararg children: ReactNode) = html(
+fun Kbd(vararg children: ReactNode) = html(
   tag = "kbd",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Label(
+fun Label(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -6800,7 +6691,6 @@ fun Styled.Label(
   key: Any? = null
 ) = html(
   tag = "label",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6859,13 +6749,12 @@ fun Styled.Label(
   key = key
 )
 
-fun Styled.Label(vararg children: ReactNode) = html(
+fun Label(vararg children: ReactNode) = html(
   tag = "label",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Legend(
+fun Legend(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -6921,7 +6810,6 @@ fun Styled.Legend(
   key: Any? = null
 ) = html(
   tag = "legend",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -6978,13 +6866,12 @@ fun Styled.Legend(
   key = key
 )
 
-fun Styled.Legend(vararg children: ReactNode) = html(
+fun Legend(vararg children: ReactNode) = html(
   tag = "legend",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Li(
+fun Li(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -7041,7 +6928,6 @@ fun Styled.Li(
   key: Any? = null
 ) = html(
   tag = "li",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7099,13 +6985,12 @@ fun Styled.Li(
   key = key
 )
 
-fun Styled.Li(vararg children: ReactNode) = html(
+fun Li(vararg children: ReactNode) = html(
   tag = "li",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Link(
+fun Link(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -7167,7 +7052,6 @@ fun Styled.Link(
   key: Any? = null
 ) = html(
   tag = "link",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7230,13 +7114,12 @@ fun Styled.Link(
   key = key
 )
 
-fun Styled.Link(vararg children: ReactNode) = html(
+fun Link(vararg children: ReactNode) = html(
   tag = "link",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Main(
+fun Main(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -7292,7 +7175,6 @@ fun Styled.Main(
   key: Any? = null
 ) = html(
   tag = "main",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7349,13 +7231,12 @@ fun Styled.Main(
   key = key
 )
 
-fun Styled.Main(vararg children: ReactNode) = html(
+fun Main(vararg children: ReactNode) = html(
   tag = "main",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Map(
+fun Map(
   hidden: Boolean? = null,
   id: String? = null,
   name: String? = null,
@@ -7412,7 +7293,6 @@ fun Styled.Map(
   key: Any? = null
 ) = html(
   tag = "map",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7470,13 +7350,12 @@ fun Styled.Map(
   key = key
 )
 
-fun Styled.Map(vararg children: ReactNode) = html(
+fun Map(vararg children: ReactNode) = html(
   tag = "map",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Mark(
+fun Mark(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -7532,7 +7411,6 @@ fun Styled.Mark(
   key: Any? = null
 ) = html(
   tag = "mark",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7589,13 +7467,12 @@ fun Styled.Mark(
   key = key
 )
 
-fun Styled.Mark(vararg children: ReactNode) = html(
+fun Mark(vararg children: ReactNode) = html(
   tag = "mark",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Meta(
+fun Meta(
   hidden: Boolean? = null,
   id: String? = null,
   name: String? = null,
@@ -7655,7 +7532,6 @@ fun Styled.Meta(
   key: Any? = null
 ) = html(
   tag = "meta",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7716,13 +7592,12 @@ fun Styled.Meta(
   key = key
 )
 
-fun Styled.Meta(vararg children: ReactNode) = html(
+fun Meta(vararg children: ReactNode) = html(
   tag = "meta",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Meter(
+fun Meter(
   hidden: Boolean? = null,
   id: String? = null,
   high: String? = null,
@@ -7785,7 +7660,6 @@ fun Styled.Meter(
   key: Any? = null
 ) = html(
   tag = "meter",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7849,13 +7723,12 @@ fun Styled.Meter(
   key = key
 )
 
-fun Styled.Meter(vararg children: ReactNode) = html(
+fun Meter(vararg children: ReactNode) = html(
   tag = "meter",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Nav(
+fun Nav(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -7911,7 +7784,6 @@ fun Styled.Nav(
   key: Any? = null
 ) = html(
   tag = "nav",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -7968,13 +7840,12 @@ fun Styled.Nav(
   key = key
 )
 
-fun Styled.Nav(vararg children: ReactNode) = html(
+fun Nav(vararg children: ReactNode) = html(
   tag = "nav",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Noscript(
+fun Noscript(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -8030,7 +7901,6 @@ fun Styled.Noscript(
   key: Any? = null
 ) = html(
   tag = "noscript",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8087,13 +7957,12 @@ fun Styled.Noscript(
   key = key
 )
 
-fun Styled.Noscript(vararg children: ReactNode) = html(
+fun Noscript(vararg children: ReactNode) = html(
   tag = "noscript",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Object(
+fun Object(
   hidden: Boolean? = null,
   id: String? = null,
   data: String? = null,
@@ -8156,7 +8025,6 @@ fun Styled.Object(
   key: Any? = null
 ) = html(
   tag = "object",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8220,13 +8088,12 @@ fun Styled.Object(
   key = key
 )
 
-fun Styled.Object(vararg children: ReactNode) = html(
+fun Object(vararg children: ReactNode) = html(
   tag = "object",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Ol(
+fun Ol(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -8285,7 +8152,6 @@ fun Styled.Ol(
   key: Any? = null
 ) = html(
   tag = "ol",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8345,13 +8211,12 @@ fun Styled.Ol(
   key = key
 )
 
-fun Styled.Ol(vararg children: ReactNode) = html(
+fun Ol(vararg children: ReactNode) = html(
   tag = "ol",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Optgroup(
+fun Optgroup(
   hidden: Boolean? = null,
   id: String? = null,
   label: String? = null,
@@ -8409,7 +8274,6 @@ fun Styled.Optgroup(
   key: Any? = null
 ) = html(
   tag = "optgroup",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8468,13 +8332,12 @@ fun Styled.Optgroup(
   key = key
 )
 
-fun Styled.Optgroup(vararg children: ReactNode) = html(
+fun Optgroup(vararg children: ReactNode) = html(
   tag = "optgroup",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Option(
+fun Option(
   hidden: Boolean? = null,
   id: String? = null,
   label: String? = null,
@@ -8534,7 +8397,6 @@ fun Styled.Option(
   key: Any? = null
 ) = html(
   tag = "option",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8595,13 +8457,12 @@ fun Styled.Option(
   key = key
 )
 
-fun Styled.Option(vararg children: ReactNode) = html(
+fun Option(vararg children: ReactNode) = html(
   tag = "option",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Output(
+fun Output(
   hidden: Boolean? = null,
   id: String? = null,
   name: String? = null,
@@ -8660,7 +8521,6 @@ fun Styled.Output(
   key: Any? = null
 ) = html(
   tag = "output",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8720,13 +8580,12 @@ fun Styled.Output(
   key = key
 )
 
-fun Styled.Output(vararg children: ReactNode) = html(
+fun Output(vararg children: ReactNode) = html(
   tag = "output",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.P(
+fun P(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -8782,7 +8641,6 @@ fun Styled.P(
   key: Any? = null
 ) = html(
   tag = "p",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8839,13 +8697,12 @@ fun Styled.P(
   key = key
 )
 
-fun Styled.P(vararg children: ReactNode) = html(
+fun P(vararg children: ReactNode) = html(
   tag = "p",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Param(
+fun Param(
   hidden: Boolean? = null,
   id: String? = null,
   name: String? = null,
@@ -8903,7 +8760,6 @@ fun Styled.Param(
   key: Any? = null
 ) = html(
   tag = "param",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -8962,13 +8818,12 @@ fun Styled.Param(
   key = key
 )
 
-fun Styled.Param(vararg children: ReactNode) = html(
+fun Param(vararg children: ReactNode) = html(
   tag = "param",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Path(
+fun Path(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -9025,7 +8880,6 @@ fun Styled.Path(
   key: Any? = null
 ) = html(
   tag = "path",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9083,7 +8937,7 @@ fun Styled.Path(
   key = key
 )
 
-fun Styled.Picture(
+fun Picture(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -9139,7 +8993,6 @@ fun Styled.Picture(
   key: Any? = null
 ) = html(
   tag = "picture",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9196,13 +9049,12 @@ fun Styled.Picture(
   key = key
 )
 
-fun Styled.Picture(vararg children: ReactNode) = html(
+fun Picture(vararg children: ReactNode) = html(
   tag = "picture",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Pre(
+fun Pre(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -9258,7 +9110,6 @@ fun Styled.Pre(
   key: Any? = null
 ) = html(
   tag = "pre",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9315,13 +9166,12 @@ fun Styled.Pre(
   key = key
 )
 
-fun Styled.Pre(vararg children: ReactNode) = html(
+fun Pre(vararg children: ReactNode) = html(
   tag = "pre",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Progress(
+fun Progress(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -9379,7 +9229,6 @@ fun Styled.Progress(
   key: Any? = null
 ) = html(
   tag = "progress",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9438,13 +9287,12 @@ fun Styled.Progress(
   key = key
 )
 
-fun Styled.Progress(vararg children: ReactNode) = html(
+fun Progress(vararg children: ReactNode) = html(
   tag = "progress",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Q(
+fun Q(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -9501,7 +9349,6 @@ fun Styled.Q(
   key: Any? = null
 ) = html(
   tag = "q",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9559,13 +9406,12 @@ fun Styled.Q(
   key = key
 )
 
-fun Styled.Q(vararg children: ReactNode) = html(
+fun Q(vararg children: ReactNode) = html(
   tag = "q",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Rp(
+fun Rp(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -9621,7 +9467,6 @@ fun Styled.Rp(
   key: Any? = null
 ) = html(
   tag = "rp",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9678,13 +9523,12 @@ fun Styled.Rp(
   key = key
 )
 
-fun Styled.Rp(vararg children: ReactNode) = html(
+fun Rp(vararg children: ReactNode) = html(
   tag = "rp",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Rt(
+fun Rt(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -9740,7 +9584,6 @@ fun Styled.Rt(
   key: Any? = null
 ) = html(
   tag = "rt",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9797,13 +9640,12 @@ fun Styled.Rt(
   key = key
 )
 
-fun Styled.Rt(vararg children: ReactNode) = html(
+fun Rt(vararg children: ReactNode) = html(
   tag = "rt",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Ruby(
+fun Ruby(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -9859,7 +9701,6 @@ fun Styled.Ruby(
   key: Any? = null
 ) = html(
   tag = "ruby",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -9916,13 +9757,12 @@ fun Styled.Ruby(
   key = key
 )
 
-fun Styled.Ruby(vararg children: ReactNode) = html(
+fun Ruby(vararg children: ReactNode) = html(
   tag = "ruby",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.S(
+fun S(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -9978,7 +9818,6 @@ fun Styled.S(
   key: Any? = null
 ) = html(
   tag = "s",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10035,13 +9874,12 @@ fun Styled.S(
   key = key
 )
 
-fun Styled.S(vararg children: ReactNode) = html(
+fun S(vararg children: ReactNode) = html(
   tag = "s",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Samp(
+fun Samp(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -10097,7 +9935,6 @@ fun Styled.Samp(
   key: Any? = null
 ) = html(
   tag = "samp",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10154,13 +9991,12 @@ fun Styled.Samp(
   key = key
 )
 
-fun Styled.Samp(vararg children: ReactNode) = html(
+fun Samp(vararg children: ReactNode) = html(
   tag = "samp",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Script(
+fun Script(
   hidden: Boolean? = null,
   id: String? = null,
   src: String? = null,
@@ -10221,7 +10057,6 @@ fun Styled.Script(
   key: Any? = null
 ) = html(
   tag = "script",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10283,13 +10118,12 @@ fun Styled.Script(
   key = key
 )
 
-fun Styled.Script(vararg children: ReactNode) = html(
+fun Script(vararg children: ReactNode) = html(
   tag = "script",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Section(
+fun Section(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -10345,7 +10179,6 @@ fun Styled.Section(
   key: Any? = null
 ) = html(
   tag = "section",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10402,13 +10235,12 @@ fun Styled.Section(
   key = key
 )
 
-fun Styled.Section(vararg children: ReactNode) = html(
+fun Section(vararg children: ReactNode) = html(
   tag = "section",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Select(
+fun Select(
   hidden: Boolean? = null,
   id: String? = null,
   name: String? = null,
@@ -10472,7 +10304,6 @@ fun Styled.Select(
   key: Any? = null
 ) = html(
   tag = "select",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10537,13 +10368,12 @@ fun Styled.Select(
   key = key
 )
 
-fun Styled.Select(vararg children: ReactNode) = html(
+fun Select(vararg children: ReactNode) = html(
   tag = "select",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Small(
+fun Small(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -10599,7 +10429,6 @@ fun Styled.Small(
   key: Any? = null
 ) = html(
   tag = "small",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10656,13 +10485,12 @@ fun Styled.Small(
   key = key
 )
 
-fun Styled.Small(vararg children: ReactNode) = html(
+fun Small(vararg children: ReactNode) = html(
   tag = "small",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Source(
+fun Source(
   hidden: Boolean? = null,
   id: String? = null,
   src: String? = null,
@@ -10722,7 +10550,6 @@ fun Styled.Source(
   key: Any? = null
 ) = html(
   tag = "source",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10783,13 +10610,12 @@ fun Styled.Source(
   key = key
 )
 
-fun Styled.Source(vararg children: ReactNode) = html(
+fun Source(vararg children: ReactNode) = html(
   tag = "source",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Span(
+fun Span(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -10845,7 +10671,6 @@ fun Styled.Span(
   key: Any? = null
 ) = html(
   tag = "span",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -10902,13 +10727,12 @@ fun Styled.Span(
   key = key
 )
 
-fun Styled.Span(vararg children: ReactNode) = html(
+fun Span(vararg children: ReactNode) = html(
   tag = "span",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Strong(
+fun Strong(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -10964,7 +10788,6 @@ fun Styled.Strong(
   key: Any? = null
 ) = html(
   tag = "strong",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11021,13 +10844,12 @@ fun Styled.Strong(
   key = key
 )
 
-fun Styled.Strong(vararg children: ReactNode) = html(
+fun Strong(vararg children: ReactNode) = html(
   tag = "strong",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Style(
+fun Style(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -11085,7 +10907,6 @@ fun Styled.Style(
   key: Any? = null
 ) = html(
   tag = "style",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11144,13 +10965,12 @@ fun Styled.Style(
   key = key
 )
 
-fun Styled.Style(vararg children: ReactNode) = html(
+fun Style(vararg children: ReactNode) = html(
   tag = "style",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Sub(
+fun Sub(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -11206,7 +11026,6 @@ fun Styled.Sub(
   key: Any? = null
 ) = html(
   tag = "sub",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11263,13 +11082,12 @@ fun Styled.Sub(
   key = key
 )
 
-fun Styled.Sub(vararg children: ReactNode) = html(
+fun Sub(vararg children: ReactNode) = html(
   tag = "sub",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Summary(
+fun Summary(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -11325,7 +11143,6 @@ fun Styled.Summary(
   key: Any? = null
 ) = html(
   tag = "summary",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11382,13 +11199,12 @@ fun Styled.Summary(
   key = key
 )
 
-fun Styled.Summary(vararg children: ReactNode) = html(
+fun Summary(vararg children: ReactNode) = html(
   tag = "summary",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Sup(
+fun Sup(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -11444,7 +11260,6 @@ fun Styled.Sup(
   key: Any? = null
 ) = html(
   tag = "sup",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11501,13 +11316,12 @@ fun Styled.Sup(
   key = key
 )
 
-fun Styled.Sup(vararg children: ReactNode) = html(
+fun Sup(vararg children: ReactNode) = html(
   tag = "sup",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Svg(
+fun Svg(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -11565,7 +11379,6 @@ fun Styled.Svg(
   key: Any? = null
 ) = html(
   tag = "svg",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11624,13 +11437,12 @@ fun Styled.Svg(
   key = key
 )
 
-fun Styled.Svg(vararg children: ReactNode) = html(
+fun Svg(vararg children: ReactNode) = html(
   tag = "svg",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Table(
+fun Table(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -11686,7 +11498,6 @@ fun Styled.Table(
   key: Any? = null
 ) = html(
   tag = "table",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11743,13 +11554,12 @@ fun Styled.Table(
   key = key
 )
 
-fun Styled.Table(vararg children: ReactNode) = html(
+fun Table(vararg children: ReactNode) = html(
   tag = "table",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Tbody(
+fun Tbody(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -11805,7 +11615,6 @@ fun Styled.Tbody(
   key: Any? = null
 ) = html(
   tag = "tbody",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11862,13 +11671,12 @@ fun Styled.Tbody(
   key = key
 )
 
-fun Styled.Tbody(vararg children: ReactNode) = html(
+fun Tbody(vararg children: ReactNode) = html(
   tag = "tbody",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Td(
+fun Td(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -11927,7 +11735,6 @@ fun Styled.Td(
   key: Any? = null
 ) = html(
   tag = "td",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -11987,13 +11794,12 @@ fun Styled.Td(
   key = key
 )
 
-fun Styled.Td(vararg children: ReactNode) = html(
+fun Td(vararg children: ReactNode) = html(
   tag = "td",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Template(
+fun Template(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -12049,7 +11855,6 @@ fun Styled.Template(
   key: Any? = null
 ) = html(
   tag = "template",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12106,13 +11911,12 @@ fun Styled.Template(
   key = key
 )
 
-fun Styled.Template(vararg children: ReactNode) = html(
+fun Template(vararg children: ReactNode) = html(
   tag = "template",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Textarea(
+fun Textarea(
   form: String? = null,
   autoFocus: Boolean? = null,
   draggable: Boolean? = null,
@@ -12180,7 +11984,6 @@ fun Styled.Textarea(
   key: Any? = null
 ) = html(
   tag = "textarea",
-  cssPrefix = prefix,
   attributes = attributes(
     form = form,
     autoFocus = autoFocus,
@@ -12249,13 +12052,12 @@ fun Styled.Textarea(
   key = key
 )
 
-fun Styled.Textarea(vararg children: ReactNode) = html(
+fun Textarea(vararg children: ReactNode) = html(
   tag = "textarea",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Tfoot(
+fun Tfoot(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -12311,7 +12113,6 @@ fun Styled.Tfoot(
   key: Any? = null
 ) = html(
   tag = "tfoot",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12368,13 +12169,12 @@ fun Styled.Tfoot(
   key = key
 )
 
-fun Styled.Tfoot(vararg children: ReactNode) = html(
+fun Tfoot(vararg children: ReactNode) = html(
   tag = "tfoot",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Th(
+fun Th(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -12435,7 +12235,6 @@ fun Styled.Th(
   key: Any? = null
 ) = html(
   tag = "th",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12497,13 +12296,12 @@ fun Styled.Th(
   key = key
 )
 
-fun Styled.Th(vararg children: ReactNode) = html(
+fun Th(vararg children: ReactNode) = html(
   tag = "th",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Thead(
+fun Thead(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -12559,7 +12357,6 @@ fun Styled.Thead(
   key: Any? = null
 ) = html(
   tag = "thead",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12616,13 +12413,12 @@ fun Styled.Thead(
   key = key
 )
 
-fun Styled.Thead(vararg children: ReactNode) = html(
+fun Thead(vararg children: ReactNode) = html(
   tag = "thead",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Time(
+fun Time(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -12679,7 +12475,6 @@ fun Styled.Time(
   key: Any? = null
 ) = html(
   tag = "time",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12737,13 +12532,12 @@ fun Styled.Time(
   key = key
 )
 
-fun Styled.Time(vararg children: ReactNode) = html(
+fun Time(vararg children: ReactNode) = html(
   tag = "time",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Title(
+fun Title(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -12799,7 +12593,6 @@ fun Styled.Title(
   key: Any? = null
 ) = html(
   tag = "title",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12856,13 +12649,12 @@ fun Styled.Title(
   key = key
 )
 
-fun Styled.Title(vararg children: ReactNode) = html(
+fun Title(vararg children: ReactNode) = html(
   tag = "title",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Tr(
+fun Tr(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -12918,7 +12710,6 @@ fun Styled.Tr(
   key: Any? = null
 ) = html(
   tag = "tr",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -12975,13 +12766,12 @@ fun Styled.Tr(
   key = key
 )
 
-fun Styled.Tr(vararg children: ReactNode) = html(
+fun Tr(vararg children: ReactNode) = html(
   tag = "tr",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Track(
+fun Track(
   kind: String? = null,
   hidden: Boolean? = null,
   id: String? = null,
@@ -13042,7 +12832,6 @@ fun Styled.Track(
   key: Any? = null
 ) = html(
   tag = "track",
-  cssPrefix = prefix,
   attributes = attributes(
     kind = kind,
     hidden = hidden,
@@ -13104,13 +12893,12 @@ fun Styled.Track(
   key = key
 )
 
-fun Styled.Track(vararg children: ReactNode) = html(
+fun Track(vararg children: ReactNode) = html(
   tag = "track",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.U(
+fun U(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -13166,7 +12954,6 @@ fun Styled.U(
   key: Any? = null
 ) = html(
   tag = "u",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -13223,13 +13010,12 @@ fun Styled.U(
   key = key
 )
 
-fun Styled.U(vararg children: ReactNode) = html(
+fun U(vararg children: ReactNode) = html(
   tag = "u",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Ul(
+fun Ul(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -13285,7 +13071,6 @@ fun Styled.Ul(
   key: Any? = null
 ) = html(
   tag = "ul",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -13342,13 +13127,12 @@ fun Styled.Ul(
   key = key
 )
 
-fun Styled.Ul(vararg children: ReactNode) = html(
+fun Ul(vararg children: ReactNode) = html(
   tag = "ul",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Var(
+fun Var(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -13404,7 +13188,6 @@ fun Styled.Var(
   key: Any? = null
 ) = html(
   tag = "var",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -13461,13 +13244,12 @@ fun Styled.Var(
   key = key
 )
 
-fun Styled.Var(vararg children: ReactNode) = html(
+fun Var(vararg children: ReactNode) = html(
   tag = "var",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Video(
+fun Video(
   autoPlay: String? = null,
   width: Int? = null,
   draggable: Boolean? = null,
@@ -13532,7 +13314,6 @@ fun Styled.Video(
   key: Any? = null
 ) = html(
   tag = "video",
-  cssPrefix = prefix,
   attributes = attributes(
     autoPlay = autoPlay,
     width = width,
@@ -13598,13 +13379,12 @@ fun Styled.Video(
   key = key
 )
 
-fun Styled.Video(vararg children: ReactNode) = html(
+fun Video(vararg children: ReactNode) = html(
   tag = "video",
-  cssPrefix = prefix,
   children = children.asList()
 )
 
-fun Styled.Wbr(
+fun Wbr(
   hidden: Boolean? = null,
   id: String? = null,
   contentEditable: String? = null,
@@ -13660,7 +13440,6 @@ fun Styled.Wbr(
   key: Any? = null
 ) = html(
   tag = "wbr",
-  cssPrefix = prefix,
   attributes = attributes(
     hidden = hidden,
     id = id,
@@ -13717,9 +13496,8 @@ fun Styled.Wbr(
   key = key
 )
 
-fun Styled.Wbr(vararg children: ReactNode) = html(
+fun Wbr(vararg children: ReactNode) = html(
   tag = "wbr",
-  cssPrefix = prefix,
   children = children.asList()
 )
 

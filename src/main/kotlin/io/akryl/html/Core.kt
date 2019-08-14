@@ -11,7 +11,6 @@ import kotlin.js.json
 
 fun html(
   tag: String,
-  cssPrefix: String?,
   attributes: Map<String, Any?> = emptyMap(),
   style: Map<String, String?> = emptyMap(),
   listeners: Map<String, (event: Event) -> Unit> = emptyMap(),

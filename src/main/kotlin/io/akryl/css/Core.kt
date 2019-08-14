@@ -3,10 +3,6 @@ package io.akryl.css
 import kotlin.browser.document
 import kotlin.reflect.KProperty
 
-interface Styled {
-  val prefix: String?
-}
-
 class CssProperty(private val name: ClassName, private val builder: CssBuilder) {
   private var initialized = false
 

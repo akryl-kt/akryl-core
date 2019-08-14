@@ -2,7 +2,6 @@
 
 package io.akryl
 
-import io.akryl.css.Styled
 import io.akryl.react.FunctionalComponent
 import io.akryl.react.ReactNode
 import io.akryl.react.createElement
@@ -22,9 +21,7 @@ private const val THIS_KEY = "\$this"
 
 abstract class Component(
   val key: Any? = undefined
-) : ReactNode, Styled {
-  final override val prefix: String? get() = null // todo
-
+) : ReactNode {
   abstract fun render(): ReactNode
 }
 

@@ -64,6 +64,7 @@ val kbd get() = TagName("kbd")
 val keygen get() = TagName("keygen")
 
 val label get() = TagName("label")
+val li get() = TagName("li")
 val link get() = TagName("link")
 
 val map get() = TagName("map")

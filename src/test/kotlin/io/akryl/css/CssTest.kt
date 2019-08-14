@@ -142,11 +142,15 @@ class CssTest {
       transform
         .translate(10.px, 20.px)
         .rotate(45.deg)
+
+      transition(width, 1.s, Timing.easeInOut, 500.ms)
+      transition(height, 2.s, Timing.linear)
     }
     val expected = """
       .foo {
         box-shadow: 1px 2px 3px 4px red, 4px 3px 2px 1px green;
         transform: translate(10px, 20px) rotate(45deg);
+        transition: width 1s ease-in-out 500ms, height 2s linear 0s;
       }
     """.trimIndent()
     assertEquals(expected, actual)

@@ -14,7 +14,7 @@ class ModifiersScope(
   }
 }
 
-open class StringScope(protected val properties: CssProps, protected val name: String) {
+open class StringScope(protected val properties: CssProps, val name: String) {
   open operator fun invoke(value: String): ModifiersScope {
     properties[name] = value
     return ModifiersScope(properties, name, value)
@@ -429,4 +429,103 @@ class FlexWrapScope(properties: CssProps, name: String) : StringScope(properties
   fun nowrap() = this("nowrap")
   fun wrap() = this("wrap")
   fun wrapReverse() = this("wrap-reverse")
+}
+
+class TextDecorationStyleScope(properties: CssProps, name: String) : StringScope(properties, name) {
+  fun initial() = this("initial")
+  fun inherit() = this("inherit")
+  fun none() = this("none")
+
+  fun solid() = this("solid")
+  fun double() = this("double")
+  fun dotted() = this("dotted")
+  fun dashed() = this("dashed")
+  fun wavy() = this("wavy")
+}
+
+class TextDecorationLineScope(properties: CssProps, name: String) : StringScope(properties, name) {
+  fun initial() = this("initial")
+  fun inherit() = this("inherit")
+  fun none() = this("none")
+
+  fun underline() = this("underline")
+  fun overline() = this("overline")
+  fun lineThrough() = this("line-through")
+}
+
+class CursorScope(properties: CssProps, name: String) : StringScope(properties, name) {
+  fun initial() = this("initial")
+  fun inherit() = this("inherit")
+  fun none() = this("none")
+
+  fun alias() = this("alias")
+  fun allScroll() = this("all-scroll")
+  fun auto() = this("auto")
+  fun cell() = this("cell")
+  fun contextMenu() = this("context-menu")
+  fun colResize() = this("col-resize")
+  fun copy() = this("copy")
+  fun crosshair() = this("crosshair")
+  fun default() = this("default")
+  fun eResize() = this("e-resize")
+  fun ewResize() = this("ew-resize")
+  fun grab() = this("grab")
+  fun grabbing() = this("grabbing")
+  fun help() = this("help")
+  fun move() = this("move")
+  fun nResize() = this("n-resize")
+  fun neResize() = this("ne-resize")
+  fun neswResize() = this("nesw-resize")
+  fun nsResize() = this("ns-resize")
+  fun nwResize() = this("nw-resize")
+  fun nwseResize() = this("nwse-resize")
+  fun noDrop() = this("no-drop")
+  fun notAllowed() = this("not-allowed")
+  fun pointer() = this("pointer")
+  fun progress() = this("progress")
+  fun rowResize() = this("row-resize")
+  fun sResize() = this("s-resize")
+  fun seResize() = this("se-resize")
+  fun swResize() = this("sw-resize")
+  fun text() = this("text")
+  fun verticalText() = this("vertical-text")
+  fun wResize() = this("w-resize")
+  fun wait() = this("wait")
+  fun zoomIn() = this("zoom-in")
+  fun zoomOut() = this("zoom-out")
+}
+
+class OverflowScope(properties: CssProps, name: String) : StringScope(properties, name) {
+  fun initial() = this("initial")
+  fun inherit() = this("inherit")
+
+  fun visible() = this("visible")
+  fun hidden() = this("hidden")
+  fun scroll() = this("scroll")
+  fun auto() = this("auto")
+}
+
+class FloatScope(properties: CssProps, name: String) : StringScope(properties, name) {
+  fun initial() = this("initial")
+  fun inherit() = this("inherit")
+  fun none() = this("none")
+
+  fun left() = this("left")
+  fun right() = this("right")
+}
+
+class VerticalAlignScope(properties: CssProps, name: String) : StringScope(properties, name) {
+  fun initial() = this("initial")
+  fun inherit() = this("inherit")
+
+  fun baseline() = this("baseline")
+  fun sub() = this("sub")
+  fun `super`() = this("super")
+  fun top() = this("top")
+  fun textTop() = this("text-top")
+  fun middle() = this("middle")
+  fun bottom() = this("bottom")
+  fun textBottom() = this("text-bottom")
+
+  operator fun invoke(value: Linear) = this(value.toString())
 }

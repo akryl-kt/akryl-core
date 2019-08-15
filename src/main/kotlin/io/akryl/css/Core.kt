@@ -45,7 +45,7 @@ fun globalCss(block: RuleSet) {
   }
 }
 
-fun classMap(vararg items: Pair<ClassName, Boolean>) = items
+fun classMap(vararg items: Pair<CharSequence, Boolean>) = items
   .filter { it.second }
   .map { it.first }
 

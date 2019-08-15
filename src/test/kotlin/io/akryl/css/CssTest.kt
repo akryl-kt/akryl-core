@@ -155,4 +155,16 @@ class CssTest {
     """.trimIndent()
     assertEquals(expected, actual)
   }
+
+  @Test
+  fun classMapTest() {
+    val actual = classMap(
+      "foo" to true,
+      "bar" to false,
+      ClassName("baz") to true,
+      ClassName("qux") to false
+    )
+    val expected = listOf("foo", ClassName("baz"))
+    assertEquals(expected, actual)
+  }
 }

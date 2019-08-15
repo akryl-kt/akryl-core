@@ -7,7 +7,7 @@ interface Selector {
   val selector: String
 }
 
-data class ClassName(val value: String) : Selector {
+data class ClassName(val value: String) : Selector, CharSequence by value {
   companion object {
     fun random(prefix: String, separator: String = "_", random: Random = Random): ClassName {
       val randPart = random.nextString(6)

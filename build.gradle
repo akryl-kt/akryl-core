@@ -96,6 +96,14 @@ task runMocha(type: NodeTask, dependsOn: [compileTestKotlin2Js, populateNodeModu
 }
 
 jar {
+    // Prevent transitive npm dependency errors
+    doFirst {
+        File file = new File("$buildDir/resources/main/package.json")
+        String content = file.text
+        content = content.replaceAll('"dependencies": \\{[^}]+}', '"dependencies": {}')
+        file.write(content)
+    }
+
     baseName = project.getProperty('name')
     manifest {
         attributes 'Implementation-Title': 'Akryl Core'
@@ -144,3 +152,4 @@ artifacts {
     archives javadocJar
     archives sourcesJar
 }
+

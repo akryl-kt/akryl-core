@@ -34,7 +34,7 @@ typealias RuleSet = CssBuilder.() -> Unit
 data class Rule(val selector: String, val block: RuleSet)
 
 @Suppress("unused")
-class CssBuilder {
+class CssBuilder : TagSelectors, PseudoSelectors {
   val properties = LinkedHashMap<String, Any?>()
   val rules = ArrayList<Rule>()
 
@@ -248,47 +248,8 @@ class CssBuilder {
   val stroke get() = StringScope(properties, "stroke")
   val strokeWidth get() = StringScope(properties, "strokeWidth")
 
-  // pseudo selectors
-  fun active(block: RuleSet) = "&:active"(block)
-  fun checked(block: RuleSet) = "&:checked"(block)
-  fun default(block: RuleSet) = "&:default"(block)
-  fun disabled(block: RuleSet) = "&:disabled"(block)
-  fun empty(block: RuleSet) = "&:empty"(block)
-  fun enabled(block: RuleSet) = "&:enabled"(block)
-  fun firstChild(block: RuleSet) = "&:first-child"(block)
-  fun firstOfType(block: RuleSet) = "&:first-of-type"(block)
-  fun focus(block: RuleSet) = "&:focus"(block)
-  fun hover(block: RuleSet) = "&:hover"(block)
-  fun indeterminate(block: RuleSet) = "&:indeterminate"(block)
-  fun inRange(block: RuleSet) = "&:in-range"(block)
-  fun invalid(block: RuleSet) = "&:invalid"(block)
-  fun lastChild(block: RuleSet) = "&:last-child"(block)
-  fun lastOfType(block: RuleSet) = "&:last-of-type"(block)
-  fun link(block: RuleSet) = "&:link"(block)
-  fun not(selector: String, block: RuleSet) = "&:not($selector)"(block)
-  fun not(name: ClassName, block: RuleSet) = "&:not(${name.selector})"(block)
-  fun nthChild(selector: String, block: RuleSet) = "&:nth-child($selector)"(block)
-  fun nthLastChild(selector: String, block: RuleSet) = "&:nth-last-child($selector)"(block)
-  fun nthLastOfType(selector: String, block: RuleSet) = "&:nth-last-of-type($selector)"(block)
-  fun nthOfType(selector: String, block: RuleSet) = "&:nth-of-type($selector)"(block)
-  fun nthChild(name: ClassName, block: RuleSet) = "&:nth-child(${name.selector})"(block)
-  fun nthLastChild(name: ClassName, block: RuleSet) = "&:nth-last-child(${name.selector})"(block)
-  fun nthLastOfType(name: ClassName, block: RuleSet) = "&:nth-last-of-type(${name.selector})"(block)
-  fun nthOfType(name: ClassName, block: RuleSet) = "&:nth-of-type(${name.selector})"(block)
-  fun onlyChild(block: RuleSet) = "&:only-child"(block)
-  fun onlyOfType(block: RuleSet) = "&:only-of-type"(block)
-  fun optional(block: RuleSet) = "&:optional"(block)
-  fun outOfRange(block: RuleSet) = "&:out-of-range"(block)
-  fun readOnly(block: RuleSet) = "&:read-only"(block)
-  fun readWrite(block: RuleSet) = "&:read-write"(block)
-  fun required(block: RuleSet) = "&:required"(block)
-  fun valid(block: RuleSet) = "&:valid"(block)
-  fun visited(block: RuleSet) = "&:visited"(block)
-  fun after(block: RuleSet) = "&::after"(block)
-  fun before(block: RuleSet) = "&::before"(block)
-  fun placeholder(block: RuleSet) = "&::placeholder"(block)
-
   operator fun Selector.invoke(block: RuleSet) = "& ${this.selector}"(block)
+  operator fun PseudoSelector.invoke(block: RuleSet) = "&${this.selector}"(block)
 
   operator fun String.invoke(block: RuleSet) {
     rules.add(Rule(this, block))

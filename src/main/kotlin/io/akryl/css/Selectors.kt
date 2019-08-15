@@ -34,6 +34,12 @@ data class TagName(val value: String) : Selector {
   operator fun get(inner: ClassName) = ComplexSelector("$value${inner.selector}")
 }
 
+data class PseudoSelector(val value: String) : Selector {
+  override val selector get() = value
+  override fun toString() = value
+  operator fun plus(other: PseudoSelector) = PseudoSelector("$value${other.value}")
+}
+
 data class ComplexSelector(val value: String) : Selector {
   override val selector get() = value
   override fun toString() = value

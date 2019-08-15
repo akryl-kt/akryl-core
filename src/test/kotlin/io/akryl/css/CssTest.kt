@@ -90,6 +90,9 @@ class CssTest {
       bar {
         height(200.px)
       }
+      (foo + bar) {
+        height(250.px)
+      }
       div {
         width(300.px)
       }
@@ -106,6 +109,9 @@ class CssTest {
       }
       .bar {
         height: 200px;
+      }
+      .foo.bar {
+        height: 250px;
       }
       div {
         width: 300px;
@@ -165,6 +171,33 @@ class CssTest {
       ClassName("qux") to false
     )
     val expected = listOf("foo", ClassName("baz"))
+    assertEquals(expected, actual)
+  }
+
+  @Test
+  fun pseudoSelectors() {
+    val actual = cssString(".foo") {
+      hover {
+        width(100.px)
+      }
+      after {
+        width(200.px)
+      }
+      (hover + after) {
+        width(300.px)
+      }
+    }
+    val expected = """
+      .foo:hover {
+        width: 100px;
+      }
+      .foo::after {
+        width: 200px;
+      }
+      .foo:hover::after {
+        width: 300px;
+      }
+    """.trimIndent()
     assertEquals(expected, actual)
   }
 }

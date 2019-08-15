@@ -4,7 +4,7 @@ import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class SelectorTest {
+class SelectorTest : TagSelectors {
   @Test
   fun tagSelector() {
     assertEquals("div", div.selector)

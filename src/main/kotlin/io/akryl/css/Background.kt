@@ -35,23 +35,3 @@ class BackgroundRepeatScope(properties: CssProps, name: String) : StringScope(pr
   fun initial() = this("initial")
   fun inherit() = this("inherit")
 }
-
-enum class Horizontal {
-  left,
-  center,
-  right,
-}
-
-enum class Vertical {
-  top,
-  center,
-  bottom
-}
-
-class BackgroundPositionScope(properties: CssProps, name: String) : StringScope(properties, name) {
-  fun initial() = this("initial")
-  fun inherit() = this("inherit")
-
-  operator fun invoke(vertical: Vertical, horizontal: Horizontal) = this("$vertical $horizontal")
-  operator fun invoke(horizontal: Linear, vertical: Linear) = this("$horizontal $vertical")
-}

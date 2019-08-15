@@ -30,7 +30,6 @@ class Linear(val value: String) {
   operator fun div(times: Number) = Linear("calc($valueCalcSafe / $times)")
 
   override fun toString() = value
-  val important get() = Linear("$value !important")
 }
 
 val Number.cm: Linear get() = Linear(this, "cm")       // Centimeter

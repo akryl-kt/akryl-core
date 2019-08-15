@@ -1,4 +1,4 @@
-@file:Suppress("unused", "SpellCheckingInspection")
+@file:Suppress("unused", "SpellCheckingInspection", "EnumEntryName")
 
 package io.akryl.css
 
@@ -12,6 +12,18 @@ class ModifiersScope(
   fun important() {
     properties[name] = "$value !important"
   }
+}
+
+enum class Horizontal {
+  left,
+  center,
+  right,
+}
+
+enum class Vertical {
+  top,
+  center,
+  bottom
 }
 
 open class StringScope(protected val properties: CssProps, val name: String) {
@@ -528,4 +540,42 @@ class VerticalAlignScope(properties: CssProps, name: String) : StringScope(prope
   fun textBottom() = this("text-bottom")
 
   operator fun invoke(value: Linear) = this(value.toString())
+}
+
+class TextOverflowScope(properties: CssProps, name: String) : StringScope(properties, name) {
+  fun initial() = this("initial")
+  fun inherit() = this("inherit")
+
+  fun clip() = this("clip")
+  fun ellipsis() = this("ellipsis")
+}
+
+class WhiteSpaceScope(properties: CssProps, name: String) : StringScope(properties, name) {
+  fun initial() = this("initial")
+  fun inherit() = this("inherit")
+
+  fun normal() = this("normal")
+  fun nowrap() = this("nowrap")
+  fun pre() = this("pre")
+  fun preLine() = this("pre-line")
+  fun preWrap() = this("pre-wrap")
+}
+
+class ObjectFitScope(properties: CssProps, name: String) : StringScope(properties, name) {
+  fun initial() = this("initial")
+  fun inherit() = this("inherit")
+  fun none() = this("none")
+
+  fun fill() = this("fill")
+  fun contain() = this("contain")
+  fun cover() = this("cover")
+  fun scaleDown() = this("scale-down")
+}
+
+class PositionAlignScope(properties: CssProps, name: String) : StringScope(properties, name) {
+  fun initial() = this("initial")
+  fun inherit() = this("inherit")
+
+  operator fun invoke(horizontal: Horizontal, vertical: Vertical) = this("$horizontal $vertical")
+  operator fun invoke(horizontal: Linear, vertical: Linear) = this("$horizontal $vertical")
 }

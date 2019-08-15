@@ -56,6 +56,25 @@ class TransformScope(properties: CssProps, name: String) : StringScope(propertie
 }
 
 class Angle(val value: String) {
+  companion object {
+    private const val ZERO = "0"
+  }
+
+  private val valueCalcSafe: String
+    get() = if (value == ZERO) "0px" else value
+
+  operator fun unaryMinus() = Angle(when {
+    value.startsWith('-') -> value.substring(1)
+    value.startsWith("calc") -> "calc(0px - $value)"
+    value == ZERO -> value
+    else -> "-$value"
+  })
+
+  operator fun plus(other: Angle) = Angle("calc($valueCalcSafe + ${other.valueCalcSafe})")
+  operator fun minus(other: Angle) = Angle("calc($valueCalcSafe - ${other.valueCalcSafe})")
+  operator fun times(times: Number) = Angle("calc($valueCalcSafe * $times)")
+  operator fun div(times: Number) = Angle("calc($valueCalcSafe / $times)")
+
   override fun toString() = value
 }
 

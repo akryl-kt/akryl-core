@@ -60,7 +60,7 @@ class CssBuilder {
   val backgroundColor get() = ColorScope(properties, "backgroundColor")
   val backgroundImage get() = ImageScope(properties, "backgroundImage")
   val backgroundOrigin get() = ExtendScope(properties, "backgroundOrigin")
-  val backgroundPosition get() = BackgroundPositionScope(properties, "backgroundPosition")
+  val backgroundPosition get() = PositionAlignScope(properties, "backgroundPosition")
   val backgroundRepeat get() = BackgroundRepeatScope(properties, "backgroundRepeat")
   val backgroundSize get() = BackgroundSizeScope(properties, "backgroundSize")
   val border get() = BorderScope(properties, "border")
@@ -175,13 +175,13 @@ class CssBuilder {
   val marginLeft get() = LinearScope(properties, "marginLeft")
   val marginRight get() = LinearScope(properties, "marginRight")
   val marginTop get() = LinearScope(properties, "marginTop")
-  val maxHeight get() = StringScope(properties, "maxHeight")
-  val maxWidth get() = StringScope(properties, "maxWidth")
-  val minHeight get() = StringScope(properties, "minHeight")
-  val minWidth get() = StringScope(properties, "minWidth")
+  val maxHeight get() = LinearScope(properties, "maxHeight")
+  val maxWidth get() = LinearScope(properties, "maxWidth")
+  val minHeight get() = LinearScope(properties, "minHeight")
+  val minWidth get() = LinearScope(properties, "minWidth")
   val mixBlendMode get() = StringScope(properties, "mixBlendMode")
-  val objectFit get() = StringScope(properties, "objectFit")
-  val objectPosition get() = StringScope(properties, "objectPosition")
+  val objectFit get() = ObjectFitScope(properties, "objectFit")
+  val objectPosition get() = PositionAlignScope(properties, "objectPosition")
   val opacity get() = NumberScope(properties, "opacity")
   val order get() = StringScope(properties, "order")
   val outline get() = OutlineScope(properties, "outline")
@@ -193,10 +193,10 @@ class CssBuilder {
   val overflowX get() = OverflowScope(properties, "overflowX")
   val overflowY get() = OverflowScope(properties, "overflowY")
   val padding get() = InsetsScope(properties, "padding")
-  val paddingBottom get() = StringScope(properties, "paddingBottom")
-  val paddingLeft get() = StringScope(properties, "paddingLeft")
-  val paddingRight get() = StringScope(properties, "paddingRight")
-  val paddingTop get() = StringScope(properties, "paddingTop")
+  val paddingBottom get() = LinearScope(properties, "paddingBottom")
+  val paddingLeft get() = LinearScope(properties, "paddingLeft")
+  val paddingRight get() = LinearScope(properties, "paddingRight")
+  val paddingTop get() = LinearScope(properties, "paddingTop")
   val pageBreakAfter get() = StringScope(properties, "pageBreakAfter")
   val pageBreakBefore get() = StringScope(properties, "pageBreakBefore")
   val pageBreakInside get() = StringScope(properties, "pageBreakInside")
@@ -218,7 +218,7 @@ class CssBuilder {
   val textDecorationStyle get() = TextDecorationStyleScope(properties, "textDecorationStyle")
   val textIndent get() = StringScope(properties, "textIndent")
   val textJustify get() = StringScope(properties, "textJustify")
-  val textOverflow get() = StringScope(properties, "textOverflow")
+  val textOverflow get() = TextOverflowScope(properties, "textOverflow")
   val textShadow get() = StringScope(properties, "textShadow")
   val textTransform get() = StringScope(properties, "textTransform")
   val top get() = LinearScope(properties, "top")
@@ -234,7 +234,7 @@ class CssBuilder {
   val userSelect get() = StringScope(properties, "userSelect")
   val verticalAlign get() = VerticalAlignScope(properties, "verticalAlign")
   val visibility get() = StringScope(properties, "visibility")
-  val whiteSpace get() = StringScope(properties, "whiteSpace")
+  val whiteSpace get() = WhiteSpaceScope(properties, "whiteSpace")
   val width get() = DimensionScope(properties, "width")
   val willChange get() = StringScope(properties, "willChange")
   val wordBreak get() = WordBreakScope(properties, "wordBreak")
@@ -292,6 +292,10 @@ class CssBuilder {
 
   operator fun String.invoke(block: RuleSet) {
     rules.add(Rule(this, block))
+  }
+
+  fun each(vararg selectors: Selector, block: RuleSet) {
+    selectors.forEach { it(block) }
   }
 
   fun put(name: String, value: String) {

@@ -22,15 +22,35 @@ private const val THIS_KEY = "\$this"
 abstract class Component(
   val key: Any? = undefined
 ) : ReactNode {
+  companion object {
+    fun build(node: ReactNode): ReactNode {
+      if (node !is Component) return node
+      val clazz = node::class
+
+      var wrapper = wrappers[clazz]
+      if (wrapper == null) {
+        val innerRender = node.asDynamic().render
+        wrapper = Wrapper(innerRender, clazz)
+        wrappers[clazz] = wrapper
+      }
+
+      // The `node` will lose its prototype if we pass it as a props object.
+      // So it's passed inside `THIS_KEY` property.
+      val props = json(THIS_KEY to node)
+
+      return createElement(wrapper.render, props)
+    }
+  }
+
   abstract fun render(): ReactNode
 }
 
 fun render(component: Component, container: Element) {
-  reactRender(build(component), container)
+  reactRender(Component.build(component), container)
 }
 
 fun render(node: ReactNode, container: Element) {
-  reactRender(build(node), container)
+  reactRender(Component.build(node), container)
 }
 
 internal class Wrapper(var inner: dynamic, clazz: KClass<*>) {
@@ -40,7 +60,7 @@ internal class Wrapper(var inner: dynamic, clazz: KClass<*>) {
     var tmp: FunctionalComponent = { props ->
       observer {
         val tree = inner.apply(props[THIS_KEY])
-        build(tree.unsafeCast<ReactNode>())
+        Component.build(tree.unsafeCast<ReactNode>())
       }
     }
 
@@ -60,24 +80,6 @@ internal class Wrapper(var inner: dynamic, clazz: KClass<*>) {
 }
 
 internal val wrappers = HashMap<KClass<*>, Wrapper>()
-
-fun build(node: ReactNode): ReactNode {
-  if (node !is Component) return node
-  val clazz = node::class
-
-  var wrapper = wrappers[clazz]
-  if (wrapper == null) {
-    val innerRender = node.asDynamic().render
-    wrapper = Wrapper(innerRender, clazz)
-    wrappers[clazz] = wrapper
-  }
-
-  // The `node` will lose its prototype if we pass it as a props object.
-  // So it's passed inside `THIS_KEY` property.
-  val props = json(THIS_KEY to node)
-
-  return createElement(wrapper.render, props)
-}
 
 @Suppress("USELESS_CAST")
 private fun propsEquals(a: dynamic, b: dynamic): Boolean {

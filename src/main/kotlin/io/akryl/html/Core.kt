@@ -2,7 +2,7 @@
 
 package io.akryl.html
 
-import io.akryl.build
+import io.akryl.Component
 import io.akryl.react.ReactNode
 import io.akryl.react.createElement
 import io.akryl.react.createTextElement
@@ -43,7 +43,7 @@ fun html(
     props["key"] = key
   }
 
-  return createElement(tag, props, *Array(children.size) { build(children[it]) })
+  return createElement(tag, props, *Array(children.size) { Component.build(children[it]) })
 }
 
 fun Text(value: String) = createTextElement(value)

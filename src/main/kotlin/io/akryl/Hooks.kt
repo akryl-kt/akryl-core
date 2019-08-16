@@ -119,6 +119,26 @@ fun <C : Component, R> C.useComputed(vararg dependencies: Any?, fn: C.() -> R): 
   return propRef
 }
 
+fun <C : Component, R> C.useWatch(selector: C.() -> R, callback: C.(newValue: R, oldValue: R) -> Unit) {
+  var thisRef by useRef { this }
+  thisRef = this
+
+  val watchRef by useRef {
+    Watcher(
+      { thisRef.selector() },
+      { new, old -> thisRef.callback(new, old) }
+    )
+  }
+
+  useEffect(Unit) {
+    dispose { watchRef.dispose() }
+  }
+}
+
+fun <C : Component, R> C.useWatch(selector: C.() -> R, callback: C.(newValue: R) -> Unit) {
+  useWatch(selector, { newValue, _ -> callback(newValue) })
+}
+
 fun <T> useContext(context: Context<T>): T? {
   return reactUseContext(context)
 }

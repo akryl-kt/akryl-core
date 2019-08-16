@@ -2,7 +2,7 @@ package io.akryl.rx
 
 class Watcher<R>(
   private val selector: () -> R,
-  private val callback: (oldValue: R, newValue: R) -> Unit
+  private val callback: (newValue: R, oldValue: R) -> Unit
 ) : ReactiveHandle, Transient {
   companion object {
     const val QUEUE_PRIORITY = 200
@@ -18,7 +18,7 @@ class Watcher<R>(
 
   private fun watcher() {
     val newValue = compute()
-    callback(oldValue, newValue)
+    callback(newValue, oldValue)
     oldValue = newValue
   }
 
@@ -35,7 +35,7 @@ class Watcher<R>(
 
 fun <T : ReactiveContainer, R> T.watch(
   selector: () -> R,
-  callback: (oldValue: R, newValue: R) -> Unit
+  callback: (newValue: R, oldValue: R) -> Unit
 ) {
   val watcher = Watcher(selector, callback)
   this.registerReactiveHandle(watcher)

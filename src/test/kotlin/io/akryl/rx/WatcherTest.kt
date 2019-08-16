@@ -10,7 +10,7 @@ class WatcherTest : EmptyReactiveContainer {
     var oldValue = 0
     var newValue = 0
 
-    watch({ prop }) { old, new ->
+    watch({ prop }) { new, old ->
       counter += 1
       oldValue = old
       newValue = new

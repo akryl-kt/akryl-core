@@ -36,7 +36,10 @@ abstract class Component(
 
       // The `node` will lose its prototype if we pass it as a props object.
       // So it's passed inside `THIS_KEY` property.
-      val props = json(THIS_KEY to node)
+      val props = json(
+        "key" to node.key,
+        THIS_KEY to node
+      )
 
       return createElement(wrapper.render, props)
     }

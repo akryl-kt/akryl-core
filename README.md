@@ -242,7 +242,7 @@ Example:
 fun render(): ReactNode {
   var count by useState(0)
   return Div(
-    text = "Count = ${count}, click to increment",
+    text = "Count = $count, click to increment",
     onClick = { count += 1 }
   )
 }
@@ -252,7 +252,7 @@ This hook is not reactive. It will not work with other reactive hooks. Most of t
 
 ## HTML
 
-Instead of React, you don't need JSX - Kotlin is expressive enough already. In Akryl, HTML tags are functions like `Div()` or `Span()`. Attributes, styles, event listeners, and children are named parameters. 
+Unlike React, you don't need JSX - Kotlin is expressive enough already. In Akryl, HTML tags are functions like `Div()` or `Span()`. Attributes, styles, event listeners, and children are named parameters. 
 
 Example:
 

@@ -2,13 +2,16 @@
 
 package io.akryl.html
 
+import io.akryl.RefProperty
 import io.akryl.react.ReactNode
-import org.w3c.dom.DragEvent
+import org.w3c.dom.*
 import org.w3c.dom.clipboard.ClipboardEvent
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.KeyboardEvent
 import org.w3c.dom.events.MouseEvent
 import org.w3c.dom.events.WheelEvent
+import org.w3c.dom.svg.SVGElement
+import org.w3c.dom.svg.SVGPathElement
 
 @Suppress("UNCHECKED_CAST")
 private inline fun listeners(
@@ -161,7 +164,8 @@ fun A(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null
 ) = html(
   tag = "a",
   attributes = attributes(
@@ -225,7 +229,8 @@ fun A(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun A(vararg children: ReactNode) = html(
@@ -286,8 +291,8 @@ fun Abbr(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "abbr",
   attributes = attributes(
     hidden = hidden,
@@ -342,7 +347,8 @@ fun Abbr(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Abbr(vararg children: ReactNode) = html(
@@ -403,8 +409,8 @@ fun Address(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "address",
   attributes = attributes(
     hidden = hidden,
@@ -459,7 +465,8 @@ fun Address(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Address(vararg children: ReactNode) = html(
@@ -530,8 +537,8 @@ fun Area(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLAreaElement?>? = null) = html(
   tag = "area",
   attributes = attributes(
     alt = alt,
@@ -596,7 +603,8 @@ fun Area(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Area(vararg children: ReactNode) = html(
@@ -657,8 +665,8 @@ fun Article(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "article",
   attributes = attributes(
     hidden = hidden,
@@ -713,7 +721,8 @@ fun Article(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Article(vararg children: ReactNode) = html(
@@ -774,8 +783,8 @@ fun Aside(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "aside",
   attributes = attributes(
     hidden = hidden,
@@ -830,7 +839,8 @@ fun Aside(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Aside(vararg children: ReactNode) = html(
@@ -897,8 +907,8 @@ fun Audio(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLAudioElement?>? = null) = html(
   tag = "audio",
   attributes = attributes(
     hidden = hidden,
@@ -959,7 +969,8 @@ fun Audio(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Audio(vararg children: ReactNode) = html(
@@ -1020,8 +1031,8 @@ fun B(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "b",
   attributes = attributes(
     hidden = hidden,
@@ -1076,7 +1087,8 @@ fun B(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun B(vararg children: ReactNode) = html(
@@ -1139,8 +1151,8 @@ fun Base(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLBaseElement?>? = null) = html(
   tag = "base",
   attributes = attributes(
     target = target,
@@ -1197,7 +1209,8 @@ fun Base(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Base(vararg children: ReactNode) = html(
@@ -1258,8 +1271,8 @@ fun Bdi(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "bdi",
   attributes = attributes(
     hidden = hidden,
@@ -1314,7 +1327,8 @@ fun Bdi(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Bdi(vararg children: ReactNode) = html(
@@ -1375,8 +1389,8 @@ fun Bdo(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "bdo",
   attributes = attributes(
     hidden = hidden,
@@ -1431,7 +1445,8 @@ fun Bdo(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Bdo(vararg children: ReactNode) = html(
@@ -1493,8 +1508,8 @@ fun Blockquote(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "blockquote",
   attributes = attributes(
     hidden = hidden,
@@ -1550,7 +1565,8 @@ fun Blockquote(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Blockquote(vararg children: ReactNode) = html(
@@ -1611,8 +1627,8 @@ fun Body(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLBodyElement?>? = null) = html(
   tag = "body",
   attributes = attributes(
     hidden = hidden,
@@ -1667,7 +1683,8 @@ fun Body(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Body(vararg children: ReactNode) = html(
@@ -1728,8 +1745,8 @@ fun Br(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLBRElement?>? = null) = html(
   tag = "br",
   attributes = attributes(
     hidden = hidden,
@@ -1784,7 +1801,8 @@ fun Br(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Br(vararg children: ReactNode) = html(
@@ -1856,8 +1874,8 @@ fun Button(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLButtonElement?>? = null) = html(
   tag = "button",
   attributes = attributes(
     formNoValidate = formNoValidate,
@@ -1923,7 +1941,8 @@ fun Button(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Button(vararg children: ReactNode) = html(
@@ -1986,8 +2005,8 @@ fun Canvas(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLCanvasElement?>? = null) = html(
   tag = "canvas",
   attributes = attributes(
     hidden = hidden,
@@ -2044,7 +2063,8 @@ fun Canvas(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Canvas(vararg children: ReactNode) = html(
@@ -2105,8 +2125,8 @@ fun Caption(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLTableCaptionElement?>? = null) = html(
   tag = "caption",
   attributes = attributes(
     hidden = hidden,
@@ -2161,7 +2181,8 @@ fun Caption(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Caption(vararg children: ReactNode) = html(
@@ -2222,8 +2243,8 @@ fun Cite(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "cite",
   attributes = attributes(
     hidden = hidden,
@@ -2278,7 +2299,8 @@ fun Cite(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Cite(vararg children: ReactNode) = html(
@@ -2339,8 +2361,8 @@ fun Code(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "code",
   attributes = attributes(
     hidden = hidden,
@@ -2395,7 +2417,8 @@ fun Code(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Code(vararg children: ReactNode) = html(
@@ -2457,8 +2480,8 @@ fun Col(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLTableColElement?>? = null) = html(
   tag = "col",
   attributes = attributes(
     hidden = hidden,
@@ -2514,7 +2537,8 @@ fun Col(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Col(vararg children: ReactNode) = html(
@@ -2576,8 +2600,8 @@ fun Colgroup(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLTableColElement?>? = null) = html(
   tag = "colgroup",
   attributes = attributes(
     hidden = hidden,
@@ -2633,7 +2657,8 @@ fun Colgroup(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Colgroup(vararg children: ReactNode) = html(
@@ -2694,8 +2719,8 @@ fun Data(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLDataElement?>? = null) = html(
   tag = "data",
   attributes = attributes(
     hidden = hidden,
@@ -2750,7 +2775,8 @@ fun Data(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Data(vararg children: ReactNode) = html(
@@ -2811,8 +2837,8 @@ fun Datalist(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLDataListElement?>? = null) = html(
   tag = "datalist",
   attributes = attributes(
     hidden = hidden,
@@ -2867,7 +2893,8 @@ fun Datalist(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Datalist(vararg children: ReactNode) = html(
@@ -2928,8 +2955,8 @@ fun Dd(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "dd",
   attributes = attributes(
     hidden = hidden,
@@ -2984,7 +3011,8 @@ fun Dd(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Dd(vararg children: ReactNode) = html(
@@ -3047,8 +3075,8 @@ fun Del(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "del",
   attributes = attributes(
     hidden = hidden,
@@ -3105,7 +3133,8 @@ fun Del(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Del(vararg children: ReactNode) = html(
@@ -3167,8 +3196,8 @@ fun Details(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLDetailsElement?>? = null) = html(
   tag = "details",
   attributes = attributes(
     hidden = hidden,
@@ -3224,7 +3253,8 @@ fun Details(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Details(vararg children: ReactNode) = html(
@@ -3285,8 +3315,8 @@ fun Dfn(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "dfn",
   attributes = attributes(
     hidden = hidden,
@@ -3341,7 +3371,8 @@ fun Dfn(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Dfn(vararg children: ReactNode) = html(
@@ -3403,8 +3434,8 @@ fun Dialog(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLDialogElement?>? = null) = html(
   tag = "dialog",
   attributes = attributes(
     hidden = hidden,
@@ -3460,7 +3491,8 @@ fun Dialog(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Dialog(vararg children: ReactNode) = html(
@@ -3521,8 +3553,8 @@ fun Div(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLDivElement?>? = null) = html(
   tag = "div",
   attributes = attributes(
     hidden = hidden,
@@ -3577,7 +3609,8 @@ fun Div(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Div(vararg children: ReactNode) = html(
@@ -3638,8 +3671,8 @@ fun Dl(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLDListElement?>? = null) = html(
   tag = "dl",
   attributes = attributes(
     hidden = hidden,
@@ -3694,7 +3727,8 @@ fun Dl(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Dl(vararg children: ReactNode) = html(
@@ -3755,8 +3789,8 @@ fun Dt(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "dt",
   attributes = attributes(
     hidden = hidden,
@@ -3811,7 +3845,8 @@ fun Dt(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Dt(vararg children: ReactNode) = html(
@@ -3872,8 +3907,8 @@ fun Em(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "em",
   attributes = attributes(
     hidden = hidden,
@@ -3928,7 +3963,8 @@ fun Em(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Em(vararg children: ReactNode) = html(
@@ -3993,8 +4029,8 @@ fun Embed(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLEmbedElement?>? = null) = html(
   tag = "embed",
   attributes = attributes(
     hidden = hidden,
@@ -4053,7 +4089,8 @@ fun Embed(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Embed(vararg children: ReactNode) = html(
@@ -4117,8 +4154,8 @@ fun Fieldset(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLFieldSetElement?>? = null) = html(
   tag = "fieldset",
   attributes = attributes(
     hidden = hidden,
@@ -4176,7 +4213,8 @@ fun Fieldset(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Fieldset(vararg children: ReactNode) = html(
@@ -4237,8 +4275,8 @@ fun Figcaption(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "figcaption",
   attributes = attributes(
     hidden = hidden,
@@ -4293,7 +4331,8 @@ fun Figcaption(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Figcaption(vararg children: ReactNode) = html(
@@ -4354,8 +4393,8 @@ fun Figure(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "figure",
   attributes = attributes(
     hidden = hidden,
@@ -4410,7 +4449,8 @@ fun Figure(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Figure(vararg children: ReactNode) = html(
@@ -4471,8 +4511,8 @@ fun Footer(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "footer",
   attributes = attributes(
     hidden = hidden,
@@ -4527,7 +4567,8 @@ fun Footer(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Footer(vararg children: ReactNode) = html(
@@ -4596,8 +4637,8 @@ fun Form(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLFormElement?>? = null) = html(
   tag = "form",
   attributes = attributes(
     target = target,
@@ -4660,7 +4701,8 @@ fun Form(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Form(vararg children: ReactNode) = html(
@@ -4721,8 +4763,8 @@ fun H1(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLHeadingElement?>? = null) = html(
   tag = "h1",
   attributes = attributes(
     hidden = hidden,
@@ -4777,7 +4819,8 @@ fun H1(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun H1(vararg children: ReactNode) = html(
@@ -4838,8 +4881,8 @@ fun H2(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLHeadingElement?>? = null) = html(
   tag = "h2",
   attributes = attributes(
     hidden = hidden,
@@ -4894,7 +4937,8 @@ fun H2(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun H2(vararg children: ReactNode) = html(
@@ -4955,8 +4999,8 @@ fun H3(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLHeadingElement?>? = null) = html(
   tag = "h3",
   attributes = attributes(
     hidden = hidden,
@@ -5011,7 +5055,8 @@ fun H3(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun H3(vararg children: ReactNode) = html(
@@ -5072,8 +5117,8 @@ fun H4(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLHeadingElement?>? = null) = html(
   tag = "h4",
   attributes = attributes(
     hidden = hidden,
@@ -5128,7 +5173,8 @@ fun H4(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun H4(vararg children: ReactNode) = html(
@@ -5189,8 +5235,8 @@ fun H5(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLHeadingElement?>? = null) = html(
   tag = "h5",
   attributes = attributes(
     hidden = hidden,
@@ -5245,7 +5291,8 @@ fun H5(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun H5(vararg children: ReactNode) = html(
@@ -5306,8 +5353,8 @@ fun H6(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLHeadingElement?>? = null) = html(
   tag = "h6",
   attributes = attributes(
     hidden = hidden,
@@ -5362,7 +5409,8 @@ fun H6(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun H6(vararg children: ReactNode) = html(
@@ -5423,8 +5471,8 @@ fun Head(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLHeadElement?>? = null) = html(
   tag = "head",
   attributes = attributes(
     hidden = hidden,
@@ -5479,7 +5527,8 @@ fun Head(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Head(vararg children: ReactNode) = html(
@@ -5540,8 +5589,8 @@ fun Header(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "header",
   attributes = attributes(
     hidden = hidden,
@@ -5596,7 +5645,8 @@ fun Header(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Header(vararg children: ReactNode) = html(
@@ -5657,8 +5707,8 @@ fun Hr(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "hr",
   attributes = attributes(
     hidden = hidden,
@@ -5713,7 +5763,8 @@ fun Hr(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Hr(vararg children: ReactNode) = html(
@@ -5775,8 +5826,8 @@ fun Html(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "html",
   attributes = attributes(
     hidden = hidden,
@@ -5832,7 +5883,8 @@ fun Html(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Html(vararg children: ReactNode) = html(
@@ -5893,8 +5945,8 @@ fun I(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "i",
   attributes = attributes(
     hidden = hidden,
@@ -5949,7 +6001,8 @@ fun I(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun I(vararg children: ReactNode) = html(
@@ -6016,8 +6069,8 @@ fun Iframe(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLIFrameElement?>? = null) = html(
   tag = "iframe",
   attributes = attributes(
     hidden = hidden,
@@ -6078,7 +6131,8 @@ fun Iframe(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Iframe(vararg children: ReactNode) = html(
@@ -6146,8 +6200,8 @@ fun Img(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLImageElement?>? = null) = html(
   tag = "img",
   attributes = attributes(
     hidden = hidden,
@@ -6209,7 +6263,8 @@ fun Img(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Img(vararg children: ReactNode) = html(
@@ -6300,8 +6355,8 @@ fun Input(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLInputElement?>? = null) = html(
   tag = "input",
   attributes = attributes(
     formNoValidate = formNoValidate,
@@ -6386,7 +6441,8 @@ fun Input(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Input(vararg children: ReactNode) = html(
@@ -6449,8 +6505,8 @@ fun Ins(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "ins",
   attributes = attributes(
     hidden = hidden,
@@ -6507,7 +6563,8 @@ fun Ins(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Ins(vararg children: ReactNode) = html(
@@ -6568,8 +6625,8 @@ fun Kbd(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "kbd",
   attributes = attributes(
     hidden = hidden,
@@ -6624,7 +6681,8 @@ fun Kbd(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Kbd(vararg children: ReactNode) = html(
@@ -6687,8 +6745,8 @@ fun Label(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLLabelElement?>? = null) = html(
   tag = "label",
   attributes = attributes(
     hidden = hidden,
@@ -6745,7 +6803,8 @@ fun Label(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Label(vararg children: ReactNode) = html(
@@ -6806,8 +6865,8 @@ fun Legend(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLLegendElement?>? = null) = html(
   tag = "legend",
   attributes = attributes(
     hidden = hidden,
@@ -6862,7 +6921,8 @@ fun Legend(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Legend(vararg children: ReactNode) = html(
@@ -6924,8 +6984,8 @@ fun Li(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "li",
   attributes = attributes(
     hidden = hidden,
@@ -6981,7 +7041,8 @@ fun Li(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Li(vararg children: ReactNode) = html(
@@ -7048,8 +7109,8 @@ fun Link(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLLinkElement?>? = null) = html(
   tag = "link",
   attributes = attributes(
     hidden = hidden,
@@ -7110,7 +7171,8 @@ fun Link(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Link(vararg children: ReactNode) = html(
@@ -7171,8 +7233,8 @@ fun Main(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "main",
   attributes = attributes(
     hidden = hidden,
@@ -7227,7 +7289,8 @@ fun Main(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Main(vararg children: ReactNode) = html(
@@ -7289,8 +7352,8 @@ fun Map(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLMapElement?>? = null) = html(
   tag = "map",
   attributes = attributes(
     hidden = hidden,
@@ -7346,7 +7409,8 @@ fun Map(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Map(vararg children: ReactNode) = html(
@@ -7407,8 +7471,8 @@ fun Mark(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "mark",
   attributes = attributes(
     hidden = hidden,
@@ -7463,7 +7527,8 @@ fun Mark(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Mark(vararg children: ReactNode) = html(
@@ -7528,8 +7593,8 @@ fun Meta(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLMetaElement?>? = null) = html(
   tag = "meta",
   attributes = attributes(
     hidden = hidden,
@@ -7588,7 +7653,8 @@ fun Meta(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Meta(vararg children: ReactNode) = html(
@@ -7656,8 +7722,8 @@ fun Meter(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLMeterElement?>? = null) = html(
   tag = "meter",
   attributes = attributes(
     hidden = hidden,
@@ -7719,7 +7785,8 @@ fun Meter(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Meter(vararg children: ReactNode) = html(
@@ -7780,8 +7847,8 @@ fun Nav(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "nav",
   attributes = attributes(
     hidden = hidden,
@@ -7836,7 +7903,8 @@ fun Nav(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Nav(vararg children: ReactNode) = html(
@@ -7897,8 +7965,8 @@ fun Noscript(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "noscript",
   attributes = attributes(
     hidden = hidden,
@@ -7953,7 +8021,8 @@ fun Noscript(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Noscript(vararg children: ReactNode) = html(
@@ -8021,8 +8090,8 @@ fun Object(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLObjectElement?>? = null) = html(
   tag = "object",
   attributes = attributes(
     hidden = hidden,
@@ -8084,7 +8153,8 @@ fun Object(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Object(vararg children: ReactNode) = html(
@@ -8148,8 +8218,8 @@ fun Ol(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLOListElement?>? = null) = html(
   tag = "ol",
   attributes = attributes(
     hidden = hidden,
@@ -8207,7 +8277,8 @@ fun Ol(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Ol(vararg children: ReactNode) = html(
@@ -8270,8 +8341,8 @@ fun Optgroup(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLOptGroupElement?>? = null) = html(
   tag = "optgroup",
   attributes = attributes(
     hidden = hidden,
@@ -8328,7 +8399,8 @@ fun Optgroup(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Optgroup(vararg children: ReactNode) = html(
@@ -8393,8 +8465,8 @@ fun Option(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLOptionElement?>? = null) = html(
   tag = "option",
   attributes = attributes(
     hidden = hidden,
@@ -8453,7 +8525,8 @@ fun Option(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Option(vararg children: ReactNode) = html(
@@ -8517,8 +8590,8 @@ fun Output(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLOutputElement?>? = null) = html(
   tag = "output",
   attributes = attributes(
     hidden = hidden,
@@ -8576,7 +8649,8 @@ fun Output(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Output(vararg children: ReactNode) = html(
@@ -8637,8 +8711,8 @@ fun P(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLParagraphElement?>? = null) = html(
   tag = "p",
   attributes = attributes(
     hidden = hidden,
@@ -8693,7 +8767,8 @@ fun P(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun P(vararg children: ReactNode) = html(
@@ -8756,8 +8831,8 @@ fun Param(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLParamElement?>? = null) = html(
   tag = "param",
   attributes = attributes(
     hidden = hidden,
@@ -8814,7 +8889,8 @@ fun Param(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Param(vararg children: ReactNode) = html(
@@ -8876,8 +8952,8 @@ fun Path(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out SVGPathElement?>? = null) = html(
   tag = "path",
   attributes = attributes(
     hidden = hidden,
@@ -8933,7 +9009,8 @@ fun Path(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Picture(
@@ -8989,8 +9066,8 @@ fun Picture(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLPictureElement?>? = null) = html(
   tag = "picture",
   attributes = attributes(
     hidden = hidden,
@@ -9045,7 +9122,8 @@ fun Picture(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Picture(vararg children: ReactNode) = html(
@@ -9106,8 +9184,8 @@ fun Pre(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLPreElement?>? = null) = html(
   tag = "pre",
   attributes = attributes(
     hidden = hidden,
@@ -9162,7 +9240,8 @@ fun Pre(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Pre(vararg children: ReactNode) = html(
@@ -9225,8 +9304,8 @@ fun Progress(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLProgressElement?>? = null) = html(
   tag = "progress",
   attributes = attributes(
     hidden = hidden,
@@ -9283,7 +9362,8 @@ fun Progress(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Progress(vararg children: ReactNode) = html(
@@ -9345,8 +9425,8 @@ fun Q(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLQuoteElement?>? = null) = html(
   tag = "q",
   attributes = attributes(
     hidden = hidden,
@@ -9402,7 +9482,8 @@ fun Q(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Q(vararg children: ReactNode) = html(
@@ -9463,8 +9544,8 @@ fun Rp(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "rp",
   attributes = attributes(
     hidden = hidden,
@@ -9519,7 +9600,8 @@ fun Rp(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Rp(vararg children: ReactNode) = html(
@@ -9580,8 +9662,8 @@ fun Rt(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "rt",
   attributes = attributes(
     hidden = hidden,
@@ -9636,7 +9718,8 @@ fun Rt(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Rt(vararg children: ReactNode) = html(
@@ -9697,8 +9780,8 @@ fun Ruby(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "ruby",
   attributes = attributes(
     hidden = hidden,
@@ -9753,7 +9836,8 @@ fun Ruby(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Ruby(vararg children: ReactNode) = html(
@@ -9814,8 +9898,8 @@ fun S(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "s",
   attributes = attributes(
     hidden = hidden,
@@ -9870,7 +9954,8 @@ fun S(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun S(vararg children: ReactNode) = html(
@@ -9931,8 +10016,8 @@ fun Samp(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "samp",
   attributes = attributes(
     hidden = hidden,
@@ -9987,7 +10072,8 @@ fun Samp(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Samp(vararg children: ReactNode) = html(
@@ -10053,8 +10139,8 @@ fun Script(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLScriptElement?>? = null) = html(
   tag = "script",
   attributes = attributes(
     hidden = hidden,
@@ -10114,7 +10200,8 @@ fun Script(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Script(vararg children: ReactNode) = html(
@@ -10175,8 +10262,8 @@ fun Section(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "section",
   attributes = attributes(
     hidden = hidden,
@@ -10231,7 +10318,8 @@ fun Section(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Section(vararg children: ReactNode) = html(
@@ -10300,8 +10388,8 @@ fun Select(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLSelectElement?>? = null) = html(
   tag = "select",
   attributes = attributes(
     hidden = hidden,
@@ -10364,7 +10452,8 @@ fun Select(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Select(vararg children: ReactNode) = html(
@@ -10425,8 +10514,8 @@ fun Small(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "small",
   attributes = attributes(
     hidden = hidden,
@@ -10481,7 +10570,8 @@ fun Small(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Small(vararg children: ReactNode) = html(
@@ -10546,8 +10636,8 @@ fun Source(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLSourceElement?>? = null) = html(
   tag = "source",
   attributes = attributes(
     hidden = hidden,
@@ -10606,7 +10696,8 @@ fun Source(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Source(vararg children: ReactNode) = html(
@@ -10667,8 +10758,8 @@ fun Span(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLSpanElement?>? = null) = html(
   tag = "span",
   attributes = attributes(
     hidden = hidden,
@@ -10723,7 +10814,8 @@ fun Span(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Span(vararg children: ReactNode) = html(
@@ -10784,8 +10876,8 @@ fun Strong(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "strong",
   attributes = attributes(
     hidden = hidden,
@@ -10840,7 +10932,8 @@ fun Strong(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Strong(vararg children: ReactNode) = html(
@@ -10903,8 +10996,8 @@ fun Style(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLStyleElement?>? = null) = html(
   tag = "style",
   attributes = attributes(
     hidden = hidden,
@@ -10961,7 +11054,8 @@ fun Style(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Style(vararg children: ReactNode) = html(
@@ -11022,8 +11116,8 @@ fun Sub(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "sub",
   attributes = attributes(
     hidden = hidden,
@@ -11078,7 +11172,8 @@ fun Sub(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Sub(vararg children: ReactNode) = html(
@@ -11139,8 +11234,8 @@ fun Summary(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "summary",
   attributes = attributes(
     hidden = hidden,
@@ -11195,7 +11290,8 @@ fun Summary(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Summary(vararg children: ReactNode) = html(
@@ -11256,8 +11352,8 @@ fun Sup(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "sup",
   attributes = attributes(
     hidden = hidden,
@@ -11312,7 +11408,8 @@ fun Sup(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Sup(vararg children: ReactNode) = html(
@@ -11375,8 +11472,8 @@ fun Svg(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out SVGElement?>? = null) = html(
   tag = "svg",
   attributes = attributes(
     hidden = hidden,
@@ -11433,7 +11530,8 @@ fun Svg(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Svg(vararg children: ReactNode) = html(
@@ -11494,8 +11592,8 @@ fun Table(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLTableElement?>? = null) = html(
   tag = "table",
   attributes = attributes(
     hidden = hidden,
@@ -11550,7 +11648,8 @@ fun Table(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Table(vararg children: ReactNode) = html(
@@ -11611,8 +11710,8 @@ fun Tbody(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "tbody",
   attributes = attributes(
     hidden = hidden,
@@ -11667,7 +11766,8 @@ fun Tbody(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Tbody(vararg children: ReactNode) = html(
@@ -11731,8 +11831,8 @@ fun Td(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLTableCellElement?>? = null) = html(
   tag = "td",
   attributes = attributes(
     hidden = hidden,
@@ -11790,7 +11890,8 @@ fun Td(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Td(vararg children: ReactNode) = html(
@@ -11851,8 +11952,8 @@ fun Template(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLTemplateElement?>? = null) = html(
   tag = "template",
   attributes = attributes(
     hidden = hidden,
@@ -11907,7 +12008,8 @@ fun Template(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Template(vararg children: ReactNode) = html(
@@ -11980,8 +12082,8 @@ fun Textarea(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLTextAreaElement?>? = null) = html(
   tag = "textarea",
   attributes = attributes(
     form = form,
@@ -12048,7 +12150,8 @@ fun Textarea(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Textarea(vararg children: ReactNode) = html(
@@ -12109,8 +12212,8 @@ fun Tfoot(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "tfoot",
   attributes = attributes(
     hidden = hidden,
@@ -12165,7 +12268,8 @@ fun Tfoot(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Tfoot(vararg children: ReactNode) = html(
@@ -12231,8 +12335,8 @@ fun Th(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLTableCellElement?>? = null) = html(
   tag = "th",
   attributes = attributes(
     hidden = hidden,
@@ -12292,7 +12396,8 @@ fun Th(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Th(vararg children: ReactNode) = html(
@@ -12353,8 +12458,8 @@ fun Thead(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "thead",
   attributes = attributes(
     hidden = hidden,
@@ -12409,7 +12514,8 @@ fun Thead(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Thead(vararg children: ReactNode) = html(
@@ -12471,8 +12577,8 @@ fun Time(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLTimeElement?>? = null) = html(
   tag = "time",
   attributes = attributes(
     hidden = hidden,
@@ -12528,7 +12634,8 @@ fun Time(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Time(vararg children: ReactNode) = html(
@@ -12589,8 +12696,8 @@ fun Title(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLTitleElement?>? = null) = html(
   tag = "title",
   attributes = attributes(
     hidden = hidden,
@@ -12645,7 +12752,8 @@ fun Title(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Title(vararg children: ReactNode) = html(
@@ -12706,8 +12814,8 @@ fun Tr(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLTableRowElement?>? = null) = html(
   tag = "tr",
   attributes = attributes(
     hidden = hidden,
@@ -12762,7 +12870,8 @@ fun Tr(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Tr(vararg children: ReactNode) = html(
@@ -12828,8 +12937,8 @@ fun Track(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLTrackElement?>? = null) = html(
   tag = "track",
   attributes = attributes(
     kind = kind,
@@ -12889,7 +12998,8 @@ fun Track(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Track(vararg children: ReactNode) = html(
@@ -12950,8 +13060,8 @@ fun U(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "u",
   attributes = attributes(
     hidden = hidden,
@@ -13006,7 +13116,8 @@ fun U(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun U(vararg children: ReactNode) = html(
@@ -13067,8 +13178,8 @@ fun Ul(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLUListElement?>? = null) = html(
   tag = "ul",
   attributes = attributes(
     hidden = hidden,
@@ -13123,7 +13234,8 @@ fun Ul(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Ul(vararg children: ReactNode) = html(
@@ -13184,8 +13296,8 @@ fun Var(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "var",
   attributes = attributes(
     hidden = hidden,
@@ -13240,7 +13352,8 @@ fun Var(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Var(vararg children: ReactNode) = html(
@@ -13310,8 +13423,8 @@ fun Video(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLVideoElement?>? = null) = html(
   tag = "video",
   attributes = attributes(
     autoPlay = autoPlay,
@@ -13375,7 +13488,8 @@ fun Video(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Video(vararg children: ReactNode) = html(
@@ -13436,8 +13550,8 @@ fun Wbr(
   child: ReactNode? = null,
   children: Iterable<ReactNode>? = null,
   innerHtml: String? = null,
-  key: Any? = null
-) = html(
+  key: Any? = null,
+  ref: RefProperty<out HTMLElement?>? = null) = html(
   tag = "wbr",
   attributes = attributes(
     hidden = hidden,
@@ -13492,7 +13606,8 @@ fun Wbr(
   style = style,
   children = children(text, child, children),
   innerHtml = innerHtml,
-  key = key
+  key = key,
+  ref = ref
 )
 
 fun Wbr(vararg children: ReactNode) = html(

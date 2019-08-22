@@ -29,18 +29,18 @@ data class StateProperty<R>(
 
 @Suppress("UNCHECKED_CAST")
 class RefProperty<R>(
-  private val ref: Ref<R?>
+  val inner: Ref<R?>
 ) {
   var value: R
-    get() = ref.current as R
-    set(value) { ref.current = value }
+    get() = inner.current as R
+    set(value) { inner.current = value }
 
   operator fun getValue(self: Any?, property: KProperty<*>): R {
-    return ref.current as R
+    return inner.current as R
   }
 
   operator fun setValue(self: Any?, property: KProperty<*>, newValue: R) {
-    ref.current = newValue
+    inner.current = newValue
   }
 }
 

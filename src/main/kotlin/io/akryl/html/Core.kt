@@ -3,6 +3,7 @@
 package io.akryl.html
 
 import io.akryl.Component
+import io.akryl.RefProperty
 import io.akryl.react.ReactNode
 import io.akryl.react.createElement
 import io.akryl.react.createTextElement
@@ -16,7 +17,8 @@ fun html(
   listeners: Map<String, (event: Event) -> Unit> = emptyMap(),
   children: List<ReactNode> = emptyList(),
   innerHtml: String? = null,
-  key: Any? = null
+  key: Any? = null,
+  ref: RefProperty<*>? = null
 ): ReactNode {
   val styleProps = if (style.isNotEmpty()) js("{}") else undefined
 
@@ -41,6 +43,10 @@ fun html(
 
   if (key != null) {
     props["key"] = key
+  }
+
+  if (ref != null) {
+    props["ref"] = ref.inner
   }
 
   return createElement(tag, props, *Array(children.size) { Component.build(children[it]) })

@@ -3,7 +3,7 @@
 package io.akryl.css
 
 class InsetsScope(properties: MutableMap<String, Any?>, name: String) : StringScope(properties, name) {
-  fun none() = this("none")
+  fun none() = this("0")
   fun auto() = this("auto")
   fun initial() = this("initial")
   fun inherit() = this("inherit")

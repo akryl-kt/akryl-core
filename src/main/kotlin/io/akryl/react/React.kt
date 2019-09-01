@@ -35,4 +35,4 @@ external interface Context<T> {
 }
 
 external fun <T> createContext(initialValue: T): Context<T>
-external fun <T> useContext(context: Context<T>): T?
+external fun <T> useContext(context: Context<T>): T

@@ -139,7 +139,7 @@ fun <C : Component, R> C.useWatch(selector: C.() -> R, callback: C.(newValue: R)
   useWatch(selector, { newValue, _ -> callback(newValue) })
 }
 
-fun <T> useContext(context: Context<T>): T? {
+fun <T> useContext(context: Context<T>): T {
   return reactUseContext(context)
 }
 

@@ -2,7 +2,6 @@
 
 package io.akryl.html
 
-import io.akryl.Component
 import io.akryl.RefProperty
 import io.akryl.react.ReactNode
 import io.akryl.react.createElement
@@ -49,7 +48,7 @@ fun html(
     props["ref"] = ref.inner
   }
 
-  return createElement(tag, props, *Array(children.size) { Component.build(children[it]) })
+  return createElement(tag, props, *children.toTypedArray())
 }
 
 fun Text(value: String) = createTextElement(value)

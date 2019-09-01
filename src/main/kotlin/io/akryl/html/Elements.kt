@@ -2,6 +2,7 @@
 
 package io.akryl.html
 
+import io.akryl.Component
 import io.akryl.RefProperty
 import io.akryl.react.ReactNode
 import org.w3c.dom.*
@@ -86,21 +87,21 @@ private inline fun listeners(
   return result
 }
 
-private inline fun classes(clazz: CharSequence?, classes: List<CharSequence?>?): String? {
+inline fun classes(clazz: CharSequence?, classes: List<CharSequence?>?): String? {
   return ((classes ?: emptyList()) + clazz)
     .filterNotNull()
     .joinToString(" ")
     .ifEmpty { null }
 }
 
-private inline fun children(text: String?, child: ReactNode?, children: Iterable<ReactNode>?): List<ReactNode> {
+inline fun children(text: String? = null, child: ReactNode? = null, children: Iterable<ReactNode>? = null): List<ReactNode> {
   if (text == null && child == null && children == null) return emptyList()
 
   val result = ArrayList<ReactNode>()
   if (text != null) result.add(Text(text))
   if (child != null) result.add(child)
   if (children != null) result.addAll(children)
-  return result
+  return result.map { Component.build(it) }
 }
 
 fun A(

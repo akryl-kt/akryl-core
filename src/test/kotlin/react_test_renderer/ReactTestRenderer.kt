@@ -26,3 +26,15 @@ fun <T> ReactTestRenderer.Factory.akt(block: () -> T): T {
 
     return result as T
 }
+
+fun ReactTestRenderer.Factory.aktCreate(block: () -> ReactElement<*>): ReactTestRenderer {
+    return akt {
+        create(block())
+    }
+}
+
+fun ReactTestRenderer.aktUpdate(block: () -> ReactElement<*>) {
+    ReactTestRenderer.akt {
+        update(block())
+    }
+}

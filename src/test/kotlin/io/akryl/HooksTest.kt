@@ -3,6 +3,8 @@ package io.akryl
 import react.React
 import react_test_renderer.ReactTestRenderer
 import react_test_renderer.akt
+import react_test_renderer.aktCreate
+import react_test_renderer.aktUpdate
 import utils.assertJsonEquals
 import kotlin.js.json
 import kotlin.test.Test
@@ -61,21 +63,12 @@ class HooksTest {
     fun testState() {
         val emitter = EventEmitter()
 
-        val root = ReactTestRenderer.akt {
-            ReactTestRenderer.create(
-                counterComponent(emitter)
-            )
+        val root = ReactTestRenderer.aktCreate {
+            counterComponent(emitter)
         }
 
         for (i in 0..2) {
-            assertJsonEquals(
-                json(
-                    "type" to "div",
-                    "props" to json(),
-                    "children" to arrayOf(i.toString())
-                ),
-                root.toJSON()
-            )
+            assertContent(i.toString(), root)
 
             ReactTestRenderer.akt {
                 emitter.emit()
@@ -87,20 +80,14 @@ class HooksTest {
     fun testSimpleEffect() {
         val sideEffect = Value("")
 
-        val root = ReactTestRenderer.akt {
-            ReactTestRenderer.create(
-                simpleSideEffectComponent(sideEffect, "foo")
-            )
+        val root = ReactTestRenderer.aktCreate {
+            simpleSideEffectComponent(sideEffect, "foo")
         }
-
         assertEquals("foo", sideEffect.value)
 
-        ReactTestRenderer.akt {
-            root.update(
-                simpleSideEffectComponent(sideEffect, "bar")
-            )
+        root.aktUpdate {
+            simpleSideEffectComponent(sideEffect, "bar")
         }
-
         assertEquals("bar", sideEffect.value)
     }
 
@@ -108,109 +95,69 @@ class HooksTest {
     fun testDependenciesEffect() {
         val sideEffect = Value(0)
 
-        val root = ReactTestRenderer.akt {
-            ReactTestRenderer.create(
-                dependenciesSideEffectComponent(sideEffect, "foo")
-            )
+        val root = ReactTestRenderer.aktCreate {
+            dependenciesSideEffectComponent(sideEffect, "foo")
         }
         assertEquals(1, sideEffect.value)
 
-        ReactTestRenderer.akt {
-            root.update(
-                dependenciesSideEffectComponent(sideEffect, "foo")
-            )
+        root.aktUpdate {
+            dependenciesSideEffectComponent(sideEffect, "foo")
         }
         assertEquals(1, sideEffect.value)
 
-        ReactTestRenderer.akt {
-            root.update(
-                dependenciesSideEffectComponent(sideEffect, "bar")
-            )
+        root.aktUpdate {
+            dependenciesSideEffectComponent(sideEffect, "bar")
         }
         assertEquals(2, sideEffect.value)
     }
 
     @Test
     fun testContextAbsent() {
-        val root = ReactTestRenderer.akt {
-            ReactTestRenderer.create(
-                contextComponent()
-            )
+        val root = ReactTestRenderer.aktCreate {
+            contextComponent()
         }
-        assertJsonEquals(
-            json(
-                "type" to "div",
-                "props" to json(),
-                "children" to arrayOf("null")
-            ),
-            root.toJSON()
-        )
+        assertContent("null", root)
     }
 
     @Test
     fun testContextPresented() {
-        val root = ReactTestRenderer.akt {
-            ReactTestRenderer.create(
-                testContext.provider(
-                    value = TestContext(value = "foobar"),
-                    children = listOf(
-                        contextComponent()
-                    )
+        val root = ReactTestRenderer.aktCreate {
+            testContext.provider(
+                value = TestContext(value = "foobar"),
+                children = listOf(
+                    contextComponent()
                 )
             )
         }
-        assertJsonEquals(
-            json(
-                "type" to "div",
-                "props" to json(),
-                "children" to arrayOf("foobar")
-            ),
-            root.toJSON()
-        )
+        assertContent("foobar", root)
     }
 
     @Test
     fun testDependenciesCallback() {
-        val root = ReactTestRenderer.akt {
-            ReactTestRenderer.create(
-                callbackComponent("first") { 10 }
-            )
+        val root = ReactTestRenderer.aktCreate {
+            callbackComponent("first") { 10 }
         }
-        assertJsonEquals(
-            json(
-                "type" to "div",
-                "props" to json(),
-                "children" to arrayOf("10")
-            ),
-            root.toJSON()
-        )
+        assertContent("10", root)
 
-        ReactTestRenderer.akt {
-            root.update(
-                callbackComponent("first") { 20 }
-            )
+        root.aktUpdate {
+            callbackComponent("first") { 20 }
         }
-        assertJsonEquals(
-            json(
-                "type" to "div",
-                "props" to json(),
-                "children" to arrayOf("10")
-            ),
-            root.toJSON()
-        )
+        assertContent("10", root)
 
-        ReactTestRenderer.akt {
-            root.update(
-                callbackComponent("second") { 20 }
-            )
+        root.aktUpdate {
+            callbackComponent("second") { 20 }
         }
-        assertJsonEquals(
-            json(
-                "type" to "div",
-                "props" to json(),
-                "children" to arrayOf("20")
-            ),
-            root.toJSON()
-        )
+        assertContent("20", root)
     }
+}
+
+private fun assertContent(expected: String, actual: ReactTestRenderer) {
+    assertJsonEquals(
+        json(
+            "type" to "div",
+            "props" to json(),
+            "children" to arrayOf(expected)
+        ),
+        actual.toJSON()
+    )
 }

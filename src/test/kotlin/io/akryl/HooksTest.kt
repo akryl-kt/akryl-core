@@ -10,19 +10,19 @@ import kotlin.js.json
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-private class EventEmitter {
-    private lateinit var event: () -> Unit
+private class EventEmitter<T> {
+    private lateinit var event: (T) -> Unit
 
-    operator fun invoke(event: () -> Unit) {
+    operator fun invoke(event: (T) -> Unit) {
         this.event = event
     }
 
-    fun emit() = event()
+    fun emit(value: T) = event(value)
 }
 
 private class Value<T>(var value: T)
 
-private fun counterComponent(emitter: EventEmitter) = component {
+private fun counterComponent(emitter: EventEmitter<Unit>) = component {
     val (state, setState) = useState(0)
     emitter { setState(state + 1) }
     React.createElement("div", null, state.toString())
@@ -68,10 +68,16 @@ private fun permanentCallbackComponent(callback: () -> Int) = component {
     React.createElement("div", null, cb().toString())
 }
 
+private fun refComponent(eventEmitter: EventEmitter<Int>) = component {
+    val ref = useRef(0)
+    eventEmitter { ref.current = it }
+    React.createElement("div", null, ref.current.toString())
+}
+
 class HooksTest {
     @Test
     fun testState() {
-        val emitter = EventEmitter()
+        val emitter = EventEmitter<Unit>()
 
         val root = ReactTestRenderer.aktCreate {
             counterComponent(emitter)
@@ -81,7 +87,7 @@ class HooksTest {
             assertContent(i.toString(), root)
 
             ReactTestRenderer.akt {
-                emitter.emit()
+                emitter.emit(Unit)
             }
         }
     }
@@ -184,6 +190,26 @@ class HooksTest {
             dependenciesCallbackComponent("second") { 20 }
         }
         assertContent("20", root)
+    }
+
+    @Test
+    fun testRef() {
+        val emitter = EventEmitter<Int>()
+
+        val root = ReactTestRenderer.aktCreate {
+            refComponent(emitter)
+        }
+        assertContent("0", root)
+
+        ReactTestRenderer.akt {
+            emitter.emit(1)
+        }
+        assertContent("0", root)
+
+        root.aktUpdate {
+            refComponent(emitter)
+        }
+        assertContent("1", root)
     }
 }
 

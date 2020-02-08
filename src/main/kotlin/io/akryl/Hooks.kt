@@ -1,6 +1,7 @@
 package io.akryl
 
 import react.Context
+import react.MutableRefObject
 import react.React
 
 typealias SetStateAction<S> = (newState: S) -> Unit
@@ -30,4 +31,9 @@ fun <T> ComponentScope.useContext(context: Context<T>): T {
 @Suppress("unused")
 fun <R> ComponentScope.useCallback(dependencies: List<Any?>? = undefined, callback: () -> R): () -> R {
     return React.useCallback(callback, dependencies?.toTypedArray())
+}
+
+@Suppress("unused")
+fun <R> ComponentScope.useRef(initialValue: R): MutableRefObject<R> {
+    return React.useRef(initialValue)
 }

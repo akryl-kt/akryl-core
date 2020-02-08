@@ -10,6 +10,7 @@ external object React {
     fun useEffect(effect: () -> EffectDisposer?, dependencies: Array<Any?>? = definedExternally)
     fun <R> useCallback(callback: () -> R, dependencies: Array<Any?>? = definedExternally): () -> R
     fun <T> useContext(context: Context<T>): T
+    fun <R> useRef(initialValue: R): MutableRefObject<R>
     fun isValidElement(obj: dynamic): Boolean
     fun <T> createContext(defaultValue: T): Context<T>
 }
@@ -49,3 +50,7 @@ external interface ReactElement<P> {
 typealias FunctionalComponent<P> = (props: P) -> ReactElement<P>?
 
 typealias EffectDisposer = () -> Unit
+
+external interface MutableRefObject<R> {
+    var current: R
+}

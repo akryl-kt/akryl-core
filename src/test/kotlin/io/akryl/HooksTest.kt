@@ -53,8 +53,18 @@ private fun contextComponent() = component {
     React.createElement("div", null, data?.value.toString())
 }
 
-private fun callbackComponent(dependency: String, callback: () -> Int) = component {
+private fun dependenciesCallbackComponent(dependency: String, callback: () -> Int) = component {
     val cb = useCallback(listOf(dependency), callback)
+    React.createElement("div", null, cb().toString())
+}
+
+private fun simpleCallbackComponent(callback: () -> Int) = component {
+    val cb = useCallback { callback() }
+    React.createElement("div", null, cb().toString())
+}
+
+private fun permanentCallbackComponent(callback: () -> Int) = component {
+    val cb = useCallback(emptyList()) { callback() }
     React.createElement("div", null, cb().toString())
 }
 
@@ -133,19 +143,45 @@ class HooksTest {
     }
 
     @Test
+    fun testSimpleCallback() {
+        val root = ReactTestRenderer.aktCreate {
+            simpleCallbackComponent { 10 }
+        }
+        assertContent("10", root)
+
+        root.aktUpdate {
+            simpleCallbackComponent { 20 }
+        }
+        assertContent("20", root)
+    }
+
+    @Test
+    fun testPermanentCallback() {
+        val root = ReactTestRenderer.aktCreate {
+            permanentCallbackComponent { 10 }
+        }
+        assertContent("10", root)
+
+        root.aktUpdate {
+            permanentCallbackComponent { 20 }
+        }
+        assertContent("10", root)
+    }
+
+    @Test
     fun testDependenciesCallback() {
         val root = ReactTestRenderer.aktCreate {
-            callbackComponent("first") { 10 }
+            dependenciesCallbackComponent("first") { 10 }
         }
         assertContent("10", root)
 
         root.aktUpdate {
-            callbackComponent("first") { 20 }
+            dependenciesCallbackComponent("first") { 20 }
         }
         assertContent("10", root)
 
         root.aktUpdate {
-            callbackComponent("second") { 20 }
+            dependenciesCallbackComponent("second") { 20 }
         }
         assertContent("20", root)
     }

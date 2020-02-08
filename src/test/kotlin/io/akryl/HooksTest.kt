@@ -79,6 +79,20 @@ private fun debugValueComponent() = component {
     null
 }
 
+private fun ComponentScope.useCounter(emitter: EventEmitter<Unit>): Int {
+    val (count, setCount) = useState(0)
+    val cb = useCallback(listOf(count)) {
+        setCount(count + 1)
+    }
+    emitter { cb() }
+    return count
+}
+
+private fun customHookComponent(emitter: EventEmitter<Unit>) = component {
+    val count = useCounter(emitter)
+    React.createElement("div", null, count.toString())
+}
+
 class HooksTest {
     @Test
     fun testState() {
@@ -222,6 +236,21 @@ class HooksTest {
         ReactTestRenderer.aktCreate {
             debugValueComponent()
         }
+    }
+
+    @Test
+    fun testCustomHook() {
+        val emitter = EventEmitter<Unit>()
+
+        val root = ReactTestRenderer.aktCreate {
+            customHookComponent(emitter)
+        }
+        assertContent("0", root)
+
+        ReactTestRenderer.akt {
+            emitter.emit(Unit)
+        }
+        assertContent("1", root)
     }
 }
 

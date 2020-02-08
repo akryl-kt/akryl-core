@@ -11,6 +11,7 @@ external object React {
     fun <R> useCallback(callback: () -> R, dependencies: Array<Any?>? = definedExternally): () -> R
     fun <T> useContext(context: Context<T>): T
     fun <R> useRef(initialValue: R): MutableRefObject<R>
+    fun useDebugValue(value: Any?)
     fun isValidElement(obj: dynamic): Boolean
     fun <T> createContext(defaultValue: T): Context<T>
 }

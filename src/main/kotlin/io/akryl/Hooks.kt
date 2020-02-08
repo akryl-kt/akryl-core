@@ -37,3 +37,8 @@ fun <R> ComponentScope.useCallback(dependencies: List<Any?>? = undefined, callba
 fun <R> ComponentScope.useRef(initialValue: R): MutableRefObject<R> {
     return React.useRef(initialValue)
 }
+
+@Suppress("unused")
+fun ComponentScope.useDebugValue(value: Any?) {
+    React.useDebugValue(value)
+}

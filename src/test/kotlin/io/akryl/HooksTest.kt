@@ -74,6 +74,11 @@ private fun refComponent(eventEmitter: EventEmitter<Int>) = component {
     React.createElement("div", null, ref.current.toString())
 }
 
+private fun debugValueComponent() = component {
+    useDebugValue("test")
+    null
+}
+
 class HooksTest {
     @Test
     fun testState() {
@@ -210,6 +215,13 @@ class HooksTest {
             refComponent(emitter)
         }
         assertContent("1", root)
+    }
+
+    @Test
+    fun testDebugValueRuns() {
+        ReactTestRenderer.aktCreate {
+            debugValueComponent()
+        }
     }
 }
 

@@ -51,6 +51,11 @@ private fun contextComponent() = component {
     React.createElement("div", null, data?.value.toString())
 }
 
+private fun callbackComponent(dependency: String, callback: () -> Int) = component {
+    val cb = useCallback(listOf(dependency), callback)
+    React.createElement("div", null, cb().toString())
+}
+
 class HooksTest {
     @Test
     fun testState() {
@@ -159,6 +164,51 @@ class HooksTest {
                 "type" to "div",
                 "props" to json(),
                 "children" to arrayOf("foobar")
+            ),
+            root.toJSON()
+        )
+    }
+
+    @Test
+    fun testDependenciesCallback() {
+        val root = ReactTestRenderer.akt {
+            ReactTestRenderer.create(
+                callbackComponent("first") { 10 }
+            )
+        }
+        assertJsonEquals(
+            json(
+                "type" to "div",
+                "props" to json(),
+                "children" to arrayOf("10")
+            ),
+            root.toJSON()
+        )
+
+        ReactTestRenderer.akt {
+            root.update(
+                callbackComponent("first") { 20 }
+            )
+        }
+        assertJsonEquals(
+            json(
+                "type" to "div",
+                "props" to json(),
+                "children" to arrayOf("10")
+            ),
+            root.toJSON()
+        )
+
+        ReactTestRenderer.akt {
+            root.update(
+                callbackComponent("second") { 20 }
+            )
+        }
+        assertJsonEquals(
+            json(
+                "type" to "div",
+                "props" to json(),
+                "children" to arrayOf("20")
             ),
             root.toJSON()
         )

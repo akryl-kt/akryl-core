@@ -7,7 +7,8 @@ external object React {
     fun <P> createElement(type: Component<P>, props: P, vararg children: ReactElement<*>): ReactElement<P>
     fun memo(inner: dynamic): dynamic
     fun useState(initialState: dynamic): Array<dynamic>
-    fun useEffect(effect: () -> EffectDisposer?, dependencies: Array<Any?>?)
+    fun useEffect(effect: () -> EffectDisposer?, dependencies: Array<Any?>? = definedExternally)
+    fun <R> useCallback(callback: () -> R, dependencies: Array<Any?>? = definedExternally): () -> R
     fun <T> useContext(context: Context<T>): T
     fun isValidElement(obj: dynamic): Boolean
     fun <T> createContext(defaultValue: T): Context<T>

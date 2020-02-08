@@ -26,3 +26,8 @@ fun ComponentScope.useEffect(dependencies: Array<Any?>? = undefined, effect: () 
 fun <T> ComponentScope.useContext(context: Context<T>): T {
     return React.useContext(context)
 }
+
+@Suppress("unused")
+fun <R> ComponentScope.useCallback(dependencies: List<Any?>? = undefined, callback: () -> R): () -> R {
+    return React.useCallback(callback, dependencies?.toTypedArray())
+}

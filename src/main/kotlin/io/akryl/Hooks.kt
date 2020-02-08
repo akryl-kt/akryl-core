@@ -15,11 +15,11 @@ fun <S> ComponentScope.useState(initialState: S): Pair<S, SetStateAction<S>> {
 }
 
 @Suppress("unused")
-fun ComponentScope.useEffect(dependencies: Array<Any?>? = undefined, effect: () -> Unit) {
+fun ComponentScope.useEffect(dependencies: List<Any?>? = undefined, effect: () -> Unit) {
     React.useEffect({
         effect()
         undefined
-    }, dependencies)
+    }, dependencies?.toTypedArray())
 }
 
 @Suppress("unused")

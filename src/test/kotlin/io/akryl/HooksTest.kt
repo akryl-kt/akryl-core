@@ -36,7 +36,7 @@ private fun simpleSideEffectComponent(sideEffect: Value<String>, value: String) 
 }
 
 private fun dependenciesSideEffectComponent(sideEffect: Value<Int>, value: String) = component {
-    useEffect(arrayOf(value)) {
+    useEffect(listOf(value)) {
         sideEffect.value += 1
     }
     null

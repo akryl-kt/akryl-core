@@ -1,5 +1,6 @@
 package io.akryl
 
+import react.Context
 import react.React
 
 typealias SetStateAction<S> = (newState: S) -> Unit
@@ -19,4 +20,9 @@ fun ComponentScope.useEffect(dependencies: Array<Any?>? = undefined, effect: () 
         effect()
         undefined
     }, dependencies)
+}
+
+@Suppress("unused")
+fun <T> ComponentScope.useContext(context: Context<T>): T {
+    return React.useContext(context)
 }

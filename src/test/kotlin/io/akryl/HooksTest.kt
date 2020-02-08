@@ -40,6 +40,17 @@ private fun dependenciesSideEffectComponent(sideEffect: Value<Int>, value: Strin
     null
 }
 
+data class TestContext(
+    val value: String
+)
+
+private val testContext = React.createContext<TestContext?>(null)
+
+private fun contextComponent() = component {
+    val data = useContext(testContext)
+    React.createElement("div", null, data?.value.toString())
+}
+
 class HooksTest {
     @Test
     fun testState() {
@@ -112,5 +123,44 @@ class HooksTest {
             )
         }
         assertEquals(2, sideEffect.value)
+    }
+
+    @Test
+    fun testContextAbsent() {
+        val root = ReactTestRenderer.akt {
+            ReactTestRenderer.create(
+                contextComponent()
+            )
+        }
+        assertJsonEquals(
+            json(
+                "type" to "div",
+                "props" to json(),
+                "children" to arrayOf("null")
+            ),
+            root.toJSON()
+        )
+    }
+
+    @Test
+    fun testContextPresented() {
+        val root = ReactTestRenderer.akt {
+            ReactTestRenderer.create(
+                testContext.provider(
+                    value = TestContext(value = "foobar"),
+                    children = listOf(
+                        contextComponent()
+                    )
+                )
+            )
+        }
+        assertJsonEquals(
+            json(
+                "type" to "div",
+                "props" to json(),
+                "children" to arrayOf("foobar")
+            ),
+            root.toJSON()
+        )
     }
 }

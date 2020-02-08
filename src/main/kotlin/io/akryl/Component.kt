@@ -2,11 +2,11 @@ package io.akryl
 
 import react.FunctionalComponent
 import react.React
-import react.ReactNode
+import react.ReactElement
 
 typealias ComponentWrapper<P> = (FunctionalComponent<P>) -> FunctionalComponent<P>
 
-typealias RenderFunction = ComponentScope.() -> ReactNode
+typealias RenderFunction = ComponentScope.() -> ReactElement<*>?
 
 interface ComponentScope
 
@@ -15,14 +15,14 @@ fun __akryl_react_component_marker__(
     react: React,
     wrapper: ComponentWrapper<*>,
     render: RenderFunction
-): ReactNode = throw NotImplementedError("Implemented by babel-plugin-akryl")
+): ReactElement<*> = throw NotImplementedError("Implemented by babel-plugin-akryl")
 
 @Suppress("NOTHING_TO_INLINE")
-inline fun component(noinline wrapper: ComponentWrapper<*> = { it }, noinline render: RenderFunction): ReactNode {
+inline fun component(noinline wrapper: ComponentWrapper<*> = { it }, noinline render: RenderFunction): ReactElement<*> {
     return __akryl_react_component_marker__(React, wrapper, render)
 }
 
 @Suppress("NOTHING_TO_INLINE", "UnsafeCastFromDynamic")
-inline fun memo(noinline render: RenderFunction): ReactNode {
+inline fun memo(noinline render: RenderFunction): ReactElement<*> {
     return component({ React.memo(it) }, render)
 }

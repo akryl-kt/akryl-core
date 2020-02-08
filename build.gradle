@@ -16,16 +16,43 @@ repositories {
 
 kotlin {
     target {
-        browser()
+        browser {
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
+            }
+        }
+
     }
 
     sourceSets {
         main {
             dependencies {
                 implementation "org.jetbrains.kotlin:kotlin-stdlib-js"
+
+                implementation npm("babel-loader", "8.0.6")
+                implementation npm("@babel/core", "7.7.7")
+                implementation npm("@babel/preset-env", "7.7.7")
+                implementation npm("react", "16.12.0")
+                implementation npm("react-test-renderer", "16.12.0")
             }
         }
     }
+}
+
+kotlinNpmInstall {
+    doLast {
+        exec {
+            workingDir "$projectDir/build/js"
+            executable "npm"
+            args "link", "babel-plugin-akryl"
+        }
+    }
+}
+
+dependencies {
+    testImplementation "org.jetbrains.kotlin:kotlin-test-js"
 }
 
 compileKotlinJs {

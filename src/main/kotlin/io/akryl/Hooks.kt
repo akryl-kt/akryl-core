@@ -16,6 +16,15 @@ fun <S> ComponentScope.useState(initialState: S): Pair<S, SetStateAction<S>> {
 }
 
 @Suppress("unused")
+fun <S> ComponentScope.useState(initializer: () -> S): Pair<S, SetStateAction<S>> {
+    val (state, setState) = React.useState(initializer)
+    return Pair(
+        state.unsafeCast<S>(),
+        setState.unsafeCast<SetStateAction<S>>()
+    )
+}
+
+@Suppress("unused")
 fun ComponentScope.useEffect(dependencies: List<Any?>? = undefined, effect: () -> Unit) {
     React.useEffect({
         effect()

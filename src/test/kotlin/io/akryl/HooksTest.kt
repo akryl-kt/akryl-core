@@ -28,6 +28,12 @@ private fun counterComponent(emitter: EventEmitter<Unit>) = component {
     React.createElement("div", null, state.toString())
 }
 
+private fun counterInitializerComponent(emitter: EventEmitter<Unit>) = component {
+    val (state, setState) = useState { 0 }
+    emitter { setState(state + 1) }
+    React.createElement("div", null, state.toString())
+}
+
 private fun simpleSideEffectComponent(sideEffect: Value<String>, value: String) = component {
     useEffect {
         sideEffect.value = value
@@ -100,6 +106,23 @@ class HooksTest {
 
         val root = ReactTestRenderer.aktCreate {
             counterComponent(emitter)
+        }
+
+        for (i in 0..2) {
+            assertContent(i.toString(), root)
+
+            ReactTestRenderer.akt {
+                emitter.emit(Unit)
+            }
+        }
+    }
+
+    @Test
+    fun testStateWithInitializer() {
+        val emitter = EventEmitter<Unit>()
+
+        val root = ReactTestRenderer.aktCreate {
+            counterInitializerComponent(emitter)
         }
 
         for (i in 0..2) {

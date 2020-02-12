@@ -11,7 +11,8 @@ fun <T> Context<T>.provider(value: T, children: List<ReactElement<*>>): ReactEle
         Provider,
         ProviderProps<T>(
             value = value,
-            children = children.toTypedArray()
-        )
+            children = undefined
+        ),
+        *children.toTypedArray()
     )
 }

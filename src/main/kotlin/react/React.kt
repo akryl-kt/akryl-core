@@ -5,6 +5,7 @@ package react
 external object React {
     fun createElement(type: String, props: dynamic = definedExternally, vararg children: dynamic): ReactElement<dynamic>
     fun <P> createElement(type: Component<P>, props: P, vararg children: ReactElement<*>): ReactElement<P>
+    fun <P> cloneElement(element: ReactElement<P>, props: P, vararg children: ReactElement<*>): ReactElement<P>
     fun memo(inner: dynamic): dynamic
     fun useState(initialState: dynamic): Array<dynamic>
     fun useEffect(effect: () -> EffectDisposer?, dependencies: Array<Any?>? = definedExternally)

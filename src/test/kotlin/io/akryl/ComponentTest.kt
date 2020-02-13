@@ -55,4 +55,12 @@ class ComponentTest {
         assertEquals("memoWithProps", node.type.type.name)
         assertJsonEquals(json("a" to 10, "b" to "str"), node.props)
     }
+
+    @Test
+    fun testKey() {
+        val node = React.createElement("div", null, listOf("child")).withKey("foobar")
+        assertTrue(React.isValidElement(node))
+        assertJsonEquals(json("children" to arrayOf("child")), node.props)
+        assertEquals("foobar", node.key)
+    }
 }

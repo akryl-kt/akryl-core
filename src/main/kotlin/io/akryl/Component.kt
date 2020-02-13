@@ -26,3 +26,9 @@ inline fun component(noinline wrapper: ComponentWrapper<*> = { it }, noinline re
 inline fun memo(noinline render: RenderFunction): ReactElement<*> {
     return component({ React.memo(it) }, render)
 }
+
+@Suppress("UNUSED_PARAMETER")
+fun <P> ReactElement<P>.withKey(key: Any): ReactElement<P> {
+    val element = this
+    return React.cloneElement(element, js("Object.assign({}, element.props, {key: key})") as P)
+}

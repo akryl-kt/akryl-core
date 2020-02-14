@@ -1,0 +1,28 @@
+name: Bintray Upload
+
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Fetch all
+      run: git fetch --prune --unshallow --tags
+    - name: Show current version
+      run: git describe --tags
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+    - name: Test with Gradle
+      run: ./gradlew test
+    - name: Deploy with Gradle
+      env:
+        BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
+        BINTRAY_KEY: ${{ secrets.BINTRAY_KEY }}
+      run: ./gradlew bintrayUpload

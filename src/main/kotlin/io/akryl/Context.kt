@@ -1,10 +1,18 @@
 package io.akryl
 
-import io.akryl.react.Context
-import io.akryl.react.ProviderProps
-import io.akryl.react.ReactNode
-import io.akryl.react.createElement
+import react.Context
+import react.ProviderProps
+import react.React
+import react.ReactElement
 
-fun <T> Context<T>.provide(value: T, child: ReactNode): ReactNode {
-  return createElement(this.Provider, ProviderProps(value), Component.build(child))
+fun <T> Context<T>.provider(value: T, children: List<ReactElement<*>>): ReactElement<ProviderProps<T>> {
+    @Suppress("RemoveExplicitTypeArguments") // Type inference failing on ProviderProps<T>
+    return React.createElement(
+        Provider,
+        ProviderProps<T>(
+            value = value,
+            children = undefined
+        ),
+        *children.toTypedArray()
+    )
 }

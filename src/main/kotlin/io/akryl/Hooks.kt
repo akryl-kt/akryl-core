@@ -1,148 +1,53 @@
 package io.akryl
 
-import io.akryl.react.Context
-import io.akryl.react.EffectDisposer
-import io.akryl.react.Ref
-import io.akryl.rx.*
-import kotlin.reflect.KProperty
-import io.akryl.react.useContext as reactUseContext
-import io.akryl.react.useEffect as reactUseEffect
-import io.akryl.react.useRef as reactUseRef
-import io.akryl.react.useState as reactUseState
+import react.Context
+import react.MutableRefObject
+import react.React
 
-data class StateProperty<R>(
-  val state: R,
-  val setState: (R) -> Unit
-) {
-  var value: R
-    get() = state
-    set(value) { setState(value) }
+typealias SetStateAction<S> = (newState: S) -> Unit
 
-  operator fun getValue(self: Any?, property: KProperty<*>): R {
-    return state
-  }
-
-  operator fun setValue(self: Any?, property: KProperty<*>, newValue: R) {
-    setState(newValue)
-  }
-}
-
-@Suppress("UNCHECKED_CAST")
-class RefProperty<R>(
-  val inner: Ref<R?>
-) {
-  var value: R
-    get() = inner.current as R
-    set(value) { inner.current = value }
-
-  operator fun getValue(self: Any?, property: KProperty<*>): R {
-    return inner.current as R
-  }
-
-  operator fun setValue(self: Any?, property: KProperty<*>, newValue: R) {
-    inner.current = newValue
-  }
-}
-
-fun <R> useState(initialValue: R): StateProperty<R> {
-  val (state, setState) = reactUseState(initialValue)
-  return StateProperty(state.unsafeCast<R>(), setState.unsafeCast<(R) -> Unit>())
-}
-
-class DisposeScope {
-  var disposer: EffectDisposer? = undefined
-    private set
-
-  fun dispose(disposer: EffectDisposer) {
-    this.disposer = disposer
-  }
-}
-
-inline fun useEffect(vararg dependencies: Any?, crossinline callback: DisposeScope.() -> Unit) {
-  val wrapper = {
-    val scope = DisposeScope()
-    scope.callback()
-    scope.disposer
-  }
-
-  if (dependencies.isEmpty()) {
-    reactUseEffect(wrapper)
-  } else {
-    reactUseEffect(wrapper, dependencies)
-  }
-}
-
-inline fun <R> useRef(initialValue: () -> R): RefProperty<R> {
-  val ref = reactUseRef<R?>(undefined)
-  if (ref.current === undefined) {
-    ref.current = initialValue()
-  }
-  return RefProperty(ref)
-}
-
-fun <R> useReactive(initialValue: () -> R): ReactiveProperty<R> {
-  val ref by useRef { ReactiveProperty(initialValue()) }
-  return ref
-}
-
-fun <C : Component, R> C.useComputed(fn: C.() -> R): ComputedProperty<R> {
-  var thisRef by useRef { this }
-  thisRef = this
-
-  val propRef by useRef { ComputedProperty(EmptyReactiveContainer) { thisRef.fn() } }
-
-  useEffect(Unit) {
-    dispose { propRef.dispose() }
-  }
-
-  useEffect(this) {
-    propRef.changed()
-  }
-
-  return propRef
-}
-
-fun <C : Component, R> C.useComputed(vararg dependencies: Any?, fn: C.() -> R): ComputedProperty<R> {
-  var thisRef by useRef { this }
-  thisRef = this
-
-  val propRef by useRef { ComputedProperty(EmptyReactiveContainer) { thisRef.fn() } }
-
-  useEffect(Unit) {
-    dispose { propRef.dispose() }
-  }
-
-  useEffect(*dependencies) {
-    propRef.changed()
-  }
-
-  return propRef
-}
-
-fun <C : Component, R> C.useWatch(selector: C.() -> R, callback: C.(newValue: R, oldValue: R) -> Unit) {
-  var thisRef by useRef { this }
-  thisRef = this
-
-  val watchRef by useRef {
-    Watcher(
-      { thisRef.selector() },
-      { new, old -> thisRef.callback(new, old) }
+@Suppress("unused")
+fun <S> ComponentScope.useState(initialState: S): Pair<S, SetStateAction<S>> {
+    val (state, setState) = React.useState(initialState)
+    return Pair(
+        state.unsafeCast<S>(),
+        setState.unsafeCast<SetStateAction<S>>()
     )
-  }
-
-  useEffect(Unit) {
-    dispose { watchRef.dispose() }
-  }
 }
 
-fun <C : Component, R> C.useWatch(selector: C.() -> R, callback: C.(newValue: R) -> Unit) {
-  useWatch(selector, { newValue, _ -> callback(newValue) })
+@Suppress("unused")
+fun <S> ComponentScope.useState(initializer: () -> S): Pair<S, SetStateAction<S>> {
+    val (state, setState) = React.useState(initializer)
+    return Pair(
+        state.unsafeCast<S>(),
+        setState.unsafeCast<SetStateAction<S>>()
+    )
 }
 
-fun <T> useContext(context: Context<T>): T {
-  return reactUseContext(context)
+@Suppress("unused")
+fun ComponentScope.useEffect(dependencies: List<Any?>? = undefined, effect: () -> Unit) {
+    React.useEffect({
+        effect()
+        undefined
+    }, dependencies?.toTypedArray())
 }
 
-private object EmptyReactiveContainer : ReactiveContainer, Transient {
-  override fun registerReactiveHandle(handle: ReactiveHandle) {}
+@Suppress("unused")
+fun <T> ComponentScope.useContext(context: Context<T>): T {
+    return React.useContext(context)
+}
+
+@Suppress("unused")
+fun <R> ComponentScope.useCallback(dependencies: List<Any?>? = undefined, callback: () -> R): () -> R {
+    return React.useCallback(callback, dependencies?.toTypedArray())
+}
+
+@Suppress("unused")
+fun <R> ComponentScope.useRef(initialValue: R): MutableRefObject<R> {
+    return React.useRef(initialValue)
+}
+
+@Suppress("unused")
+fun ComponentScope.useDebugValue(value: Any?) {
+    React.useDebugValue(value)
 }

@@ -81,6 +81,7 @@ bintray {
     key = System.getenv('BINTRAY_KEY')
     publications = ['maven']
     dryRun = project.version.endsWith('SNAPSHOT')
+    publish = true
     pkg {
         repo = 'akryl'
         name = project.name

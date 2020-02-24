@@ -1,6 +1,7 @@
 package io.akryl
 
 import react.Context
+import react.EffectDisposer
 import react.MutableRefObject
 import react.React
 
@@ -24,11 +25,25 @@ fun <S> ComponentScope.useState(initializer: () -> S): Pair<S, SetStateAction<S>
     )
 }
 
+class DisposeScope {
+    private val items = ArrayList<EffectDisposer>()
+
+    fun dispose(block: EffectDisposer) {
+        items.add(block)
+    }
+
+    fun build(): EffectDisposer {
+        val items = ArrayList(this.items)
+        return {
+            items.forEach { it() }
+        }
+    }
+}
+
 @Suppress("unused")
-fun ComponentScope.useEffect(dependencies: List<Any?>? = undefined, effect: () -> Unit) {
+fun ComponentScope.useEffect(dependencies: List<Any?>? = undefined, effect: DisposeScope.() -> Unit) {
     React.useEffect({
-        effect()
-        undefined
+        DisposeScope().apply(effect).build()
     }, dependencies?.toTypedArray())
 }
 

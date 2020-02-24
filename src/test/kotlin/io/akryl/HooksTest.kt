@@ -48,6 +48,14 @@ private fun dependenciesSideEffectComponent(sideEffect: Value<Int>, value: Strin
     null
 }
 
+private fun disposeSideEffectComponent(sideEffect: Value<Int>, disposeResult: Value<Int>, value: String) = component {
+    useEffect(listOf(value)) {
+        sideEffect.value += 1
+        dispose { disposeResult.value += 1 }
+    }
+    null
+}
+
 data class TestContext(
     val value: String
 )
@@ -167,6 +175,30 @@ class HooksTest {
             dependenciesSideEffectComponent(sideEffect, "bar")
         }
         assertEquals(2, sideEffect.value)
+    }
+
+    @Test
+    fun testDisposeEffect() {
+        val sideEffect = Value(0)
+        val disposeResult = Value(0)
+
+        val root = ReactTestRenderer.aktCreate {
+            disposeSideEffectComponent(sideEffect, disposeResult, "foo")
+        }
+        assertEquals(1, sideEffect.value)
+        assertEquals(0, disposeResult.value)
+
+        root.aktUpdate {
+            disposeSideEffectComponent(sideEffect, disposeResult, "bar")
+        }
+        assertEquals(2, sideEffect.value)
+        assertEquals(1, disposeResult.value)
+
+        root.aktUpdate {
+            React.createElement("div")
+        }
+        assertEquals(2, sideEffect.value)
+        assertEquals(2, disposeResult.value)
     }
 
     @Test

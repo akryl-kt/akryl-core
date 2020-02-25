@@ -64,6 +64,8 @@ kotlin {
                 // react dependencies
                 implementation npm("react", "16.12.0")
                 implementation npm("react-dom", "16.12.0")
+                implementation npm("redux", "4.0.5")
+                implementation npm("react-redux", "7.1.3")
             }
         }
     }
@@ -127,5 +129,89 @@ fun main() {
 
 ```bash
 ./gradlew run --continuous
+```
+
+# Documentation
+
+`akryl-core` provides basic React features:
+
+- Components
+- Context
+- Hooks
+
+To use JSX-like syntax you must install [akryl-dom](https://github.com/akryl-kt/akryl-dom) library.
+
+## Components
+
+With Akryl you can use only hooks API and functional components. To create a component you must define a function, that takes props as arguments and returns a virtual DOM element. It is important to wrap the function body into a `component` function call. It tells the `babel-plugin-akryl` to convert a simple Kotlin function into a React component. 
+
+Example:
+
+```kotlin
+fun Calc(a: Int, b: Int) = component {
+    Div(text = "Sum = ${a + b}")
+}
+```
+
+The `Calc` is a React component, that accepts `a` and `b` in props and returns div element. Here is the equivalent component in JSX:
+
+```jsx
+export const Calc = ({a, b}) => {
+    return <div>Sum = {a + b}</div>;
+};
+```
+
+and in TSX:
+
+```typescript
+export interface CalcProps {
+    a: number;
+    b: number;
+}
+
+export const Calc = ({a, b} : CalcProps) => {
+    return <div>Sum = {a + b}</div>;
+};
+```
+
+In Akryl you don't need to wrap props into an interface or in a class - just pass them as function arguments.
+
+You can call a component function from any place in code. There is no restriction to use a component only inside another component.
+
+Example:
+
+```kotlin
+// Akryl
+val element = Calc(a = 10, b = 20)
+```
+
+```jsx
+// JSX
+const element = <Calc a={10} b={20} />;
+```
+
+If your component is pure, you can use `memo` instead of `component` function. It has the same effect as in React: it will prevent a component from re-render if its props are not changed.
+
+## Hooks
+
+Akryl has common hooks from React: 
+
+- useState
+- useEffect
+- useContext
+- useCallback
+- useRef
+- useDebugValue
+
+All hooks have receiver argument of type `ComponentScope`, that prevents usage outside of a component at compile time.
+
+```kotlin
+// will compile
+fun counter() = component {
+    val (state, setState) = useState(0)
+}
+
+// will not compile: ComponentScope receiver is not provided
+val (state, setState) = useState(0)
 ```
 

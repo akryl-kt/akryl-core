@@ -19,8 +19,8 @@ typealias SetStateAction<S> = (newState: S) -> Unit
  * The `setState` function is used to update the state. It accepts a new state value
  * and enqueues a re-render of the component.
  */
-@Suppress("unused")
 fun <S> ComponentScope.useState(initialState: S): Pair<S, SetStateAction<S>> {
+    hookMarker()
     val (state, setState) = React.useState(initialState)
     return Pair(
         state.unsafeCast<S>(),
@@ -37,8 +37,8 @@ fun <S> ComponentScope.useState(initialState: S): Pair<S, SetStateAction<S>> {
  * val (state, setState) = useState { /* compute initial state */ }
  * ```
  */
-@Suppress("unused")
 fun <S> ComponentScope.useState(initializer: () -> S): Pair<S, SetStateAction<S>> {
+    hookMarker()
     val (state, setState) = React.useState(initializer)
     return Pair(
         state.unsafeCast<S>(),
@@ -98,8 +98,8 @@ class DisposeScope {
  * The [DisposeScope.dispose] can be called multiple times.
  * All passed lambdas will be executed in the same order as [DisposeScope.dispose] were called.
  */
-@Suppress("unused")
 fun ComponentScope.useEffect(dependencies: List<Any?>? = undefined, effect: DisposeScope.() -> Unit) {
+    hookMarker()
     React.useEffect({
         DisposeScope().apply(effect).build()
     }, dependencies?.toTypedArray())
@@ -127,8 +127,8 @@ fun ComponentScope.useEffect(dependencies: List<Any?>? = undefined, effect: Disp
  * }
  * ```
  */
-@Suppress("unused")
 fun <T> ComponentScope.useContext(context: Context<T>): T {
+    hookMarker()
     return React.useContext(context)
 }
 
@@ -144,8 +144,8 @@ fun <T> ComponentScope.useContext(context: Context<T>): T {
  * }
  * ```
  */
-@Suppress("unused")
 fun <R> ComponentScope.useCallback(dependencies: List<Any?>? = undefined, callback: () -> R): () -> R {
+    hookMarker()
     return React.useCallback(callback, dependencies?.toTypedArray())
 }
 
@@ -165,8 +165,8 @@ fun <R> ComponentScope.useCallback(dependencies: List<Any?>? = undefined, callba
  * }
  * ```
  */
-@Suppress("unused")
 fun <R> ComponentScope.useRef(initialValue: R): MutableRefObject<R> {
+    hookMarker()
     return React.useRef(initialValue)
 }
 
@@ -180,7 +180,12 @@ fun <R> ComponentScope.useRef(initialValue: R): MutableRefObject<R> {
  * }
  * ```
  */
-@Suppress("unused")
 fun ComponentScope.useDebugValue(value: Any?) {
+    hookMarker()
     React.useDebugValue(value)
+}
+
+@Suppress("NOTHING_TO_INLINE", "unused")
+private inline fun ComponentScope.hookMarker() {
+    // this function is only to suppress unused `ComponentScope` receiver
 }

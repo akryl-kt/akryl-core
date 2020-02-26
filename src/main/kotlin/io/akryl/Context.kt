@@ -6,10 +6,9 @@ import react.React
 import react.ReactElement
 
 fun <T> Context<T>.provider(value: T, children: List<ReactElement<*>>): ReactElement<ProviderProps<T>> {
-    @Suppress("RemoveExplicitTypeArguments") // Type inference failing on ProviderProps<T>
     return React.createElement(
         Provider,
-        ProviderProps<T>(
+        ProviderProps(
             value = value,
             children = undefined
         ),

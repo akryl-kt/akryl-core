@@ -139,7 +139,7 @@ fun main() {
 - Context
 - Hooks
 
-To use JSX-like syntax you must install [akryl-dom](https://github.com/akryl-kt/akryl-dom) library.
+To use JSX-like syntax you need to install [akryl-dom](https://github.com/akryl-kt/akryl-dom) library.
 
 ## Components
 
@@ -196,12 +196,12 @@ If your component is pure, you can use `memo` instead of `component` function. I
 
 Akryl has common hooks from React: 
 
-- useState
-- useEffect
-- useContext
-- useCallback
-- useRef
-- useDebugValue
+- [useState](src/main/kotlin/io/akryl/Hooks.kt#L22)
+- [useEffect](src/main/kotlin/io/akryl/Hooks.kt#L101)
+- [useContext](src/main/kotlin/io/akryl/Hooks.kt#L130)
+- [useCallback](src/main/kotlin/io/akryl/Hooks.kt#L147)
+- [useRef](src/main/kotlin/io/akryl/Hooks.kt#L168)
+- [useDebugValue](src/main/kotlin/io/akryl/Hooks.kt#L183)
 
 All hooks have receiver argument of type `ComponentScope`, that prevents usage outside of a component at compile time.
 
@@ -215,3 +215,12 @@ fun counter() = component {
 val (state, setState) = useState(0)
 ```
 
+To create a custom hook, write a function that has the `ComponentScope` receiver parameter:
+
+```kotlin
+fun ComponentScope.useRenderCount(): Int {
+    val ref = useRef(0)
+    ref.current += 1
+    return ref.current
+}
+```

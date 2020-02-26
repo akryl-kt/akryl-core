@@ -1,4 +1,4 @@
-name: Bintray Upload
+name: Test & Upload
 
 on:
   push:

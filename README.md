@@ -21,7 +21,14 @@ fun App(name: String) = component {
 
 # Install
 
-If you don't want to set up the project yourself, you can clone [akryl-frontend-starter](https://github.com/akryl-kt/akryl-frontend-starter) repository.
+If you don't want to set up the project yourself, you can clone [akryl-frontend-starter](https://github.com/akryl-kt/akryl-frontend-starter) repository:
+
+```bash
+git clone https://github.com/akryl-kt/akryl-frontend-starter
+cd akryl-frontend-starter
+./run.sh
+# open http://localhost:8080 when build completes
+```
 
 Akryl library consists of several pieces:
 

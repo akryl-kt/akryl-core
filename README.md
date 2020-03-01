@@ -21,6 +21,13 @@ fun App(name: String) = component {
 
 # Install
 
+There are two options to install Akryl:
+
+- Starter project - a convenient way for beginners.
+- Manual install - if you want full control over the project.
+
+## Starter Project
+
 If you don't want to set up the project yourself, you can clone [akryl-frontend-starter](https://github.com/akryl-kt/akryl-frontend-starter) repository:
 
 ```bash
@@ -30,6 +37,10 @@ cd akryl-frontend-starter
 # open http://localhost:8080 when build completes
 ```
 
+## Manual Install
+
+To add Akryl to an existing project, follow the steps below. This instruction assumes that you already have a [Kotlin/JS project configured with Gradle](https://kotlinlang.org/docs/reference/js-project-setup.html). 
+
 Akryl library consists of several pieces:
 
 - [akryl-core](https://github.com/akryl-kt/akryl-core) - basic integration with React, hooks support.
@@ -38,8 +49,6 @@ Akryl library consists of several pieces:
 - [akryl-redux](https://github.com/akryl-kt/akryl-redux) - wrapper around `react-redux` library.
 
 In most cases, you need to install all of them. 
-
-This instruction assumes that you already have a [Kotlin/JS project configured with Gradle](https://kotlinlang.org/docs/reference/js-project-setup.html). 
 
 1. Add jcenter repository:
 

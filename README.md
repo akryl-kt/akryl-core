@@ -240,3 +240,41 @@ fun ComponentScope.useRenderCount(): Int {
     return ref.current
 }
 ```
+
+## JavaScript Interop
+
+Akryl components can accept JS components as children and vice versa. There can be a component tree that contains an arbitrary mix of Akryl and JS components. 
+
+To use an existing React library, declare the library using `@JsModule` and write helper functions to use components in a convenient way. For example, let's create a wrapper for [blueprintjs](https://github.com/palantir/blueprint) button:
+
+```kotlin
+// library declaration
+
+@JsModule("@blueprintjs/core")
+@JsNonModule
+external object Blueprint {
+    val Button: Component<dynamic>
+}
+
+// helper function for button
+
+fun bpButton(
+    onClick: (() -> Unit)? = undefined,
+    children: List<ReactElement<*>> = emptyList()
+) = React.createElement(
+  type = Blueprint.Button,
+  props = json(
+    "onClick" to onClick
+  ),
+  children = *children.toTypedArray()
+)
+
+// usage in Akryl
+
+fun app() = component {
+    bpButton(
+        onClick = { window.alert("Hello, World!") },
+        children = listOf(Text("Click me!"))
+    )
+}
+```

@@ -278,3 +278,61 @@ fun app() = component {
     )
 }
 ```
+
+# Comparison with [kotlin-react](https://github.com/JetBrains/kotlin-wrappers/tree/master/kotlin-react)
+
+There are two options to create a component in kotlin-react.
+
+1. Class API
+
+```kotlin
+interface GreetingProps : RProps {
+    var name: String
+}
+
+class Greeting : RComponent<GreetingProps, RState>() {
+    override fun RBuilder.render() {
+        div {
+            +"Hello, ${props.name}!"
+        }
+    }
+}
+
+fun RBuilder.greeting(name: String = "John") = child(Greeting::class) {
+    attrs.name = name
+}
+```
+
+2. Functional API
+
+```kotlin
+interface GreetingProps : RProps {
+    var name: String
+}
+
+val greeting = functionalComponent<GreetingProps> { props ->
+    div {
+        +"Hello, ${props.name}!"
+    }
+}
+
+fun RBuilder.greeting(name: String = "John") = child(greeting) {
+    attrs.name = name
+}
+```
+
+Akryl has only a functional API.
+
+```kotlin
+fun greeting(name: String = "John") = component {
+    Div(text = "Hello, $name!")
+}
+```
+
+Differences between kotlin-react and akryl:
+
+- In both options of kotlin-react, you need to create a props class, a component body, and a helper function. 
+In akryl, you only need to create a single function.
+- The functional component of kotlin-react will be anonymous. 
+It will not have a name in React DevTools, so it will be harder to debug.
+- `attrs` are not enforcing required props.

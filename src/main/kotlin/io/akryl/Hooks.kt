@@ -185,6 +185,24 @@ fun ComponentScope.useDebugValue(value: Any?) {
     React.useDebugValue(value)
 }
 
+/**
+ * Returns a memoized result of [fn] call. `useMemo` will only recompute the memoized value
+ * when one of the [dependencies] has changed.
+ * This optimization helps to avoid expensive calculations on every render.
+ *
+ * Example:
+ * ```
+ * fun markdown(md: String) = component {
+ *     val html = useMemo(listOf(md)) { renderMarkdown(md) }
+ *     Div(innerHtml = html)
+ * }
+ * ```
+ */
+fun <R> ComponentScope.useMemo(dependencies: List<Any?>? = undefined, fn: () -> R): R {
+    hookMarker()
+    return React.useMemo(fn, dependencies?.toTypedArray())
+}
+
 @Suppress("NOTHING_TO_INLINE", "unused")
 private inline fun ComponentScope.hookMarker() {
     // this function is only to suppress unused `ComponentScope` receiver

@@ -13,6 +13,7 @@ external object React {
     fun <T> useContext(context: Context<T>): T
     fun <R> useRef(initialValue: R): MutableRefObject<R>
     fun useDebugValue(value: Any?)
+    fun <R> useMemo(fn: () -> R, dependencies: Array<Any?>? = definedExternally): R
     fun isValidElement(obj: dynamic): Boolean
     fun <T> createContext(defaultValue: T): Context<T>
 }

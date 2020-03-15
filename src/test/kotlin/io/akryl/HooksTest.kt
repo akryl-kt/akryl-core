@@ -93,6 +93,15 @@ private fun debugValueComponent() = component {
     null
 }
 
+private fun memoComponent(renderCount: Value<Int>, memoCount: Value<Int>, dependency: String) = component {
+    renderCount.value += 1
+    val result = useMemo(listOf(dependency)) {
+        memoCount.value += 1
+        dependency
+    }
+    React.createElement("div", null, result)
+}
+
 private fun ComponentScope.useCounter(emitter: EventEmitter<Unit>): Int {
     val (count, setCount) = useState(0)
     val cb = useCallback(listOf(count)) {
@@ -291,6 +300,33 @@ class HooksTest {
         ReactTestRenderer.aktCreate {
             debugValueComponent()
         }
+    }
+
+    @Test
+    fun testMemo() {
+        val renderCount = Value(0)
+        val memoCount = Value(0)
+
+        val root = ReactTestRenderer.aktCreate {
+            memoComponent(renderCount, memoCount, "a")
+        }
+        assertEquals(1, renderCount.value)
+        assertEquals(1, memoCount.value)
+        assertContent("a", root)
+
+        root.aktUpdate {
+            memoComponent(renderCount, memoCount, "a")
+        }
+        assertEquals(2, renderCount.value)
+        assertEquals(1, memoCount.value)
+        assertContent("a", root)
+
+        root.aktUpdate {
+            memoComponent(renderCount, memoCount, "b")
+        }
+        assertEquals(3, renderCount.value)
+        assertEquals(2, memoCount.value)
+        assertContent("b", root)
     }
 
     @Test

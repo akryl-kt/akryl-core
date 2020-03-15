@@ -218,6 +218,7 @@ Akryl has common hooks from React:
 - [useCallback](src/main/kotlin/io/akryl/Hooks.kt#L147)
 - [useRef](src/main/kotlin/io/akryl/Hooks.kt#L168)
 - [useDebugValue](src/main/kotlin/io/akryl/Hooks.kt#L183)
+- [useMemo](src/main/kotlin/io/akryl/Hooks.kt#L201)
 
 All hooks have receiver argument of type `ComponentScope`, that prevents usage outside of a component at compile time.
 

@@ -15,7 +15,7 @@ in Kotlin using akryl:
 
 ```kotlin
 fun App(name: String) = component {
-    Div(text = "Hello, $name!")
+    div(text = "Hello, $name!")
 }
 ```
 
@@ -133,7 +133,7 @@ import react_dom.ReactDom
 import kotlin.browser.document
 
 fun app() = component {
-  Div(text = "Hello, World!")
+  div(text = "Hello, World!")
 }
 
 fun main() {
@@ -165,7 +165,7 @@ Example:
 
 ```kotlin
 fun Calc(a: Int, b: Int) = component {
-    Div(text = "Sum = ${a + b}")
+    div(text = "Sum = ${a + b}")
 }
 ```
 
@@ -275,7 +275,7 @@ fun bpButton(
 fun app() = component {
     bpButton(
         onClick = { window.alert("Hello, World!") },
-        children = listOf(Text("Click me!"))
+        children = listOf(text("Click me!"))
     )
 }
 ```
@@ -326,7 +326,7 @@ Akryl has only a functional API.
 
 ```kotlin
 fun greeting(name: String = "John") = component {
-    Div(text = "Hello, $name!")
+    div(text = "Hello, $name!")
 }
 ```
 
